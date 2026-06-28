@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maths Practice</title>
+  <style>
+    :root {
+      --blue:#2563eb; --blue-dk:#1d4ed8; --blue-lt:#dbeafe;
+      --green:#16a34a; --green-lt:#dcfce7;
+      --red:#dc2626;   --red-lt:#fee2e2;
+      --amber:#b45309; --amber-lt:#fef3c7;
+      --grey:#64748b;  --bg:#f1f5f9; --card:#fff; --border:#e2e8f0; --text:#0f172a;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+    .screen{display:none;min-height:100vh}
+    .screen.active{display:flex;flex-direction:column}
+
+    /* ── Shared ── */
+    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.75rem 1.5rem;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;border:none;font-family:inherit;transition:all .12s}
+    .btn-pri{background:var(--blue);color:#fff;width:100%}
+    .btn-pri:hover:not(:disabled){background:var(--blue-dk)}
+    .btn-pri:disabled{opacity:.35;cursor:default}
+    .btn-sec{background:var(--border);color:var(--text)}
+    .btn-sec:hover:not(:disabled){background:#cbd5e1}
+    .page-center{align-items:center;justify-content:center;padding:2rem 1rem}
+
+    /* ── Student screen ── */
+    .brand{font-size:2rem;font-weight:900;color:var(--blue);letter-spacing:-.03em;margin-bottom:.2rem}
+    .brand-sub{color:var(--grey);font-size:.9rem;margin-bottom:2rem}
+    #screen-student .card{max-width:420px;width:100%}
+    .input{width:100%;padding:.8rem 1rem;font-size:1rem;border:2px solid var(--border);border-radius:10px;font-family:inherit;transition:border-color .15s}
+    .input:focus{outline:none;border-color:var(--blue)}
+    .input-label{font-size:.8rem;font-weight:700;color:var(--grey);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem;display:block}
+    .divider{text-align:center;color:var(--grey);font-size:.8rem;margin:1rem 0;position:relative}
+    .divider::before,.divider::after{content:'';position:absolute;top:50%;width:42%;height:1px;background:var(--border)}
+    .divider::before{left:0} .divider::after{right:0}
+    .student-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
+    .chip{padding:.35rem .75rem;border-radius:20px;border:1.5px solid var(--border);background:var(--card);cursor:pointer;font-size:.85rem;font-weight:600;transition:all .1s}
+    .chip:hover{border-color:var(--blue);background:var(--blue-lt);color:var(--blue)}
+
+    /* ── Select screen ── */
+    #screen-select .content{max-width:820px;width:100%;padding:2rem 1rem}
+    .select-header{margin-bottom:1.5rem}
+    .select-header h2{font-size:1.3rem;font-weight:800}
+    .select-header .student-name{color:var(--blue);font-weight:900}
+    .grade-tabs{display:flex;gap:.5rem;margin-bottom:1.25rem;flex-wrap:wrap}
+    .grade-tab{padding:.45rem 1rem;border-radius:8px;border:2px solid var(--border);background:var(--card);cursor:pointer;font-weight:700;font-size:.9rem;transition:all .12s}
+    .grade-tab.active{border-color:var(--blue);background:var(--blue-lt);color:var(--blue)}
+    .assess-tabs{display:flex;gap:.5rem;margin-bottom:1.25rem}
+    .assess-tab{padding:.35rem .9rem;border-radius:20px;border:1.5px solid var(--border);background:var(--card);cursor:pointer;font-weight:700;font-size:.85rem;transition:all .12s}
+    .assess-tab.active{border-color:var(--blue);background:var(--blue);color:#fff}
+    .topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:.85rem}
+    .topic-card{background:var(--card);border:2px solid var(--border);border-radius:14px;padding:1.4rem 1rem 1.2rem;text-align:center;cursor:pointer;transition:border-color .12s,box-shadow .12s,transform .12s;position:relative}
+    .topic-card:hover:not(.disabled){border-color:var(--blue);box-shadow:0 4px 16px rgba(37,99,235,.18);transform:translateY(-2px)}
+    .topic-card.disabled{opacity:.45;cursor:not-allowed}
+    .t-icon{font-size:1.8rem;line-height:1;margin-bottom:.4rem}
+    .t-name{font-weight:800;font-size:.88rem}
+    .t-sub{color:var(--grey);font-size:.73rem;margin-top:.2rem}
+    .t-bank{font-size:.7rem;margin-top:.3rem;font-weight:700}
+    .t-bank.has{color:var(--green)} .t-bank.none{color:var(--grey)}
+    .dash-link{margin-top:1.25rem;color:var(--blue);cursor:pointer;font-size:.85rem;font-weight:600;text-decoration:underline;display:inline-block}
+
+    /* ── Mode toggle ── */
+    .mode-bar{display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem}
+    .mode-label{font-size:.8rem;font-weight:700;color:var(--grey);text-transform:uppercase;letter-spacing:.06em}
+    .mode-toggle{display:flex;background:var(--border);border-radius:8px;padding:3px;gap:2px}
+    .mode-btn{padding:.35rem .85rem;border-radius:6px;border:none;cursor:pointer;font-size:.82rem;font-weight:700;font-family:inherit;background:transparent;color:var(--grey);transition:all .12s}
+    .mode-btn.active{background:var(--card);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+
+    /* ── Practice ── */
+    .p-header{background:var(--card);border-bottom:1px solid var(--border);padding:.7rem 1.25rem;display:flex;align-items:center;gap:.75rem}
+    .p-topic{font-weight:800;color:var(--blue);font-size:.9rem;flex:1}
+    .p-prog{color:var(--grey);font-size:.85rem}
+    .timer{font-size:1.2rem;font-weight:900;font-variant-numeric:tabular-nums;padding:.25rem .7rem;border-radius:8px;background:var(--blue-lt);color:var(--blue);min-width:68px;text-align:center;transition:background .3s,color .3s}
+    .timer.warn{background:var(--amber-lt);color:var(--amber)}
+    .timer.danger{background:var(--red-lt);color:var(--red);animation:pulse 1s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+    .prog-track{height:4px;background:var(--border)}
+    .prog-fill{height:4px;background:var(--blue);transition:width .3s}
+    .p-body{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:1.75rem 1rem 2rem}
+    .q-card{max-width:680px;width:100%}
+    .marks-badge{display:inline-block;background:var(--blue-lt);color:var(--blue);font-size:.72rem;font-weight:800;padding:.18rem .55rem;border-radius:20px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:1rem}
+    .q-text{font-size:1.2rem;font-weight:700;line-height:1.55;margin-bottom:1.5rem;white-space:pre-wrap}
+    .opts-wrap{display:flex;flex-direction:column;gap:.55rem;margin-bottom:1rem}
+    .opt-btn{display:flex;align-items:center;gap:.7rem;padding:.8rem 1rem;border:2px solid var(--border);border-radius:10px;background:var(--card);cursor:pointer;text-align:left;font-size:1rem;font-weight:600;font-family:inherit;transition:border-color .1s,background .1s;width:100%}
+    .opt-btn:hover:not(:disabled){border-color:var(--blue);background:var(--blue-lt)}
+    .opt-btn.sel{border-color:var(--blue);background:var(--blue-lt)}
+    .opt-btn.ok{border-color:var(--green);background:var(--green-lt)}
+    .opt-btn.bad{border-color:var(--red);background:var(--red-lt)}
+    .opt-btn:disabled{cursor:default}
+    .opt-num{min-width:26px;height:26px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;flex-shrink:0}
+    .opt-btn.sel .opt-num{background:var(--blue);color:#fff}
+    .opt-btn.ok  .opt-num{background:var(--green);color:#fff}
+    .opt-btn.bad .opt-num{background:var(--red);color:#fff}
+    .ans-input{width:100%;padding:.8rem 1rem;font-size:1.05rem;border:2px solid var(--border);border-radius:10px;margin-bottom:1rem;font-family:inherit;transition:border-color .15s}
+    .ans-input:focus{outline:none;border-color:var(--blue)}
+    .ans-input.ok{border-color:var(--green);background:var(--green-lt)}
+    .ans-input.bad{border-color:var(--red);background:var(--red-lt)}
+    .feedback{display:none;padding:.8rem 1rem;border-radius:10px;margin-bottom:1rem;font-size:.92rem}
+    .feedback.ok{display:block;background:var(--green-lt);color:#14532d}
+    .feedback.bad{display:block;background:var(--red-lt);color:#7f1d1d}
+    .fb-icon{font-weight:900;margin-right:.3rem}
+    .fb-work{margin-top:.35rem;font-size:.82rem;color:var(--grey);font-style:italic}
+    .btn-action{width:100%;padding:.85rem;font-size:1rem;font-weight:800;font-family:inherit;background:var(--blue);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:background .12s}
+    .btn-action:hover:not(:disabled){background:var(--blue-dk)}
+    .btn-action:disabled{opacity:.35;cursor:default}
+
+    /* ── Results ── */
+    #screen-results{align-items:center;padding:2rem 1rem}
+    .res-card{max-width:760px;width:100%}
+    .res-top{text-align:center;padding-bottom:1.5rem;border-bottom:1px solid var(--border);margin-bottom:1.5rem}
+    .res-emoji{font-size:3rem;line-height:1}
+    .res-score{font-size:2.8rem;font-weight:900;color:var(--blue);margin:.4rem 0 0;letter-spacing:-.03em}
+    .res-label{color:var(--grey);font-size:.95rem}
+    .res-meta{color:var(--grey);font-size:.82rem;margin-top:.25rem}
+    .res-table{width:100%;border-collapse:collapse;font-size:.87rem}
+    .res-table th{text-align:left;padding:.55rem .7rem;background:var(--bg);font-weight:700;border-bottom:2px solid var(--border)}
+    .res-table td{padding:.55rem .7rem;border-bottom:1px solid var(--border);vertical-align:top}
+    .res-table tr:last-child td{border-bottom:none}
+    .tick{color:var(--green);font-weight:900} .cross{color:var(--red);font-weight:900}
+    .res-actions{display:flex;gap:.75rem;margin-top:1.5rem;flex-wrap:wrap}
+    .res-actions .btn{flex:1;min-width:140px}
+
+    /* ── Dashboard ── */
+    #screen-dash{align-items:center;padding:2rem 1rem;gap:1.5rem}
+    #screen-dash .card{max-width:820px;width:100%}
+    .dash-section{margin-bottom:2rem}
+    .dash-section h3{font-size:1rem;font-weight:800;margin-bottom:1rem;color:var(--text)}
+    .dash-table{width:100%;border-collapse:collapse;font-size:.87rem}
+    .dash-table th{text-align:left;padding:.5rem .65rem;background:var(--bg);font-weight:700;border-bottom:2px solid var(--border)}
+    .dash-table td{padding:.5rem .65rem;border-bottom:1px solid var(--border)}
+    .dash-table tr:last-child td{border-bottom:none}
+    .acc-bar{display:inline-block;height:8px;border-radius:4px;background:var(--blue);vertical-align:middle;margin-left:.4rem}
+    .acc-ok{background:var(--green)} .acc-warn{background:var(--amber)} .acc-bad{background:var(--red)}
+    .empty-note{color:var(--grey);font-size:.9rem;padding:1rem 0}
+  </style>
+</head>
+<body>
+
+<!-- ═══ SCREEN 1: Student ═══ -->
+<div id="screen-student" class="screen active page-center" style="flex-direction:column;gap:0">
+  <div class="brand">Maths Practice</div>
+  <div class="brand-sub">Singapore primary curriculum</div>
+  <div class="card">
+    <label class="input-label" for="name-input">Who is practising today?</label>
+    <input class="input" id="name-input" type="text" placeholder="Enter name…" autocomplete="off" />
+    <button class="btn btn-pri" style="margin-top:1rem" onclick="loginStudent()">Continue →</button>
+    <div class="divider" id="recent-divider" style="display:none">or pick a recent student</div>
+    <div class="student-chips" id="student-chips"></div>
+  </div>
+</div>
+
+<!-- ═══ SCREEN 2: Select ═══ -->
+<div id="screen-select" class="screen page-center" style="flex-direction:column">
+  <div class="content">
+    <div class="select-header">
+      <h2>Hello, <span class="student-name" id="sel-name"></span>! Choose a topic.</h2>
+    </div>
+    <div class="mode-bar">
+      <span class="mode-label">Questions</span>
+      <div class="mode-toggle">
+        <button class="mode-btn active" id="mode-gen"  onclick="setMode('generated')">✦ Generated</button>
+        <button class="mode-btn"        id="mode-bank" onclick="setMode('bank')">📄 Exam Bank</button>
+      </div>
+    </div>
+    <div class="grade-tabs" id="grade-tabs"></div>
+    <div class="assess-tabs" id="assess-tabs"></div>
+    <div class="topic-grid" id="topic-grid"></div>
+    <span class="dash-link" onclick="showDash()">📈 View my progress</span>
+  </div>
+</div>
+
+<!-- ═══ SCREEN 3: Practice ═══ -->
+<div id="screen-practice" class="screen">
+  <div class="p-header">
+    <div class="p-topic" id="p-topic">Place Value</div>
+    <div id="mode-badge" style="font-size:.72rem;font-weight:800;padding:.18rem .55rem;border-radius:20px;text-transform:uppercase;letter-spacing:.06em"></div>
+    <div class="p-prog" id="p-prog">Q 1 of 20</div>
+    <div class="timer" id="timer">25:00</div>
+  </div>
+  <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+  <div class="p-body">
+    <div class="q-card card">
+      <div class="marks-badge" id="marks-badge">1 mark</div>
+      <div class="q-text" id="q-text"></div>
+      <div class="opts-wrap" id="opts-wrap"></div>
+      <input type="text" class="ans-input" id="ans-input" placeholder="Type your answer here…" style="display:none" autocomplete="off" autocorrect="off" />
+      <div class="feedback" id="feedback"></div>
+      <button class="btn-action" id="btn-action">Submit Answer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SCREEN 4: Results ═══ -->
+<div id="screen-results" class="screen">
+  <div class="res-card card">
+    <div class="res-top">
+      <div class="res-emoji" id="res-emoji">🌟</div>
+      <div class="res-score" id="res-score">15 / 22</div>
+      <div class="res-label">marks</div>
+      <div class="res-meta" id="res-meta"></div>
+    </div>
+    <table class="res-table">
+      <thead><tr><th>#</th><th>Question</th><th>Your answer</th><th>Correct answer</th><th>Marks</th></tr></thead>
+      <tbody id="res-tbody"></tbody>
+    </table>
+    <div class="res-actions">
+      <button class="btn btn-sec" onclick="goSelect()">← New topic</button>
+      <button class="btn btn-sec" onclick="downloadCSV()">⬇ CSV</button>
+      <button class="btn btn-sec" onclick="showDash()">📈 Progress</button>
+      <button class="btn btn-pri" onclick="retryTopic()">Try again ↺</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SCREEN 5: Dashboard ═══ -->
+<div id="screen-dash" class="screen">
+  <div class="card">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem">
+      <h2 style="font-size:1.2rem;font-weight:900"><span id="dash-name"></span>'s Progress</h2>
+      <button class="btn btn-sec" style="width:auto;padding:.45rem 1rem" onclick="goSelect()">← Back</button>
+    </div>
+
+    <div class="dash-section">
+      <h3>Recent sessions</h3>
+      <div id="dash-history"></div>
+    </div>
+
+    <div class="dash-section">
+      <h3>Performance by topic</h3>
+      <div id="dash-stats"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────────────────────────
+//  State
+// ─────────────────────────────────────────────────────────────────
+const DURATION    = 25 * 60;
+const N_QUESTIONS = 20;
+
+let S = {
+  student:    null,   // {id, name}
+  grade:      null,
+  assessment: null,
+  topic:      null,   // {key, label, icon, ...}
+  sessionId:  null,
+  questions:  [],     // from API (no answers)
+  responses:  [],     // {question, userAnswer, correct, correctAnswer, working, marksEarned, marksAvailable}
+  idx:        0,
+  secsLeft:   DURATION,
+  interval:   null,
+  startMs:    null,
+  submitted:  false,
+  selOpt:     null,
+};
+
+// Grade/assessment/mode state
+let grades = [];
+let selGrade = null, selAssess = null;
+let mode = 'generated';   // 'generated' | 'bank'
+
+// ─────────────────────────────────────────────────────────────────
+//  API helpers
+// ─────────────────────────────────────────────────────────────────
+const api = async (method, path, body) => {
+  const opts = { method, headers: { 'Content-Type': 'application/json' } };
+  if (body) opts.body = JSON.stringify(body);
+  const r = await fetch(path, opts);
+  if (!r.ok) throw new Error(`${method} ${path} → ${r.status}`);
+  return r.json();
+};
+
+// ─────────────────────────────────────────────────────────────────
+//  Screen management
+// ─────────────────────────────────────────────────────────────────
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  SCREEN 1 — Student
+// ─────────────────────────────────────────────────────────────────
+async function initStudentScreen() {
+  try {
+    const students = await api('GET', '/api/students');
+    const chips = document.getElementById('student-chips');
+    const divider = document.getElementById('recent-divider');
+    chips.innerHTML = '';
+    if (students.length > 0) {
+      divider.style.display = '';
+      students.forEach(st => {
+        const chip = document.createElement('button');
+        chip.className = 'chip';
+        chip.textContent = st.name;
+        chip.onclick = () => setStudent(st);
+        chips.appendChild(chip);
+      });
+    }
+  } catch (e) {
+    console.warn('Could not load students:', e);
+  }
+}
+
+async function loginStudent() {
+  const name = document.getElementById('name-input').value.trim();
+  if (!name) { document.getElementById('name-input').focus(); return; }
+  try {
+    const st = await api('POST', '/api/students', { name });
+    setStudent({ id: st.id, name: st.name });
+  } catch(e) {
+    alert('Could not log in: ' + e.message);
+  }
+}
+
+async function setStudent(student) {
+  S.student = student;
+  document.getElementById('name-input').value = '';
+  await initSelectScreen();
+  show('screen-select');
+}
+
+document.getElementById('name-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') loginStudent();
+});
+
+// ─────────────────────────────────────────────────────────────────
+//  SCREEN 2 — Select grade / assessment / topic
+// ─────────────────────────────────────────────────────────────────
+async function initSelectScreen() {
+  document.getElementById('sel-name').textContent = S.student.name;
+  try {
+    grades = await api('GET', '/api/grades');
+  } catch(e) {
+    alert('Could not load grades: ' + e.message);
+    return;
+  }
+  buildGradeTabs();
+  if (grades.length > 0) {
+    selectGrade(grades[0].grade);
+  }
+}
+
+function buildGradeTabs() {
+  const el = document.getElementById('grade-tabs');
+  el.innerHTML = '';
+  grades.forEach(g => {
+    const btn = document.createElement('button');
+    btn.className = 'grade-tab' + (g.grade === selGrade ? ' active' : '');
+    btn.textContent = g.grade;
+    btn.onclick = () => selectGrade(g.grade);
+    el.appendChild(btn);
+  });
+}
+
+function selectGrade(grade) {
+  selGrade = grade;
+  selAssess = null;
+  buildGradeTabs();
+  const g = grades.find(x => x.grade === grade);
+  buildAssessTabs(g ? g.assessments : []);
+  if (g && g.assessments.length > 0) selectAssess(g.assessments[0]);
+}
+
+function buildAssessTabs(assessments) {
+  const el = document.getElementById('assess-tabs');
+  el.innerHTML = '';
+  assessments.forEach(a => {
+    const btn = document.createElement('button');
+    btn.className = 'assess-tab' + (a === selAssess ? ' active' : '');
+    btn.textContent = a;
+    btn.onclick = () => selectAssess(a);
+    el.appendChild(btn);
+  });
+}
+
+async function selectAssess(assessment) {
+  selAssess = assessment;
+  // Rebuild assess tabs to show active state
+  const g = grades.find(x => x.grade === selGrade);
+  buildAssessTabs(g ? g.assessments : []);
+  // Load topics
+  try {
+    const topics = await api('GET', `/api/topics?grade=${encodeURIComponent(selGrade)}&assessment=${encodeURIComponent(assessment)}`);
+    buildTopicGrid(topics);
+  } catch(e) {
+    document.getElementById('topic-grid').innerHTML = '<p style="color:var(--grey);font-size:.9rem">No topics available.</p>';
+  }
+}
+
+function setMode(m) {
+  mode = m;
+  document.getElementById('mode-gen').classList.toggle('active',  m === 'generated');
+  document.getElementById('mode-bank').classList.toggle('active', m === 'bank');
+  // Rebuild topic grid with new mode context
+  if (selGrade && selAssess) selectAssess(selAssess);
+}
+
+function buildTopicGrid(topics) {
+  const el = document.getElementById('topic-grid');
+  el.innerHTML = '';
+  topics.forEach(t => {
+    const isBank    = mode === 'bank';
+    const bankCount = t.bank_count ?? 0;
+    const disabled  = isBank && bankCount === 0;
+
+    const bankInfo  = isBank
+      ? (bankCount > 0
+          ? `<div class="t-bank has">📄 ${bankCount} question${bankCount !== 1 ? 's' : ''}</div>`
+          : `<div class="t-bank none">No bank questions yet</div>`)
+      : `<div class="t-sub">Generated · unlimited</div>`;
+
+    const card = document.createElement('div');
+    card.className = 'topic-card' + (disabled ? ' disabled' : '');
+    card.innerHTML = `<div class="t-icon">${t.icon}</div><div class="t-name">${t.label}</div>${bankInfo}`;
+    if (!disabled) card.onclick = () => startSession(t);
+    el.appendChild(card);
+  });
+}
+
+function goSelect() {
+  initSelectScreen();
+  show('screen-select');
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  SCREEN 3 — Practice
+// ─────────────────────────────────────────────────────────────────
+async function startSession(topic) {
+  S.topic     = topic;
+  S.responses = [];
+  S.idx       = 0;
+  S.secsLeft  = DURATION;
+  S.startMs   = Date.now();
+  S.submitted = false;
+  S.selOpt    = null;
+  clearInterval(S.interval);
+
+  try {
+    const data = await api('POST', '/api/sessions', {
+      student_id: S.student.id,
+      grade:      selGrade,
+      assessment: selAssess,
+      topic_key:  topic.key,
+      mode:       mode,
+    });
+    S.sessionId = data.session_id;
+    S.questions = data.questions;
+  } catch(e) {
+    alert('Could not start session: ' + e.message);
+    return;
+  }
+
+  document.getElementById('p-topic').textContent = `${selGrade} ${selAssess} — ${topic.label}`;
+  const badge = document.getElementById('mode-badge');
+  if (mode === 'bank') {
+    badge.textContent = '📄 Exam Bank';
+    badge.style.cssText = 'font-size:.72rem;font-weight:800;padding:.18rem .55rem;border-radius:20px;text-transform:uppercase;letter-spacing:.06em;background:#dcfce7;color:#16a34a';
+  } else {
+    badge.textContent = '✦ Generated';
+    badge.style.cssText = 'font-size:.72rem;font-weight:800;padding:.18rem .55rem;border-radius:20px;text-transform:uppercase;letter-spacing:.06em;background:#dbeafe;color:#2563eb';
+  }
+  show('screen-practice');
+  startTimer();
+  renderQ();
+}
+
+// Timer
+function startTimer() {
+  const el = document.getElementById('timer');
+  updateTimer(el);
+  S.interval = setInterval(() => {
+    S.secsLeft--;
+    updateTimer(el);
+    if (S.secsLeft <= 0) { clearInterval(S.interval); finishSession(); }
+  }, 1000);
+}
+
+function updateTimer(el) {
+  const m = Math.floor(S.secsLeft / 60), s = S.secsLeft % 60;
+  el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  el.className = 'timer' + (S.secsLeft < 120 ? ' danger' : S.secsLeft < 300 ? ' warn' : '');
+}
+
+// Render question
+function renderQ() {
+  const q = S.questions[S.idx];
+  if (!q) { finishSession(); return; }
+  S.submitted = false;
+  S.selOpt    = null;
+
+  document.getElementById('p-prog').textContent = `Q ${S.idx + 1} of ${S.questions.length}`;
+  document.getElementById('prog-fill').style.width = `${(S.idx / S.questions.length) * 100}%`;
+  document.getElementById('marks-badge').textContent = q.marks === 1 ? '1 mark' : `${q.marks} marks`;
+  document.getElementById('q-text').innerHTML = q.text.replace(/\n/g, '<br>');
+
+  const optsEl   = document.getElementById('opts-wrap');
+  const inputEl  = document.getElementById('ans-input');
+  const fbEl     = document.getElementById('feedback');
+  const btnEl    = document.getElementById('btn-action');
+
+  optsEl.innerHTML = '';
+  fbEl.className   = 'feedback';
+  fbEl.innerHTML   = '';
+
+  if (q.options && q.options.length > 0) {
+    inputEl.style.display = 'none';
+    q.options.forEach((opt, i) => {
+      const b = document.createElement('button');
+      b.className = 'opt-btn';
+      b.innerHTML = `<span class="opt-num">${i + 1}</span><span>${opt}</span>`;
+      b.onclick = () => pickOpt(i);
+      optsEl.appendChild(b);
+    });
+    btnEl.disabled = true;
+  } else {
+    inputEl.style.display = 'block';
+    inputEl.value = '';
+    inputEl.className = 'ans-input';
+    inputEl.disabled = false;
+    inputEl.onkeydown = e => { if (e.key === 'Enter') doAction(); };
+    setTimeout(() => inputEl.focus(), 50);
+    btnEl.disabled = false;
+  }
+
+  btnEl.textContent = 'Submit Answer';
+  btnEl.onclick = doAction;
+}
+
+function pickOpt(i) {
+  if (S.submitted) return;
+  S.selOpt = i;
+  document.querySelectorAll('.opt-btn').forEach((b, j) => b.classList.toggle('sel', j === i));
+  document.getElementById('btn-action').disabled = false;
+}
+
+async function doAction() {
+  if (S.submitted) {
+    S.idx++;
+    if (S.idx >= S.questions.length) finishSession();
+    else renderQ();
+    return;
+  }
+  await submitAnswer();
+}
+
+async function submitAnswer() {
+  const q = S.questions[S.idx];
+  S.submitted = true;
+
+  const userAnswer = q.options
+    ? (S.selOpt !== null ? String(S.selOpt) : '-1')
+    : document.getElementById('ans-input').value.trim();
+
+  let result;
+  try {
+    result = await api('POST', `/api/sessions/${S.sessionId}/responses`, {
+      question_index: S.idx,
+      user_answer:    userAnswer,
+    });
+  } catch(e) {
+    alert('Could not submit answer: ' + e.message);
+    S.submitted = false;
+    return;
+  }
+
+  const { correct, correct_answer, working, marks_earned, marks_available } = result;
+  const displayAnswer = q.options ? (S.selOpt !== null ? q.options[S.selOpt] : '(no answer)') : userAnswer;
+
+  S.responses.push({ q, userAnswer: displayAnswer, correct, correctAnswer: correct_answer, working, marksEarned: marks_earned, marksAvailable: marks_available });
+
+  // MCQ feedback
+  if (q.options) {
+    document.querySelectorAll('.opt-btn').forEach((b, i) => {
+      b.disabled = true;
+      if (result.correct && i === S.selOpt) b.classList.add('ok');
+      else if (!result.correct) {
+        // Find the correct option by matching text
+        const correctOptIdx = q.options.indexOf(correct_answer);
+        if (i === correctOptIdx) b.classList.add('ok');
+        else if (i === S.selOpt) b.classList.add('bad');
+      }
+    });
+  } else {
+    const inp = document.getElementById('ans-input');
+    inp.disabled = true;
+    inp.classList.add(correct ? 'ok' : 'bad');
+  }
+
+  const fb = document.getElementById('feedback');
+  if (correct) {
+    fb.className = 'feedback ok';
+    fb.innerHTML = `<span class="fb-icon">✓</span> Correct!<div class="fb-work">${working}</div>`;
+  } else {
+    fb.className = 'feedback bad';
+    fb.innerHTML = `<span class="fb-icon">✗</span> Correct answer: <strong>${correct_answer}</strong><div class="fb-work">${working}</div>`;
+  }
+
+  const btn = document.getElementById('btn-action');
+  btn.disabled = false;
+  btn.textContent = S.idx + 1 >= S.questions.length ? 'See Results →' : 'Next Question →';
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  SCREEN 4 — Results
+// ─────────────────────────────────────────────────────────────────
+async function finishSession() {
+  clearInterval(S.interval);
+  const elapsed = Math.floor((Date.now() - S.startMs) / 1000);
+
+  try {
+    await api('PATCH', `/api/sessions/${S.sessionId}/end`, { duration_seconds: elapsed });
+  } catch(e) {
+    console.warn('Could not end session:', e);
+  }
+
+  const totalM  = S.responses.reduce((s, r) => s + r.marksAvailable, 0);
+  const earnedM = S.responses.reduce((s, r) => s + r.marksEarned,    0);
+  const pct     = totalM > 0 ? earnedM / totalM : 0;
+  const em = Math.floor(elapsed / 60), es = elapsed % 60;
+
+  document.getElementById('res-emoji').textContent = pct >= .85 ? '🌟' : pct >= .6 ? '👍' : '💪';
+  document.getElementById('res-score').textContent = `${earnedM} / ${totalM}`;
+  const modeLabel = mode === 'bank' ? 'Exam Bank' : 'Generated';
+  document.getElementById('res-meta').textContent  =
+    `${S.responses.length} of ${S.questions.length} answered · ${String(em).padStart(2,'0')}:${String(es).padStart(2,'0')} elapsed · ${selGrade} ${selAssess} — ${S.topic.label} · ${modeLabel}`;
+
+  const tbody = document.getElementById('res-tbody');
+  tbody.innerHTML = '';
+  S.responses.forEach((r, i) => {
+    const plain  = r.q.text.replace(/<[^>]+>/g, '');
+    const trunc  = plain.length > 65 ? plain.slice(0, 65) + '…' : plain;
+    const markCell = r.correct
+      ? `<span class="tick">✓</span> ${r.marksEarned}`
+      : `<span class="cross">✗</span> 0`;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${i+1}</td><td>${trunc}</td><td>${r.userAnswer||'–'}</td><td>${r.correctAnswer}</td><td>${markCell}/${r.marksAvailable}</td>`;
+    tbody.appendChild(tr);
+  });
+
+  show('screen-results');
+}
+
+function retryTopic() { startSession(S.topic); }
+
+// ─────────────────────────────────────────────────────────────────
+//  CSV export
+// ─────────────────────────────────────────────────────────────────
+function downloadCSV() {
+  const esc  = s => `"${String(s).replace(/"/g,'""')}"`;
+  const strip = s => s.replace(/<[^>]+>/g, '');
+  const elapsed = Math.floor((Date.now() - S.startMs) / 1000);
+  const em = Math.floor(elapsed/60), es = elapsed%60;
+  const ts = new Date().toLocaleString('en-SG', { hour12: false });
+  const totalM = S.responses.reduce((s,r)=>s+r.marksAvailable,0);
+  const earnedM = S.responses.reduce((s,r)=>s+r.marksEarned,0);
+
+  const meta = [
+    `# Maths Practice — Session Results`,
+    `# Student: ${S.student.name}`,
+    `# Date: ${ts}`,
+    `# Grade / Assessment: ${selGrade} ${selAssess}`,
+    `# Topic: ${S.topic.label}`,
+    `# Mode: ${mode === 'bank' ? 'Exam Bank' : 'Generated'}`,
+    `# Score: ${earnedM} / ${totalM} marks`,
+    `# Time: ${String(em).padStart(2,'0')}:${String(es).padStart(2,'0')}`,
+    ``
+  ].join('\n');
+
+  const headers = ['#','Structure ID','Topic','Question','User Answer','Correct Answer','Correct','Marks Earned','Marks Available'];
+  const rows = S.responses.map((r,i) => [
+    i+1, r.q.structure_id, r.q.topic,
+    strip(r.q.text).replace(/\n/g,' '),
+    r.userAnswer||'', r.correctAnswer,
+    r.correct?'Y':'N', r.marksEarned, r.marksAvailable
+  ].map(esc).join(','));
+
+  const csv  = meta + [headers.map(esc).join(','), ...rows].join('\n');
+  const blob = new Blob([csv], { type:'text/csv;charset=utf-8;' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = `maths-${selGrade}-${selAssess}-${S.topic.key}-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  SCREEN 5 — Dashboard
+// ─────────────────────────────────────────────────────────────────
+async function showDash() {
+  document.getElementById('dash-name').textContent = S.student.name;
+  show('screen-dash');
+
+  // History
+  const histEl = document.getElementById('dash-history');
+  try {
+    const history = await api('GET', `/api/students/${S.student.id}/history`);
+    if (history.length === 0) {
+      histEl.innerHTML = '<p class="empty-note">No completed sessions yet.</p>';
+    } else {
+      const rows = history.map(h => {
+        const pct = h.max_score > 0 ? Math.round(100 * h.score / h.max_score) : 0;
+        const date = new Date(h.started_at + 'Z').toLocaleDateString('en-SG');
+        const modePill = h.mode === 'bank'
+          ? `<span style="font-size:.7rem;font-weight:700;padding:.1rem .4rem;border-radius:4px;background:#dcfce7;color:#16a34a">Bank</span>`
+          : `<span style="font-size:.7rem;font-weight:700;padding:.1rem .4rem;border-radius:4px;background:#dbeafe;color:#2563eb">Gen</span>`;
+        return `<tr>
+          <td>${date}</td>
+          <td>${h.grade} ${h.assessment}</td>
+          <td>${h.topic_label}</td>
+          <td>${modePill}</td>
+          <td>${h.score ?? 0}/${h.max_score ?? '?'}</td>
+          <td>${pct}%</td>
+        </tr>`;
+      }).join('');
+      histEl.innerHTML = `<table class="dash-table">
+        <thead><tr><th>Date</th><th>Assessment</th><th>Topic</th><th>Mode</th><th>Score</th><th>Accuracy</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>`;
+    }
+  } catch(e) {
+    histEl.innerHTML = `<p class="empty-note">Could not load history.</p>`;
+  }
+
+  // Stats by topic
+  const statsEl = document.getElementById('dash-stats');
+  try {
+    const stats = await api('GET', `/api/students/${S.student.id}/stats`);
+    if (stats.length === 0) {
+      statsEl.innerHTML = '<p class="empty-note">Complete a session to see stats.</p>';
+    } else {
+      // Group by topic_key
+      const byTopic = {};
+      stats.forEach(s => {
+        if (!byTopic[s.topic_key]) byTopic[s.topic_key] = { attempts:0, correct:0, earned:0, available:0, structures:[] };
+        const t = byTopic[s.topic_key];
+        t.attempts  += s.attempts;
+        t.correct   += s.correct;
+        t.earned    += s.earned;
+        t.available += s.available;
+        t.structures.push(s);
+      });
+
+      const rows = Object.entries(byTopic).map(([key, t]) => {
+        const pct  = t.available > 0 ? Math.round(100 * t.earned / t.available) : 0;
+        const cls  = pct >= 80 ? 'acc-ok' : pct >= 50 ? 'acc-warn' : 'acc-bad';
+        const barW = Math.max(4, pct);
+        // Structure breakdown for tooltip
+        const structs = t.structures.map(s => {
+          const sp = s.available>0 ? Math.round(100*s.earned/s.available) : 0;
+          return `${s.structure_id}: ${sp}%`;
+        }).join(', ');
+        return `<tr title="${structs}">
+          <td style="text-transform:capitalize">${key.replace(/_/g,' ')}</td>
+          <td>${t.attempts}</td>
+          <td>${t.earned}/${t.available}
+            <span class="acc-bar ${cls}" style="width:${barW}px"></span>
+          </td>
+          <td style="font-weight:700;color:${pct>=80?'var(--green)':pct>=50?'var(--amber)':'var(--red)'}">${pct}%</td>
+        </tr>`;
+      }).join('');
+
+      statsEl.innerHTML = `<p style="font-size:.8rem;color:var(--grey);margin-bottom:.75rem">Hover a row for breakdown by question structure.</p>
+        <table class="dash-table">
+          <thead><tr><th>Topic</th><th>Questions</th><th>Marks</th><th>Accuracy</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>`;
+    }
+  } catch(e) {
+    statsEl.innerHTML = `<p class="empty-note">Could not load stats.</p>`;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  Init
+// ─────────────────────────────────────────────────────────────────
+initStudentScreen();
+</script>
+</body>
+</html>

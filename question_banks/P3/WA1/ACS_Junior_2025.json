@@ -1,0 +1,115 @@
+{
+  "source": "ACS Junior Primary 2025",
+  "grade": "P3",
+  "assessment": "WA1",
+  "questions": [
+    {
+      "structure_id": "digit_value_mcq",
+      "topic": "place_value",
+      "section": "A",
+      "marks": 1,
+      "text": "What is the value of the digit 6 in 3 624?",
+      "options": ["6 000", "600", "60", "6"],
+      "correct_option": 1,
+      "answer": "600",
+      "working": "Digit 6 is in the hundreds place → 6 × 100 = 600",
+      "source": "ACS Junior 2025 WA1 Q1"
+    },
+    {
+      "structure_id": "expanded_form_mcq",
+      "topic": "place_value",
+      "section": "A",
+      "marks": 1,
+      "text": "4 307 = 4 thousands + _____ + 7 ones",
+      "options": ["300", "30", "3 000", "3"],
+      "correct_option": 0,
+      "answer": "300",
+      "working": "Missing part is 3 hundreds = 3 × 100 = 300",
+      "source": "ACS Junior 2025 WA1 Q2"
+    },
+    {
+      "structure_id": "money_multi_item_mcq",
+      "topic": "money",
+      "section": "A",
+      "marks": 2,
+      "text": "What is the total cost of 4 20-cent stamps and 3 50-cent stamps?",
+      "options": ["$2.30", "$1.70", "$2.00", "$3.50"],
+      "correct_option": 0,
+      "answer": "$2.30",
+      "working": "4 × 20¢ = 80¢;  3 × 50¢ = 150¢;  Total = 230¢ = $2.30",
+      "source": "ACS Junior 2025 WA1 Q3"
+    },
+    {
+      "structure_id": "number_pattern_missing_mcq",
+      "topic": "number_patterns",
+      "section": "A",
+      "marks": 2,
+      "text": "What are the missing numbers in the number pattern?\n2 145,  2 195,  2 245,  2 295,  _____,  _____,  2 445",
+      "options": ["2 345,  2 395", "2 335,  2 385", "2 355,  2 405", "2 365,  2 415"],
+      "correct_option": 0,
+      "answer": "2 345,  2 395",
+      "working": "Common difference = 50; missing numbers are 2 345 and 2 395",
+      "source": "ACS Junior 2025 WA1 Q4"
+    },
+    {
+      "structure_id": "two_number_sum_difference_mcq",
+      "topic": "addition_subtraction",
+      "section": "A",
+      "marks": 2,
+      "text": "The sum of two numbers is 5 436. One of the numbers is 2 109. What is the difference between the 2 numbers?",
+      "options": ["1 218", "3 327", "7 545", "3 218"],
+      "correct_option": 1,
+      "answer": "3 327",
+      "working": "Other number = 5 436 − 2 109 = 3 327;  Difference = 3 327 − 2 109 = 1 218",
+      "source": "ACS Junior 2025 WA1 Q5"
+    },
+    {
+      "structure_id": "ordering_numbers_short",
+      "topic": "ordering_numbers",
+      "section": "B",
+      "marks": 1,
+      "text": "Arrange the following numbers in decreasing order.\n4 321,  1 234,  4 123,  3 412",
+      "options": null,
+      "correct_option": null,
+      "answer": "4 321,  4 123,  3 412,  1 234",
+      "working": "Decreasing: largest first → 4 321, 4 123, 3 412, 1 234",
+      "source": "ACS Junior 2025 WA1 Q6"
+    },
+    {
+      "structure_id": "direct_addition_short",
+      "topic": "addition_subtraction",
+      "section": "B",
+      "marks": 1,
+      "text": "Find the sum of 3 486 and 2 057.",
+      "options": null,
+      "correct_option": null,
+      "answer": "5543",
+      "working": "3 486 + 2 057 = 5 543",
+      "source": "ACS Junior 2025 WA1 Q7"
+    },
+    {
+      "structure_id": "money_change_from_purchase",
+      "topic": "money",
+      "section": "B",
+      "marks": 2,
+      "text": "She bought a pen ($1.20) and a notebook ($3.85). She gave the cashier $10.00. How much change did She receive?",
+      "options": null,
+      "correct_option": null,
+      "answer": "$4.95",
+      "working": "Total = $1.20 + $3.85 = $5.05;  Change = $10.00 − $5.05 = $4.95",
+      "source": "ACS Junior 2025 WA1 Q9"
+    },
+    {
+      "structure_id": "diff_find_sum",
+      "topic": "addition_subtraction",
+      "section": "C",
+      "marks": 3,
+      "text": "The difference between two numbers is 1 385. The smaller number is 2 476. Find the sum of the two numbers.",
+      "options": null,
+      "correct_option": null,
+      "answer": "6337",
+      "working": "Larger = 2 476 + 1 385 = 3 861;  Sum = 2 476 + 3 861 = 6 337",
+      "source": "ACS Junior 2025 WA1 Q11"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "grade": "P3",
+  "assessment": "WA1",
+  "topics": [
+    {
+      "key": "place_value",
+      "label": "Place Value",
+      "icon": "🔢",
+      "taxonomy_topic": "place_value",
+      "structure_ids": ["digit_value_mcq", "expanded_form_mcq"]
+    },
+    {
+      "key": "number_patterns",
+      "label": "Number Patterns",
+      "icon": "🔄",
+      "taxonomy_topic": "number_patterns",
+      "structure_ids": ["number_pattern_missing_mcq"]
+    },
+    {
+      "key": "addition_subtraction",
+      "label": "Addition & Subtraction",
+      "icon": "➕",
+      "taxonomy_topic": "addition_subtraction",
+      "structure_ids": [
+        "two_number_sum_difference_mcq",
+        "direct_addition_short",
+        "diff_find_sum"
+      ]
+    },
+    {
+      "key": "money",
+      "label": "Money",
+      "icon": "💵",
+      "taxonomy_topic": "money",
+      "structure_ids": ["money_multi_item_mcq", "money_change_from_purchase"]
+    },
+    {
+      "key": "ordering",
+      "label": "Ordering Numbers",
+      "icon": "📊",
+      "taxonomy_topic": "ordering_numbers",
+      "structure_ids": ["ordering_numbers_short"]
+    },
+    {
+      "key": "mixed_wa1",
+      "label": "Mixed (WA1)",
+      "icon": "🎯",
+      "taxonomy_topic": null,
+      "structure_ids": [
+        "digit_value_mcq",
+        "expanded_form_mcq",
+        "number_pattern_missing_mcq",
+        "two_number_sum_difference_mcq",
+        "direct_addition_short",
+        "diff_find_sum",
+        "money_multi_item_mcq",
+        "money_change_from_purchase",
+        "ordering_numbers_short"
+      ]
+    }
+  ]
+}

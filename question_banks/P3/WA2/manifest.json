@@ -1,0 +1,48 @@
+{
+  "grade": "P3",
+  "assessment": "WA2",
+  "topics": [
+    {
+      "key": "multiplication",
+      "label": "Multiplication",
+      "icon": "✖️",
+      "taxonomy_topic": "multiplication",
+      "structure_ids": ["multiplication_as_repeated_addition_mcq"]
+    },
+    {
+      "key": "division",
+      "label": "Division",
+      "icon": "➗",
+      "taxonomy_topic": "division",
+      "structure_ids": [
+        "equal_groups_division_word_problem",
+        "division_with_remainder_round_up_word_problem",
+        "reverse_division_find_dividend"
+      ]
+    },
+    {
+      "key": "fractions",
+      "label": "Fractions",
+      "icon": "½",
+      "taxonomy_topic": "fractions",
+      "structure_ids": [
+        "fraction_simplification",
+        "fraction_addition_unlike_denominators"
+      ]
+    },
+    {
+      "key": "mixed_wa2",
+      "label": "Mixed (WA2)",
+      "icon": "🎯",
+      "taxonomy_topic": null,
+      "structure_ids": [
+        "multiplication_as_repeated_addition_mcq",
+        "equal_groups_division_word_problem",
+        "division_with_remainder_round_up_word_problem",
+        "reverse_division_find_dividend",
+        "fraction_simplification",
+        "fraction_addition_unlike_denominators"
+      ]
+    }
+  ]
+}

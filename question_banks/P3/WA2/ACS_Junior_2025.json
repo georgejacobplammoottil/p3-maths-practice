@@ -1,0 +1,79 @@
+{
+  "source": "ACS Junior Primary 2025",
+  "grade": "P3",
+  "assessment": "WA2",
+  "questions": [
+    {
+      "structure_id": "multiplication_as_repeated_addition_mcq",
+      "topic": "multiplication",
+      "section": "A",
+      "marks": 1,
+      "text": "4 × 9 is the same as ___.",
+      "options": ["9 + 9 + 9 + 9", "4 × 4 × 4 × 4 × 4 × 4 × 4 × 4 × 4", "4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4", "9 × 9 × 9 × 9"],
+      "correct_option": 0,
+      "answer": "9 + 9 + 9 + 9",
+      "working": "4 × 9 means 9 added 4 times = 36",
+      "source": "ACS Junior 2025 WA2 Q1"
+    },
+    {
+      "structure_id": "equal_groups_division_word_problem",
+      "topic": "division",
+      "section": "B",
+      "marks": 1,
+      "text": "Mrs Lee packed 56 apples equally into bags. There were 8 apples in each bag. How many bags were there?",
+      "options": null,
+      "correct_option": null,
+      "answer": "7",
+      "working": "56 ÷ 8 = 7",
+      "source": "ACS Junior 2025 WA2 Q6"
+    },
+    {
+      "structure_id": "division_with_remainder_round_up_word_problem",
+      "topic": "division",
+      "section": "B",
+      "marks": 2,
+      "text": "Ahmad had 65 cupcakes. Ahmad packed 9 cupcakes into each box. How many boxes did Ahmad need to pack all the cupcakes?",
+      "options": null,
+      "correct_option": null,
+      "answer": "8",
+      "working": "65 ÷ 9 = 7 remainder 2;  remainder > 0 → need 1 extra box → 8 boxes",
+      "source": "ACS Junior 2025 WA2 Q7"
+    },
+    {
+      "structure_id": "reverse_division_find_dividend",
+      "topic": "division",
+      "section": "B",
+      "marks": 2,
+      "text": "When a number is divided by 6, the quotient is 14 and the remainder is 3. What is the number?",
+      "options": null,
+      "correct_option": null,
+      "answer": "87",
+      "working": "6 × 14 = 84;  84 + 3 = 87",
+      "source": "ACS Junior 2025 WA2 Q8"
+    },
+    {
+      "structure_id": "fraction_simplification",
+      "topic": "fractions",
+      "section": "B",
+      "marks": 2,
+      "text": "Write 6/9 in its simplest form.",
+      "options": null,
+      "correct_option": null,
+      "answer": "2/3",
+      "working": "GCF(6, 9) = 3;  6 ÷ 3 = 2,  9 ÷ 3 = 3  →  2/3",
+      "source": "ACS Junior 2025 WA2 Q9"
+    },
+    {
+      "structure_id": "fraction_addition_unlike_denominators",
+      "topic": "fractions",
+      "section": "B",
+      "marks": 2,
+      "text": "Find the value of 1/4 + 1/2. Express your answer in the simplest form.",
+      "options": null,
+      "correct_option": null,
+      "answer": "3/4",
+      "working": "1/4 = 1/4;  1/2 = 2/4;  Sum = 3/4",
+      "source": "ACS Junior 2025 WA2 Q10"
+    }
+  ]
+}

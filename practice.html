@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>P3 Maths Practice</title>
+  <style>
+    :root {
+      --blue: #2563eb;
+      --blue-dk: #1d4ed8;
+      --blue-lt: #dbeafe;
+      --green: #16a34a;
+      --green-lt: #dcfce7;
+      --red: #dc2626;
+      --red-lt: #fee2e2;
+      --amber: #b45309;
+      --amber-lt: #fef3c7;
+      --grey: #64748b;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --text: #0f172a;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    .screen { display: none; min-height: 100vh; }
+    .screen.active { display: flex; flex-direction: column; }
+
+    /* ── Topic selection ── */
+    #screen-topic { align-items: center; justify-content: center; padding: 2rem 1rem; }
+    .app-title { font-size: 2rem; font-weight: 900; color: var(--blue); letter-spacing: -0.03em; }
+    .app-sub { color: var(--grey); font-size: 0.95rem; margin-top: 0.2rem; margin-bottom: 2rem; }
+    .topic-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0.85rem; max-width: 780px; width: 100%; }
+    .topic-card { background: var(--card); border: 2px solid var(--border); border-radius: 14px; padding: 1.5rem 1rem 1.25rem; text-align: center; cursor: pointer; transition: border-color 0.12s, box-shadow 0.12s, transform 0.12s; }
+    .topic-card:hover { border-color: var(--blue); box-shadow: 0 4px 16px rgba(37,99,235,0.18); transform: translateY(-2px); }
+    .topic-card .t-icon { font-size: 2rem; line-height: 1; margin-bottom: 0.5rem; }
+    .topic-card .t-name { font-weight: 800; font-size: 0.9rem; }
+    .topic-card .t-meta { color: var(--grey); font-size: 0.75rem; margin-top: 0.25rem; }
+
+    /* ── Practice header ── */
+    .practice-header { background: var(--card); border-bottom: 1px solid var(--border); padding: 0.7rem 1.25rem; display: flex; align-items: center; gap: 0.75rem; }
+    .h-topic { font-weight: 800; color: var(--blue); font-size: 0.95rem; flex: 1; }
+    .h-progress { color: var(--grey); font-size: 0.85rem; }
+    .timer { font-size: 1.25rem; font-weight: 900; font-variant-numeric: tabular-nums; padding: 0.25rem 0.7rem; border-radius: 8px; background: var(--blue-lt); color: var(--blue); min-width: 72px; text-align: center; transition: background 0.3s, color 0.3s; }
+    .timer.warn { background: var(--amber-lt); color: var(--amber); }
+    .timer.danger { background: var(--red-lt); color: var(--red); animation: pulse 1s infinite; }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
+
+    .progress-track { height: 4px; background: var(--border); }
+    .progress-fill { height: 4px; background: var(--blue); transition: width 0.3s; }
+
+    .practice-body { flex: 1; display: flex; align-items: flex-start; justify-content: center; padding: 1.75rem 1rem 2rem; }
+
+    /* ── Question card ── */
+    .q-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 1.75rem 2rem; max-width: 680px; width: 100%; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+    .marks-badge { display: inline-block; background: var(--blue-lt); color: var(--blue); font-size: 0.72rem; font-weight: 800; padding: 0.18rem 0.55rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 1rem; }
+    .q-text { font-size: 1.2rem; font-weight: 700; line-height: 1.55; margin-bottom: 1.5rem; white-space: pre-wrap; }
+
+    /* MCQ options */
+    .options-wrap { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 1rem; }
+    .opt-btn { display: flex; align-items: center; gap: 0.7rem; padding: 0.8rem 1rem; border: 2px solid var(--border); border-radius: 10px; background: var(--card); cursor: pointer; text-align: left; font-size: 1rem; font-weight: 600; font-family: inherit; transition: border-color 0.1s, background 0.1s; width: 100%; }
+    .opt-btn:hover:not(:disabled) { border-color: var(--blue); background: var(--blue-lt); }
+    .opt-btn.sel { border-color: var(--blue); background: var(--blue-lt); }
+    .opt-btn.ok  { border-color: var(--green); background: var(--green-lt); }
+    .opt-btn.bad { border-color: var(--red);   background: var(--red-lt); }
+    .opt-btn:disabled { cursor: default; }
+    .opt-num { min-width: 26px; height: 26px; border-radius: 50%; background: var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 800; flex-shrink: 0; }
+    .opt-btn.sel .opt-num { background: var(--blue); color: #fff; }
+    .opt-btn.ok  .opt-num { background: var(--green); color: #fff; }
+    .opt-btn.bad .opt-num { background: var(--red); color: #fff; }
+
+    /* Short answer */
+    .ans-input { width: 100%; padding: 0.8rem 1rem; font-size: 1.05rem; border: 2px solid var(--border); border-radius: 10px; margin-bottom: 1rem; font-family: inherit; transition: border-color 0.15s; }
+    .ans-input:focus { outline: none; border-color: var(--blue); }
+    .ans-input.ok  { border-color: var(--green); background: var(--green-lt); }
+    .ans-input.bad { border-color: var(--red);   background: var(--red-lt); }
+
+    /* Feedback */
+    .feedback { display: none; padding: 0.8rem 1rem; border-radius: 10px; margin-bottom: 1rem; font-size: 0.92rem; }
+    .feedback.ok  { display: block; background: var(--green-lt); color: #14532d; }
+    .feedback.bad { display: block; background: var(--red-lt);   color: #7f1d1d; }
+    .fb-icon { font-weight: 900; margin-right: 0.3rem; }
+    .fb-working { margin-top: 0.35rem; font-size: 0.82rem; color: var(--grey); font-style: italic; }
+
+    /* Action button */
+    .btn-action { width: 100%; padding: 0.85rem; font-size: 1rem; font-weight: 800; font-family: inherit; background: var(--blue); color: #fff; border: none; border-radius: 10px; cursor: pointer; transition: background 0.12s; }
+    .btn-action:hover:not(:disabled) { background: var(--blue-dk); }
+    .btn-action:disabled { opacity: 0.35; cursor: default; }
+
+    /* ── Results ── */
+    #screen-results { align-items: center; justify-content: flex-start; padding: 2rem 1rem; }
+    .res-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; max-width: 760px; width: 100%; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+    .res-top { text-align: center; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem; }
+    .res-emoji { font-size: 3rem; line-height: 1; }
+    .res-score { font-size: 2.8rem; font-weight: 900; color: var(--blue); margin: 0.4rem 0 0; letter-spacing: -0.03em; }
+    .res-label { color: var(--grey); font-size: 0.95rem; }
+    .res-meta  { color: var(--grey); font-size: 0.82rem; margin-top: 0.25rem; }
+
+    .res-table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+    .res-table th { text-align: left; padding: 0.55rem 0.7rem; background: var(--bg); font-weight: 700; border-bottom: 2px solid var(--border); }
+    .res-table td { padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .res-table tr:last-child td { border-bottom: none; }
+    .tick { color: var(--green); font-weight: 900; }
+    .cross { color: var(--red); font-weight: 900; }
+
+    .res-actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; }
+    .res-actions .btn-action { background: var(--grey); }
+    .res-actions .btn-action:hover:not(:disabled) { background: #475569; }
+    .res-actions .btn-pri { background: var(--blue); }
+    .res-actions .btn-pri:hover:not(:disabled) { background: var(--blue-dk); }
+  </style>
+</head>
+<body>
+
+<!-- ═══ SCREEN 1: Topic Selection ═══ -->
+<div id="screen-topic" class="screen active">
+  <div class="app-title">P3 Maths Practice</div>
+  <div class="app-sub">25-minute timed sessions · Singapore curriculum</div>
+  <div class="topic-grid" id="topic-grid"></div>
+</div>
+
+<!-- ═══ SCREEN 2: Practice ═══ -->
+<div id="screen-practice" class="screen">
+  <div class="practice-header">
+    <div class="h-topic" id="h-topic">Place Value</div>
+    <div class="h-progress" id="h-progress">Q 1 of 20</div>
+    <div class="timer" id="timer">25:00</div>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+  </div>
+
+  <div class="practice-body">
+    <div class="q-card">
+      <div class="marks-badge" id="marks-badge">1 mark</div>
+      <div class="q-text" id="q-text"></div>
+      <div class="options-wrap" id="options-wrap"></div>
+      <input type="text" class="ans-input" id="ans-input" placeholder="Type your answer here…" style="display:none" autocomplete="off" autocorrect="off" />
+      <div class="feedback" id="feedback"></div>
+      <button class="btn-action" id="btn-action">Submit Answer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SCREEN 3: Results ═══ -->
+<div id="screen-results" class="screen">
+  <div class="res-card">
+    <div class="res-top">
+      <div class="res-emoji" id="res-emoji">🌟</div>
+      <div class="res-score" id="res-score">15 / 22</div>
+      <div class="res-label">marks</div>
+      <div class="res-meta" id="res-meta"></div>
+    </div>
+    <table class="res-table">
+      <thead><tr><th>#</th><th>Question</th><th>Your answer</th><th>Correct answer</th><th>Marks</th></tr></thead>
+      <tbody id="res-tbody"></tbody>
+    </table>
+    <div class="res-actions">
+      <button class="btn-action" onclick="goTopics()">← New topic</button>
+      <button class="btn-action" onclick="downloadCSV()">⬇ Download CSV</button>
+      <button class="btn-action btn-pri" onclick="retryTopic()">Try again ↺</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────────────────────────
+//  Utilities
+// ─────────────────────────────────────────────────────────────────
+const ri = (lo, hi) => Math.floor(Math.random() * (hi - lo + 1)) + lo;
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) { const j = ri(0, i); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+
+function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }
+function lcm(a, b) { return a * b / gcd(a, b); }
+function fracStr(n, d) { const g = gcd(n, d); return (d / g === 1) ? String(n / g) : `${n / g}/${d / g}`; }
+
+const PLACE = ['ones', 'tens', 'hundreds', 'thousands'];
+const SG    = { bags:'bag', boxes:'box', packets:'packet', baskets:'basket', trays:'tray', containers:'container', bottles:'bottle' };
+const sing  = w => SG[w] || w.replace(/s$/, '');
+const $c    = c => `$${Math.floor(c / 100)}.${String(c % 100).padStart(2, '0')}`;
+
+// ─────────────────────────────────────────────────────────────────
+//  Question generators — each returns a plain object
+// ─────────────────────────────────────────────────────────────────
+
+function genDigitValue() {
+  let num, pos, dig;
+  do { num = ri(1000, 9999); pos = ri(0, 3); dig = Math.floor(num / 10 ** pos) % 10; } while (dig === 0);
+  const pv = 10 ** pos, ans = dig * pv;
+  const opts = [...new Set([dig * pv * 10, pv * 10, ans, pv])].sort((a, b) => b - a);
+  return { type:'mcq', marks:1, topic:'place_value', structureId:'digit_value_mcq',
+    text:`What is the value of the digit <strong>${dig}</strong> in <strong>${num}</strong>?`,
+    opts: opts.map(String), ci: opts.indexOf(ans), answer: String(ans),
+    working:`Digit ${dig} is in the ${PLACE[pos]} place → ${dig} × ${pv} = ${ans}` };
+}
+
+function genExpandedForm() {
+  let num, pos, dig;
+  do { num = ri(1000, 9999); pos = ri(1, 3); dig = Math.floor(num / 10 ** pos) % 10; } while (dig === 0);
+  const digits = [0,1,2,3].map(p => Math.floor(num / 10 ** p) % 10);
+  const pv = 10 ** pos, ans = dig * pv;
+  const parts = [];
+  for (let p = 3; p >= 0; p--) {
+    if (digits[p] === 0) continue;
+    parts.push(p === pos ? '___' : `${digits[p]} ${PLACE[p]}`);
+  }
+  const d3 = pv >= 10 ? dig * pv / 10 : dig;
+  const raw = [...new Set([dig * pv * 10, dig, ans, d3])].sort((a, b) => b - a);
+  const ci = raw.indexOf(ans);
+  if (ci === -1) return genExpandedForm();
+  return { type:'mcq', marks:1, topic:'place_value', structureId:'expanded_form_mcq',
+    text:`<strong>${num}</strong> = ${parts.join(' + ')}`,
+    opts: raw.map(String), ci, answer: String(ans),
+    working:`Missing part is ${dig} ${PLACE[pos]}s = ${dig} × ${pv} = ${ans}` };
+}
+
+function genNumberPattern() {
+  const diffs = [30, 40, 50, 60, 100, 200];
+  const d = diffs[ri(0, diffs.length - 1)];
+  const st = ri(1000, 4000);
+  const seq = Array.from({ length: 7 }, (_, i) => st + i * d);
+  const correct = `${seq[4]},  ${seq[5]}`;
+  const cands = [...new Set([
+    `${seq[4] - 3 * d},  ${seq[5] - 3 * d}`,
+    `${seq[4] - 2 * d},  ${seq[5] - 2 * d}`,
+    `${seq[4] - d},  ${seq[5] - d}`,
+    correct
+  ])];
+  const opts = shuffle(cands);
+  const display = [...seq.slice(0,4).map(String), '___', '___', String(seq[6])].join(',  ');
+  return { type:'mcq', marks:2, topic:'number_patterns', structureId:'number_pattern_missing_mcq',
+    text:`What are the missing numbers in the number pattern?\n${display}`,
+    opts, ci: opts.indexOf(correct), answer: correct,
+    working:`Common difference = ${d}. Missing: ${seq[4]} and ${seq[5]}` };
+}
+
+function genSumDiff() {
+  const a = ri(500, 3000), b = ri(a + 100, 5000);
+  const total = a + b, ans = b - a;
+  const opts = shuffle([...new Set([String(ans), String(b), String(total + a), String(total + 2 * a)])]);
+  return { type:'mcq', marks:2, topic:'addition_subtraction', structureId:'two_number_sum_difference_mcq',
+    text:`The sum of two numbers is <strong>${total}</strong>. One of the numbers is <strong>${a}</strong>. What is the difference between the 2 numbers?`,
+    opts, ci: opts.indexOf(String(ans)), answer: String(ans),
+    working:`Other number = ${total} − ${a} = ${b};  Difference = ${b} − ${a} = ${ans}` };
+}
+
+function genDirectAdd() {
+  const a = ri(1000, 5999), b = ri(100, 4000);
+  return { type:'short', marks:1, topic:'addition_subtraction', structureId:'direct_addition_short',
+    text:`Find the sum of <strong>${a}</strong> and <strong>${b}</strong>.`,
+    answer: String(a + b), working:`${a} + ${b} = ${a + b}` };
+}
+
+function genDiffFindSum() {
+  const sm = ri(100, 500), diff = ri(50, 300);
+  const lg = sm + diff, total = sm + lg;
+  return { type:'short', marks:3, topic:'addition_subtraction', structureId:'two_number_difference_find_sum',
+    text:`The difference between two numbers is <strong>${diff}</strong>. The smaller number is <strong>${sm}</strong>. Find the sum of the two numbers.`,
+    answer: String(total),
+    working:`Larger = ${sm} + ${diff} = ${lg};  Sum = ${sm} + ${lg} = ${total}` };
+}
+
+function genMoneyItems() {
+  const ITEMS = ['stamps', 'stickers', 'sweets', 'erasers', 'bookmarks'];
+  const PRICES = [5, 10, 15, 20, 25, 30, 50];
+  const item = ITEMS[ri(0, ITEMS.length - 1)];
+  const n1 = ri(3, 9), p1 = PRICES[ri(0, PRICES.length - 1)];
+  const n2 = ri(3, 9), p2 = PRICES[ri(0, PRICES.length - 1)];
+  const totalC = n1 * p1 + n2 * p2;
+  const ans = $c(totalC);
+  const opts = shuffle([...new Set([$c((n1 + n2) * 10), ans, $c(n1 * p2 + n2 * p1), $c(totalC + 10)])]);
+  return { type:'mcq', marks:2, topic:'money', structureId:'money_multi_item_mcq',
+    text:`What is the total cost of <strong>${n1}</strong> ${p1}¢ ${item} and <strong>${n2}</strong> ${p2}¢ ${item}?`,
+    opts, ci: opts.indexOf(ans), answer: ans,
+    working:`${n1} × ${p1}¢ = ${n1 * p1}¢;  ${n2} × ${p2}¢ = ${n2 * p2}¢;  Total = ${totalC}¢ = ${ans}` };
+}
+
+function genMoneyChange() {
+  const NAMES = ['Siti', 'Ravi', 'Ahmad', 'Li Hua', 'Priya'];
+  const ITEMS = ['a book', 'a ruler', 'an eraser', 'a pen', 'a notebook'];
+  const name = NAMES[ri(0, NAMES.length - 1)];
+  let i1 = ITEMS[ri(0, ITEMS.length - 1)], i2;
+  do { i2 = ITEMS[ri(0, ITEMS.length - 1)]; } while (i2 === i1);
+  const p1 = ri(50, 1500), p2 = ri(50, 1500), total = p1 + p2;
+  const paid = [2000, 5000, 10000].find(p => p > total) || 5000;
+  const change = paid - total;
+  return { type:'short', marks:2, topic:'money', structureId:'money_change_from_purchase',
+    text:`${name} bought ${i1} for <strong>${$c(p1)}</strong> and ${i2} for <strong>${$c(p2)}</strong>. ${name} gave the cashier <strong>${$c(paid)}</strong>. How much change did ${name} receive?`,
+    answer: $c(change),
+    working:`Total = ${$c(p1)} + ${$c(p2)} = ${$c(total)};  Change = ${$c(paid)} − ${$c(total)} = ${$c(change)}` };
+}
+
+function genMultAdd() {
+  const a = ri(2, 9), b = ri(2, 9);
+  const addS = (v, c) => Array(c).fill(String(v)).join(' + ');
+  const mulS = (v, c) => Array(c).fill(String(v)).join(' × ');
+  const ans = addS(b, a);
+  const opts = shuffle([...new Set([ans, mulS(b, a), addS(a, b), mulS(a, b)])]);
+  return { type:'mcq', marks:1, topic:'multiplication', structureId:'multiplication_as_repeated_addition_mcq',
+    text:`<strong>${a} × ${b}</strong> is the same as ___.`,
+    opts, ci: opts.indexOf(ans), answer: ans,
+    working:`${a} × ${b} means ${b} added ${a} times = ${a * b}` };
+}
+
+function genEqualGroups() {
+  const d = ri(3, 9), q = ri(4, 12), total = d * q;
+  const CONTS = ['bags', 'boxes', 'packets', 'baskets'];
+  const ITEMS = ['apples', 'sweets', 'stickers', 'biscuits', 'cookies'];
+  const NAMES = ['Ali', 'Siti', 'Ravi', 'Tom', 'Mrs Lee'];
+  const c = CONTS[ri(0, CONTS.length - 1)];
+  const item = ITEMS[ri(0, ITEMS.length - 1)];
+  const name = NAMES[ri(0, NAMES.length - 1)];
+  return { type:'short', marks:1, topic:'division', structureId:'equal_groups_division_word_problem',
+    text:`${name} packed <strong>${total}</strong> ${item} equally into ${c}. There were <strong>${d}</strong> ${item} in each ${sing(c)}. How many ${c} were there?`,
+    answer: String(q), working:`${total} ÷ ${d} = ${q}` };
+}
+
+function genDivRoundUp() {
+  const d = ri(4, 9), q = ri(5, 15), r = ri(1, d - 1);
+  const total = d * q + r, ans = q + 1;
+  const CONTS = ['boxes', 'bags', 'packets', 'trays'];
+  const ITEMS = ['cupcakes', 'muffins', 'eggs', 'biscuits', 'pens'];
+  const NAMES = ['Lily', 'Ben', 'Ahmad', 'Mrs Tan', 'Priya'];
+  const c = CONTS[ri(0, CONTS.length - 1)];
+  const item = ITEMS[ri(0, ITEMS.length - 1)];
+  const name = NAMES[ri(0, NAMES.length - 1)];
+  return { type:'short', marks:2, topic:'division', structureId:'division_with_remainder_round_up_word_problem',
+    text:`${name} had <strong>${total}</strong> ${item}. ${name} packed <strong>${d}</strong> ${item} into each ${sing(c)}. How many ${c} did ${name} need to pack all the ${item}?`,
+    answer: String(ans),
+    working:`${total} ÷ ${d} = ${q} remainder ${r};  remainder > 0 → need 1 extra ${sing(c)} → ${ans} ${c}` };
+}
+
+function genRevDiv() {
+  const d = ri(3, 9), q = ri(10, 50), r = ri(1, d - 1);
+  const dividend = d * q + r;
+  return { type:'short', marks:2, topic:'division', structureId:'reverse_division_find_dividend',
+    text:`When a number is divided by <strong>${d}</strong>, the quotient is <strong>${q}</strong> and the remainder is <strong>${r}</strong>. What is the number?`,
+    answer: String(dividend),
+    working:`${d} × ${q} = ${d * q};  ${d * q} + ${r} = ${dividend}` };
+}
+
+function genFracSimp() {
+  const PAIRS = [[2,4],[2,6],[2,8],[3,6],[3,9],[3,12],[4,8],[4,12],[4,16],[5,10],[5,15],[6,12],[6,18],[8,12],[9,12],[14,42],[3,15],[4,20],[6,9],[10,15],[8,20],[9,15]];
+  const [n, d] = PAIRS[ri(0, PAIRS.length - 1)];
+  const ans = fracStr(n, d);
+  const g = gcd(n, d);
+  return { type:'short', marks:2, topic:'fractions', structureId:'fraction_simplification',
+    text:`Write <strong>${n}/${d}</strong> in its simplest form.`,
+    answer: ans,
+    working:`GCF(${n}, ${d}) = ${g};  ${n} ÷ ${g} = ${n/g},  ${d} ÷ ${g} = ${d/g}  →  ${ans}` };
+}
+
+function genFracAdd() {
+  const PAIRS = [[1,5,3,10],[2,5,1,10],[1,4,1,2],[1,3,1,6],[2,3,1,6],[3,4,1,8],[1,2,1,4],[3,5,1,10],[1,4,3,8],[1,3,1,9],[2,9,1,3],[1,6,1,3],[1,2,1,6],[3,8,1,4]]
+    .filter(([n1,d1,n2,d2]) => n1*d2 + n2*d1 <= d1*d2);
+  const [n1,d1,n2,d2] = PAIRS[ri(0, PAIRS.length - 1)];
+  const ld = lcm(d1, d2);
+  const rn = n1 * (ld/d1) + n2 * (ld/d2);
+  const ans = fracStr(rn, ld);
+  return { type:'short', marks:2, topic:'fractions', structureId:'fraction_addition_unlike_denominators',
+    text:`Find the value of <strong>${n1}/${d1} + ${n2}/${d2}</strong>. Express your answer in the simplest form.`,
+    answer: ans,
+    working:`${n1}/${d1} = ${n1*(ld/d1)}/${ld};  ${n2}/${d2} = ${n2*(ld/d2)}/${ld};  Sum = ${rn}/${ld} = ${ans}` };
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  Topic registry
+// ─────────────────────────────────────────────────────────────────
+const TOPICS = [
+  { key:'place_value',         label:'Place Value',            icon:'🔢', gens:[genDigitValue, genExpandedForm] },
+  { key:'number_patterns',     label:'Number Patterns',        icon:'🔄', gens:[genNumberPattern] },
+  { key:'addition_subtraction',label:'Addition & Subtraction', icon:'➕', gens:[genSumDiff, genDirectAdd, genDiffFindSum] },
+  { key:'money',               label:'Money',                  icon:'💵', gens:[genMoneyItems, genMoneyChange] },
+  { key:'multiplication',      label:'Multiplication',         icon:'✖️',  gens:[genMultAdd] },
+  { key:'division',            label:'Division',               icon:'➗', gens:[genEqualGroups, genDivRoundUp, genRevDiv] },
+  { key:'fractions',           label:'Fractions',              icon:'½',  gens:[genFracSimp, genFracAdd] },
+  { key:'mixed',               label:'Mixed Practice',         icon:'🎯', gens:[genDigitValue, genSumDiff, genNumberPattern, genMoneyItems, genMultAdd, genEqualGroups, genDivRoundUp, genFracSimp, genFracAdd] },
+];
+
+// ─────────────────────────────────────────────────────────────────
+//  Session state
+// ─────────────────────────────────────────────────────────────────
+const N_QUESTIONS = 20;
+const DURATION    = 25 * 60;
+
+let S = {
+  topicKey: null,
+  questions: [],
+  idx: 0,
+  results: [],
+  secsLeft: DURATION,
+  interval: null,
+  startMs: null,
+  submitted: false,
+  selOpt: null,
+};
+
+// ─────────────────────────────────────────────────────────────────
+//  Screens
+// ─────────────────────────────────────────────────────────────────
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  Topic grid
+// ─────────────────────────────────────────────────────────────────
+function buildGrid() {
+  const grid = document.getElementById('topic-grid');
+  TOPICS.forEach(t => {
+    const card = document.createElement('div');
+    card.className = 'topic-card';
+    card.innerHTML = `<div class="t-icon">${t.icon}</div><div class="t-name">${t.label}</div><div class="t-meta">20 questions · 25 min</div>`;
+    card.onclick = () => startSession(t.key);
+    grid.appendChild(card);
+  });
+}
+
+function goTopics()  { clearInterval(S.interval); show('screen-topic'); }
+function retryTopic() { startSession(S.topicKey); }
+
+// ─────────────────────────────────────────────────────────────────
+//  Session
+// ─────────────────────────────────────────────────────────────────
+function startSession(key) {
+  const t = TOPICS.find(x => x.key === key);
+  S = { topicKey: key, questions: genQuestions(t.gens, N_QUESTIONS),
+        idx: 0, results: [], secsLeft: DURATION,
+        interval: null, startMs: Date.now(),
+        submitted: false, selOpt: null };
+  document.getElementById('h-topic').textContent = t.label;
+  show('screen-practice');
+  startTimer();
+  renderQ();
+}
+
+function genQuestions(gens, n) {
+  const pool = shuffle([...gens]);
+  return Array.from({ length: n }, (_, i) => pool[i % pool.length]());
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  Timer
+// ─────────────────────────────────────────────────────────────────
+function startTimer() {
+  const el = document.getElementById('timer');
+  updateTimer(el);
+  S.interval = setInterval(() => {
+    S.secsLeft--;
+    updateTimer(el);
+    if (S.secsLeft <= 0) { clearInterval(S.interval); endSession(); }
+  }, 1000);
+}
+
+function updateTimer(el) {
+  const m = Math.floor(S.secsLeft / 60), s = S.secsLeft % 60;
+  el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  el.className = 'timer' + (S.secsLeft < 120 ? ' danger' : S.secsLeft < 300 ? ' warn' : '');
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  Render question
+// ─────────────────────────────────────────────────────────────────
+function renderQ() {
+  const q = S.questions[S.idx];
+  S.submitted = false;
+  S.selOpt = null;
+
+  document.getElementById('h-progress').textContent = `Q ${S.idx + 1} of ${N_QUESTIONS}`;
+  document.getElementById('progress-fill').style.width = `${(S.idx / N_QUESTIONS) * 100}%`;
+  document.getElementById('marks-badge').textContent = q.marks === 1 ? '1 mark' : `${q.marks} marks`;
+  document.getElementById('q-text').innerHTML = q.text;
+
+  const optWrap = document.getElementById('options-wrap');
+  const input   = document.getElementById('ans-input');
+  const fb      = document.getElementById('feedback');
+  const btn     = document.getElementById('btn-action');
+
+  optWrap.innerHTML = '';
+  fb.className = 'feedback';
+  fb.innerHTML = '';
+
+  if (q.type === 'mcq') {
+    input.style.display = 'none';
+    q.opts.forEach((opt, i) => {
+      const b = document.createElement('button');
+      b.className = 'opt-btn';
+      b.innerHTML = `<span class="opt-num">${i + 1}</span><span>${opt}</span>`;
+      b.onclick = () => pickOpt(i);
+      optWrap.appendChild(b);
+    });
+    btn.disabled = true;
+  } else {
+    input.style.display = 'block';
+    input.value = '';
+    input.className = 'ans-input';
+    input.disabled = false;
+    input.onkeydown = e => { if (e.key === 'Enter') doAction(); };
+    setTimeout(() => input.focus(), 50);
+    btn.disabled = false;
+  }
+
+  btn.textContent = 'Submit Answer';
+  btn.onclick = doAction;
+}
+
+function pickOpt(i) {
+  if (S.submitted) return;
+  S.selOpt = i;
+  document.querySelectorAll('.opt-btn').forEach((b, j) => b.classList.toggle('sel', j === i));
+  document.getElementById('btn-action').disabled = false;
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  Submit / Next
+// ─────────────────────────────────────────────────────────────────
+function doAction() {
+  if (S.submitted) {
+    S.idx++;
+    if (S.idx >= N_QUESTIONS) endSession();
+    else renderQ();
+    return;
+  }
+  submitAnswer();
+}
+
+function submitAnswer() {
+  const q = S.questions[S.idx];
+  S.submitted = true;
+
+  let userAns, correct;
+
+  if (q.type === 'mcq') {
+    userAns = S.selOpt !== null ? q.opts[S.selOpt] : '(no answer)';
+    correct = S.selOpt === q.ci;
+    document.querySelectorAll('.opt-btn').forEach((b, i) => {
+      b.disabled = true;
+      if (i === q.ci)   b.classList.add('ok');
+      else if (i === S.selOpt && !correct) b.classList.add('bad');
+    });
+  } else {
+    userAns = document.getElementById('ans-input').value.trim();
+    correct = checkShort(q.answer, userAns);
+    const inp = document.getElementById('ans-input');
+    inp.disabled = true;
+    inp.classList.add(correct ? 'ok' : 'bad');
+  }
+
+  const earned = correct ? q.marks : 0;
+  S.results.push({ q, userAns, correct, earned });
+
+  const fb = document.getElementById('feedback');
+  if (correct) {
+    fb.className = 'feedback ok';
+    fb.innerHTML = `<span class="fb-icon">✓</span> Correct!<div class="fb-working">${q.working}</div>`;
+  } else {
+    const ca = q.type === 'mcq' ? q.opts[q.ci] : q.answer;
+    fb.className = 'feedback bad';
+    fb.innerHTML = `<span class="fb-icon">✗</span> Correct answer: <strong>${ca}</strong><div class="fb-working">${q.working}</div>`;
+  }
+
+  const btn = document.getElementById('btn-action');
+  btn.disabled = false;
+  btn.textContent = S.idx + 1 >= N_QUESTIONS ? 'See Results →' : 'Next Question →';
+}
+
+function checkShort(correct, user) {
+  const norm = s => s.trim().toLowerCase().replace(/\s+/g, ' ');
+  const ua = norm(user), ca = norm(correct);
+  if (!ua) return false;
+  if (ua === ca) return true;
+  // Numeric / money
+  const uN = parseFloat(ua.replace('$', '')), cN = parseFloat(ca.replace('$', ''));
+  if (!isNaN(uN) && !isNaN(cN)) return Math.abs(uN - cN) < 0.005;
+  // Fraction: cross-multiply
+  const frac = s => s.match(/^(\d+)\/(\d+)$/);
+  const uf = frac(ua), cf = frac(ca);
+  if (uf && cf) return Number(uf[1]) * Number(cf[2]) === Number(cf[1]) * Number(uf[2]);
+  return false;
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  Results
+// ─────────────────────────────────────────────────────────────────
+function endSession() {
+  clearInterval(S.interval);
+  const totalM  = S.results.reduce((s, r) => s + r.q.marks, 0);
+  const earnedM = S.results.reduce((s, r) => s + r.earned, 0);
+  const elapsed = Math.floor((Date.now() - S.startMs) / 1000);
+  const em = Math.floor(elapsed / 60), es = elapsed % 60;
+  const pct = totalM > 0 ? earnedM / totalM : 0;
+
+  document.getElementById('res-emoji').textContent = pct >= 0.85 ? '🌟' : pct >= 0.6 ? '👍' : '💪';
+  document.getElementById('res-score').textContent = `${earnedM} / ${totalM}`;
+  document.getElementById('res-meta').textContent =
+    `${S.results.length} of ${N_QUESTIONS} questions answered · ${String(em).padStart(2,'0')}:${String(es).padStart(2,'0')} elapsed`;
+
+  const tbody = document.getElementById('res-tbody');
+  tbody.innerHTML = '';
+  S.results.forEach((r, i) => {
+    const plain = r.q.text.replace(/<[^>]+>/g, '');
+    const trunc = plain.length > 65 ? plain.slice(0, 65) + '…' : plain;
+    const markCell = r.correct
+      ? `<span class="tick">✓</span> ${r.q.marks}`
+      : `<span class="cross">✗</span> 0`;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${i+1}</td><td>${trunc}</td><td>${r.userAns || '–'}</td><td>${r.q.answer}</td><td>${markCell}/${r.q.marks}</td>`;
+    tbody.appendChild(tr);
+  });
+
+  show('screen-results');
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  Download CSV
+// ─────────────────────────────────────────────────────────────────
+function downloadCSV() {
+  const stripHTML = s => s.replace(/<[^>]+>/g, '');
+  const esc = s => `"${String(s).replace(/"/g, '""')}"`;
+  const topic = TOPICS.find(t => t.key === S.topicKey);
+  const elapsed = Math.floor((Date.now() - S.startMs) / 1000);
+  const em = Math.floor(elapsed / 60), es = elapsed % 60;
+  const timestamp = new Date().toLocaleString('en-SG', { hour12: false });
+
+  const headers = ['#', 'Topic', 'Structure ID', 'Question', 'User Answer', 'Correct Answer', 'Correct', 'Marks Earned', 'Marks Available'];
+  const rows = S.results.map((r, i) => [
+    i + 1,
+    topic.label,
+    r.q.structureId || r.q.topic,
+    stripHTML(r.q.text).replace(/\n/g, ' '),
+    r.userAns || '',
+    r.q.answer,
+    r.correct ? 'Y' : 'N',
+    r.earned,
+    r.q.marks
+  ].map(esc).join(','));
+
+  const meta = [
+    `# P3 Maths Practice — Session Results`,
+    `# Date: ${timestamp}`,
+    `# Topic: ${topic.label}`,
+    `# Score: ${S.results.reduce((s,r) => s + r.earned, 0)} / ${S.results.reduce((s,r) => s + r.q.marks, 0)} marks`,
+    `# Time elapsed: ${String(em).padStart(2,'0')}:${String(es).padStart(2,'0')}`,
+    ``
+  ].join('\n');
+
+  const csv = meta + [headers.map(esc).join(','), ...rows].join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `p3-maths-${S.topicKey}-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  Init
+// ─────────────────────────────────────────────────────────────────
+buildGrid();
+</script>
+</body>
+</html>

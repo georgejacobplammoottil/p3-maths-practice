@@ -1,0 +1,1904 @@
+{
+  "_meta": {
+    "version": "0.3",
+    "description": "Question taxonomy for P3 Maths practice bank. Covers all 23 papers: ACS Junior WA1 (13 questions, original), Ai Tong WA1, plus 21 new papers (WA1: Henry Park, Nan Hua, Nanyang, Raffles Girls, Rosyth, Tao Nan; WA2: ACS Junior, Ai Tong, Henry Park, Maha Bodhi, Nan Hua, Nanyang, Northland, Raffles Girls, Rosyth, St Hilda, Tao Nan; WA3: ACS Junior, Ai Tong, Nan Hua, Rosyth).",
+    "last_updated": "2026-06-27",
+    "sources": [
+      "ACS Junior P3 Maths WA1 (2025)",
+      "Ai Tong P3 Maths WA1 (2025)",
+      "Henry Park P3 Maths WA1 (2025)",
+      "Nan Hua P3 Maths WA1 (2025)",
+      "Nanyang P3 Maths WA1 (2025)",
+      "Raffles Girls P3 Maths WA1 (2025)",
+      "Rosyth P3 Maths WA1 (2025)",
+      "Tao Nan P3 Maths WA1 (2025)",
+      "ACS Junior P3 Maths WA2 (2025)",
+      "Ai Tong P3 Maths WA2 (2025)",
+      "Henry Park P3 Maths WA2 (2025)",
+      "Maha Bodhi P3 Maths WA2 (2025)",
+      "Nan Hua P3 Maths WA2 (2025)",
+      "Nanyang P3 Maths WA2 (2025)",
+      "Northland P3 Maths WA2 (2025)",
+      "Raffles Girls P3 Maths WA2 (2025)",
+      "Rosyth P3 Maths WA2 (2025)",
+      "St Hilda P3 Maths WA2 (2025)",
+      "Tao Nan P3 Maths WA2 (2025)",
+      "ACS Junior P3 Maths WA3 (2025)",
+      "Ai Tong P3 Maths WA3 (2025)",
+      "Nan Hua P3 Maths WA3 (2025)",
+      "Rosyth P3 Maths WA3 (2025)"
+    ],
+    "term_coverage": {
+      "WA1": "Term 1 — Place Value, Money, Number Patterns, Addition/Subtraction, Ordering Numbers",
+      "WA2": "Term 2 — Multiplication, Division, Fractions, Geometry (Angles, Parallel/Perpendicular Lines), Data (Bar Graphs)",
+      "WA3": "Term 3 — likely Measurement (Mass, Length, Volume), Time, Area/Perimeter, Graphs (from partial data)"
+    },
+    "question_count_by_topic": {
+      "place_value": "~30 questions across WA1 papers",
+      "addition_subtraction": "~35 questions across all papers",
+      "money": "~25 questions across all papers",
+      "number_patterns": "~12 questions across all papers",
+      "ordering_numbers": "~10 questions across WA1 papers",
+      "multiplication": "~20 questions across WA2 papers",
+      "division": "~18 questions across WA2 papers",
+      "fractions": "~18 questions across WA2 papers",
+      "geometry_angles": "~10 questions across WA2 papers",
+      "geometry_lines": "~10 questions across WA2 papers",
+      "data_graphs": "~18 questions across WA2 papers",
+      "time": "~5 questions in WA1/WA3 papers",
+      "measurement_mass": "~3 questions",
+      "measurement_volume": "~2 questions",
+      "odd_even": "~4 questions",
+      "combinatorics": "~1 question"
+    }
+  },
+
+  "topics": {
+    "place_value": {
+      "id": "place_value",
+      "label": "Place Value",
+      "strand": "Number and Algebra",
+      "level": "Primary 3",
+      "description": "Understanding the positional value of each digit (ones, tens, hundreds, thousands); reading, writing and comparing numbers; expanded form; non-standard decompositions.",
+      "prerequisite_concepts": ["digit recognition", "number names", "counting"],
+      "question_structures": [
+        "digit_value_mcq", "expanded_form_mcq",
+        "identify_digit_by_place_mcq", "identify_digit_by_place_short",
+        "words_to_numeral", "numeral_to_words", "words_to_numerals_mcq",
+        "expanded_form_to_numeral_mcq", "non_standard_units_to_numeral_mcq",
+        "expanded_form_find_missing_part", "expanded_form_find_missing_tens_value",
+        "form_number_from_digits_constrained", "n_more_less_than_short"
+      ]
+    },
+    "money": {
+      "id": "money",
+      "label": "Money",
+      "strand": "Measurement",
+      "level": "Primary 3",
+      "description": "Counting, adding, subtracting and multiplying with dollars and cents; solving word problems involving cost, change, budgeting and comparisons.",
+      "prerequisite_concepts": ["addition", "subtraction", "multiplication", "decimal notation"],
+      "question_structures": [
+        "money_multi_item_mcq", "money_change_from_purchase",
+        "money_budget_open_ended", "money_comparison_total", "money_sale_savings",
+        "money_before_after_mcq", "count_and_compare_money_image",
+        "two_purchases_find_original_amount", "multi_expense_change_calculation",
+        "money_coin_combination_possible", "compare_prices_identify_most_expensive",
+        "count_mixed_notes_and_coins", "difference_money_word_problem",
+        "money_combination_selection_mcq", "buy_n_get_k_free_promotion",
+        "unit_rate_multiply_cost", "total_then_divide_money",
+        "multi_purchase_find_original_amount_word_problem"
+      ]
+    },
+    "number_patterns": {
+      "id": "number_patterns",
+      "label": "Number Patterns",
+      "strand": "Number and Algebra",
+      "level": "Primary 3",
+      "description": "Identifying and continuing arithmetic sequences with single or alternating rules; completing pattern webs and grids; finding missing terms.",
+      "prerequisite_concepts": ["counting", "addition", "subtraction"],
+      "question_structures": [
+        "number_pattern_missing_mcq", "number_pattern_alternating_rule_mcq",
+        "number_pattern_two_rule_missing", "number_pattern_missing_middle_term",
+        "decreasing_pattern_find_missing", "number_pattern_web", "number_pattern_grid"
+      ]
+    },
+    "addition_subtraction": {
+      "id": "addition_subtraction",
+      "label": "Addition and Subtraction",
+      "strand": "Number and Algebra",
+      "level": "Primary 3",
+      "description": "Adding and subtracting whole numbers up to 10 000; vertical algorithms with regrouping; multi-step word problems.",
+      "prerequisite_concepts": ["place value", "regrouping (carrying/borrowing)"],
+      "question_structures": [
+        "two_number_sum_difference_mcq", "subtraction_difference_mcq", "addition_4digit_mcq",
+        "direct_addition_short", "vertical_subtraction_4digit",
+        "missing_digit_vertical_subtraction", "missing_digit_in_subtraction_equation",
+        "two_number_difference_find_sum", "part_whole_find_whole_word_problem",
+        "two_step_add_then_divide_word_problem", "two_step_subtract_then_add_word_problem",
+        "three_step_chain_word_problem", "two_step_find_difference_word_problem",
+        "two_purchases_find_original_amount", "fewer_than_then_total_word_problem",
+        "more_than_find_other_then_total_word_problem", "chain_add_subtract_word_problem",
+        "reverse_multi_step_word_problem", "two_part_comparison_and_total_word_problem",
+        "less_than_find_amount_word_problem"
+      ]
+    },
+    "ordering_numbers": {
+      "id": "ordering_numbers",
+      "label": "Comparing and Ordering Numbers",
+      "strand": "Number and Algebra",
+      "level": "Primary 3",
+      "description": "Comparing 4-digit numbers; arranging in ascending or descending order; identifying numbers satisfying range and parity constraints.",
+      "prerequisite_concepts": ["place value", "greater than / less than"],
+      "question_structures": [
+        "ordering_numbers_short", "ordering_4digit_ascending",
+        "ordering_3_numbers_descending_mcq", "ordering_mcq_increasing",
+        "even_number_in_range_identify"
+      ]
+    },
+    "multiplication": {
+      "id": "multiplication",
+      "label": "Multiplication",
+      "strand": "Number and Algebra",
+      "level": "Primary 3",
+      "description": "Multiplication tables (2–10); equal groups; multiplication as repeated addition; 2-digit and 3-digit × 1-digit; multiplicative comparison word problems.",
+      "prerequisite_concepts": ["addition", "counting in groups"],
+      "question_structures": [
+        "multiplication_as_repeated_addition_mcq", "equal_groups_representation_mcq",
+        "equal_groups_multiplication_word_problem_mcq", "multiplication_3digit_by_1digit",
+        "times_as_many_then_total_word_problem", "compare_products_difference_mcq",
+        "multiplicative_chain_word_problem", "multiply_then_add_total_word_problem",
+        "divide_then_multiply_money_word_problem", "unit_rate_multiply_cost",
+        "units_method_comparison_word_problem"
+      ]
+    },
+    "division": {
+      "id": "division",
+      "label": "Division",
+      "strand": "Number and Algebra",
+      "level": "Primary 3",
+      "description": "Division as sharing and grouping; 2-digit and 3-digit ÷ 1-digit; quotient and remainder; real-world rounding up; reverse division.",
+      "prerequisite_concepts": ["multiplication tables", "subtraction"],
+      "question_structures": [
+        "division_missing_divisor_mcq", "division_remainder_only",
+        "equal_groups_division_word_problem", "division_with_remainder_round_up_word_problem",
+        "quotient_only_short_answer", "quotient_and_remainder_short_answer",
+        "reverse_division_find_dividend", "times_as_many_find_other_divide",
+        "subtract_then_divide_two_step", "divide_to_find_groups_then_multiply",
+        "measurement_division_word_problem"
+      ]
+    },
+    "fractions": {
+      "id": "fractions",
+      "label": "Fractions",
+      "strand": "Number and Algebra",
+      "level": "Primary 3",
+      "description": "Understanding fractions as parts of a whole; equivalent fractions; comparing and ordering fractions; simplification; addition and subtraction of fractions with related denominators.",
+      "prerequisite_concepts": ["division", "multiplication", "LCM/HCF basics"],
+      "question_structures": [
+        "equivalent_fractions_missing_numerator_mcq", "fraction_of_figure_simplest_form",
+        "ordering_fractions_ascending", "ordering_unit_fractions_descending",
+        "ordering_fractions_greatest_to_smallest_mcq", "fraction_simplification",
+        "fraction_addition_unlike_denominators", "fraction_subtraction_find_remainder",
+        "missing_fraction_in_equation", "fraction_find_unknown_from_subtraction",
+        "identify_shaded_fraction_from_diagram_mcq", "fraction_shade_more_to_reach_target",
+        "fraction_eaten_by_two_find_remainder"
+      ]
+    },
+    "geometry_angles": {
+      "id": "geometry_angles",
+      "label": "Angles",
+      "strand": "Geometry",
+      "level": "Primary 3",
+      "description": "Identifying and naming acute, obtuse and right angles; counting angle types in polygons; marking angles in figures.",
+      "prerequisite_concepts": ["2D shapes", "direction"],
+      "question_structures": [
+        "identify_angle_type_mcq", "count_angle_type_in_figure",
+        "count_angle_type_in_figure_short", "mark_angles_in_polygon",
+        "identify_obtuse_angle_in_figure_mcq"
+      ]
+    },
+    "geometry_lines": {
+      "id": "geometry_lines",
+      "label": "Parallel and Perpendicular Lines",
+      "strand": "Geometry",
+      "level": "Primary 3",
+      "description": "Identifying parallel and perpendicular lines in diagrams and shapes; drawing parallel and perpendicular lines on square grids.",
+      "prerequisite_concepts": ["angles", "right angles", "2D shapes"],
+      "question_structures": [
+        "identify_parallel_lines_mcq", "identify_perpendicular_lines_mcq",
+        "name_parallel_lines_from_diagram", "identify_perpendicular_in_letters",
+        "identify_perpendicular_parallel_true_statement_mcq",
+        "draw_perpendicular_on_grid", "draw_parallel_on_grid",
+        "draw_perpendicular_and_parallel_on_grid"
+      ]
+    },
+    "data_graphs": {
+      "id": "data_graphs",
+      "label": "Data Representation (Bar Graphs)",
+      "strand": "Statistics",
+      "level": "Primary 3",
+      "description": "Reading single and grouped/double bar graphs; comparing categories; calculating totals and differences from graphs; drawing missing bars; evaluating true/false statements.",
+      "prerequisite_concepts": ["addition", "subtraction", "multiplication", "division"],
+      "question_structures": [
+        "bar_graph_read_single_value_mcq", "bar_graph_find_difference",
+        "bar_graph_count_above_threshold", "bar_graph_total_two_categories",
+        "bar_graph_complete_given_relationship", "bar_graph_true_false_statements",
+        "bar_graph_equalise_two_groups", "data_read_then_calculate",
+        "grouped_bar_graph_read_and_compare", "grouped_bar_graph_difference_between_groups",
+        "grouped_bar_graph_identify_where_one_exceeds", "bar_graph_identify_double",
+        "bar_graph_find_difference_to_match"
+      ]
+    },
+    "time": {
+      "id": "time",
+      "label": "Time",
+      "strand": "Measurement",
+      "level": "Primary 3",
+      "description": "Reading analogue and digital clocks; converting between hours and minutes; calculating elapsed time.",
+      "prerequisite_concepts": ["addition", "subtraction", "multiplication"],
+      "question_structures": [
+        "read_analogue_clock", "convert_hours_minutes_to_minutes",
+        "hours_to_minutes_conversion_mcq", "elapsed_time_word_problem"
+      ]
+    },
+    "measurement_mass": {
+      "id": "measurement_mass",
+      "label": "Mass",
+      "strand": "Measurement",
+      "level": "Primary 3",
+      "description": "Reading weighing scales; solving mass word problems using kg and g.",
+      "prerequisite_concepts": ["addition", "subtraction", "multiplication"],
+      "question_structures": ["scale_reading_mass", "scale_reading_double_mass"]
+    },
+    "measurement_volume": {
+      "id": "measurement_volume",
+      "label": "Volume",
+      "strand": "Measurement",
+      "level": "Primary 3",
+      "description": "Measuring volume by counting equal containers; volume word problems in litres.",
+      "prerequisite_concepts": ["multiplication", "counting"],
+      "question_structures": ["volume_counting_equal_containers_mcq"]
+    },
+    "odd_even": {
+      "id": "odd_even",
+      "label": "Odd and Even Numbers",
+      "strand": "Number and Algebra",
+      "level": "Primary 3",
+      "description": "Identifying odd and even numbers; applying parity constraints when forming or selecting numbers.",
+      "prerequisite_concepts": ["division by 2", "digit recognition"],
+      "question_structures": [
+        "even_number_in_range_identify", "form_number_from_digits_constrained",
+        "calendar_reasoning_odd_even"
+      ]
+    },
+    "combinatorics": {
+      "id": "combinatorics",
+      "label": "Combinations (Counting)",
+      "strand": "Statistics",
+      "level": "Primary 3",
+      "description": "Systematic listing of combinations; counting distinct pairs or groups chosen from a set.",
+      "prerequisite_concepts": ["systematic listing", "multiplication principle"],
+      "question_structures": ["combinations_counting_word_problem"]
+    }
+  },
+
+  "question_structures": {
+
+    "digit_value_mcq": {
+      "id": "digit_value_mcq",
+      "topics": ["place_value"],
+      "label": "Value of a specific digit in a number (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 1,
+      "template": "What is the value of the digit {digit} in {number}?",
+      "variables": {
+        "number": { "type": "int", "example": 3875 },
+        "digit": { "type": "int", "example": 7, "constraint": "non-zero digit in number" },
+        "digit_position": { "type": "int", "description": "0=ones…3=thousands", "example": 1 },
+        "place_value": { "type": "int", "description": "10^digit_position", "example": 10 }
+      },
+      "correct_answer_formula": "digit × place_value",
+      "distractor_pattern": "2x2_place_digit_grid",
+      "notes": "Special case: if digit=0, correct answer is 0 regardless of position.",
+      "source_questions": ["ACS Jr WA1 Q1", "HP WA1 Q1", "RG WA1 Q1"]
+    },
+
+    "expanded_form_mcq": {
+      "id": "expanded_form_mcq",
+      "topics": ["place_value"],
+      "label": "Identify the missing term in an expanded-form equation (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 1,
+      "template": "{number} = {part_thousands} + _____ + {part_ones}",
+      "variables": {
+        "number": { "type": "int", "example": 5207 },
+        "missing_position": { "type": "int", "example": 2 },
+        "digit": { "type": "int", "example": 2 },
+        "place_value": { "type": "int", "example": 100 }
+      },
+      "correct_answer_formula": "digit × place_value",
+      "distractor_pattern": "shifted_and_stripped_grid",
+      "source_questions": ["ACS Jr WA1 Q2"]
+    },
+
+    "identify_digit_by_place_mcq": {
+      "id": "identify_digit_by_place_mcq",
+      "topics": ["place_value"],
+      "label": "Which digit is in the [place] place? (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 1,
+      "template": "In {number}, which digit is in the {place_name} place?",
+      "variables": {
+        "number": { "type": "int", "example": 9756 },
+        "place_name": { "type": "str", "example": "hundreds" },
+        "correct_digit": { "type": "int", "example": 7 }
+      },
+      "correct_answer_formula": "digit at place_name position",
+      "distractors": ["digit at adjacent positions"],
+      "source_questions": ["NH WA1 Q1"]
+    },
+
+    "expanded_form_to_numeral_mcq": {
+      "id": "expanded_form_to_numeral_mcq",
+      "topics": ["place_value"],
+      "label": "Expanded form → numeral (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 1,
+      "template": "{thousands} + {hundreds} + {ones} has the same value as ___.",
+      "variables": {
+        "thousands": { "type": "int", "example": 6000 },
+        "hundreds": { "type": "int", "example": 700 },
+        "tens": { "type": "int", "example": 0 },
+        "ones": { "type": "int", "example": 4 }
+      },
+      "correct_answer_formula": "sum of all expanded parts",
+      "common_errors": ["drops a place (e.g. omits hundreds)", "transposes digits", "adds trailing zero"],
+      "source_questions": ["NH WA1 Q2", "Raffles Girls WA1 Q3"]
+    },
+
+    "non_standard_units_to_numeral_mcq": {
+      "id": "non_standard_units_to_numeral_mcq",
+      "topics": ["place_value"],
+      "label": "Non-standard decomposition (e.g. 12 hundreds) → numeral (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 1,
+      "template": "{a} thousands {b} hundreds {c} tens {d} ones is the same as ___.",
+      "notes": "One or more counts exceed 9 (e.g. 12 hundreds = 1200). Requires regrouping.",
+      "variables": {
+        "a": { "type": "int", "example": 4 },
+        "b": { "type": "int", "example": 12, "note": "may exceed 9" },
+        "c": { "type": "int", "example": 9 },
+        "d": { "type": "int", "example": 6 }
+      },
+      "correct_answer_formula": "a×1000 + b×100 + c×10 + d",
+      "common_errors": ["reads digits literally without regrouping", "partial regrouping only"],
+      "source_questions": ["NH WA1 Q4"]
+    },
+
+    "words_to_numeral": {
+      "id": "words_to_numeral",
+      "topics": ["place_value"],
+      "label": "Convert number words to numerals (short answer)",
+      "section": "B", "question_type": "short_answer", "marks": 1,
+      "template": "Write {number_words} in numerals.",
+      "variables": {
+        "number_words": { "type": "str", "example": "four thousand and nine" },
+        "correct_answer": { "type": "int", "example": 4009 }
+      },
+      "common_errors": ["omits placeholder zeros (e.g. 49 instead of 4009)", "transposes digit order"],
+      "source_questions": ["NY WA1 Q4a", "RG WA1 Q3"]
+    },
+
+    "numeral_to_words": {
+      "id": "numeral_to_words",
+      "topics": ["place_value"],
+      "label": "Convert numeral to number words (short answer)",
+      "section": "B", "question_type": "short_answer", "marks": 1,
+      "template": "Write {number} in words.",
+      "variables": {
+        "number": { "type": "int", "example": 9048 }
+      },
+      "common_errors": ["omits 'and' before tens/ones", "wrong word for tens (e.g. 'fourty')"],
+      "source_questions": ["HP WA1 Q6a", "Tao Nan WA1 Q1"]
+    },
+
+    "expanded_form_find_missing_part": {
+      "id": "expanded_form_find_missing_part",
+      "topics": ["place_value"],
+      "label": "Find missing value in partial expanded form (short answer)",
+      "section": "B", "question_type": "short_answer", "marks": 1,
+      "template": "{number} = {part_a} + ___ + {part_b}",
+      "notes": "Parts given may span non-adjacent places. E.g. 8765 = 8000 + ___ + 5 → answer is 760 (=700+60).",
+      "variables": {
+        "number": { "type": "int", "example": 8765 },
+        "part_a": { "type": "int", "example": 8000 },
+        "part_b": { "type": "int", "example": 5 }
+      },
+      "correct_answer_formula": "number − part_a − part_b",
+      "source_questions": ["Raffles Girls WA1 Q7", "HP WA1 Q7a"]
+    },
+
+    "form_number_from_digits_constrained": {
+      "id": "form_number_from_digits_constrained",
+      "topics": ["place_value", "odd_even"],
+      "label": "Form smallest/largest number satisfying parity/digit constraints",
+      "section": "B", "question_type": "short_answer", "marks": 1,
+      "template": "Use all the digits {digits} to form the {target} 4-digit {parity} number. Each digit can only be used once.",
+      "variables": {
+        "digits": { "type": "list[int]", "example": [0, 7, 4, 3] },
+        "target": { "type": "str", "example": "smallest" },
+        "parity": { "type": "str", "example": "even" }
+      },
+      "common_errors": ["places 0 as leading digit", "ignores parity constraint", "doesn't use all digits"],
+      "source_questions": ["NY WA1 Q4b"]
+    },
+
+    "n_more_less_than_short": {
+      "id": "n_more_less_than_short",
+      "topics": ["place_value", "addition_subtraction"],
+      "label": "Find number N more/less than a given number",
+      "section": "B", "question_type": "short_answer", "marks": 1,
+      "template": "What is {n} more than {number}? / What is {n} less than {number}?",
+      "variables": {
+        "n": { "type": "int", "example": 10, "common_values": [1, 10, 100, 1000] },
+        "number": { "type": "int", "example": 3490 }
+      },
+      "correct_answer_formula": "number ± n",
+      "source_questions": ["HP WA1 Q8a", "Raffles Girls WA1 Q5"]
+    },
+
+    "ordering_numbers_short": {
+      "id": "ordering_numbers_short",
+      "topics": ["ordering_numbers"],
+      "label": "Arrange a set of numbers in decreasing (or increasing) order",
+      "section": "B", "question_type": "short_answer", "marks": 1,
+      "template": "Arrange the following numbers in {direction} order.\n{numbers}",
+      "variables": {
+        "numbers": { "type": "list[int]", "example": [4098, 4890, 4089] },
+        "direction": { "type": "str", "example": "decreasing" }
+      },
+      "correct_answer_formula": "sorted(numbers, reverse=(direction=='decreasing'))",
+      "common_errors": ["wrong_direction", "compares_wrong_place_value_column"],
+      "source_questions": ["ACS Jr WA1 Q6", "RO WA1 Q7", "TN WA1 Q2"]
+    },
+
+    "ordering_3_numbers_descending_mcq": {
+      "id": "ordering_3_numbers_descending_mcq",
+      "topics": ["ordering_numbers"],
+      "label": "Arrange 3 numbers in decreasing order (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 2,
+      "template": "Arrange the following numbers in decreasing order. {n1}, {n2}, {n3}",
+      "distractors": ["ascending order", "correct first but swapped middle/last", "wrong comparison of same-thousands digits"],
+      "source_questions": ["NY WA1 Q1", "NL WA2 Q5"]
+    },
+
+    "ordering_mcq_increasing": {
+      "id": "ordering_mcq_increasing",
+      "topics": ["ordering_numbers"],
+      "label": "Arrange 3 numbers in increasing order (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 1,
+      "template": "Arrange the following numbers in increasing order. {n1}, {n2}, {n3}",
+      "distractors": ["decreasing order (reversal)", "correct first but swapped remaining", "wrong digit comparison"],
+      "source_questions": ["Raffles Girls WA1 Q2"]
+    },
+
+    "even_number_in_range_identify": {
+      "id": "even_number_in_range_identify",
+      "topics": ["ordering_numbers", "odd_even"],
+      "label": "Identify the even number within a range from a given set",
+      "section": "B", "question_type": "short_answer", "marks": 1,
+      "template": "Which of the following numbers is an even number that is greater than {lo} but smaller than {hi}? {options}",
+      "variables": {
+        "lo": { "type": "int", "example": 2700 },
+        "hi": { "type": "int", "example": 4700 },
+        "options": { "type": "list[int]", "example": [3727, 3378, 2676, 4702] }
+      },
+      "common_errors": ["picks odd number in range", "ignores range constraint", "ignores parity constraint"],
+      "source_questions": ["HP WA1 Q12"]
+    },
+
+    "number_pattern_missing_mcq": {
+      "id": "number_pattern_missing_mcq",
+      "topics": ["number_patterns"],
+      "label": "Find two consecutive missing terms in an arithmetic sequence (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 2,
+      "template": "What are the missing numbers in the number pattern?\n{a}, {a+d}, {a+2d}, {a+3d}, _____, _____, {a+6d}",
+      "variables": {
+        "start": { "type": "int", "example": 3448 },
+        "common_diff": { "type": "int", "example": 40 }
+      },
+      "correct_answer_formula": "[start + 4×d, start + 5×d]",
+      "distractor_pattern": "wrong_common_difference",
+      "source_questions": ["ACS Jr WA1 Q4"]
+    },
+
+    "number_pattern_alternating_rule_mcq": {
+      "id": "number_pattern_alternating_rule_mcq",
+      "topics": ["number_patterns"],
+      "label": "Find next term in sequence with two alternating rules (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 2,
+      "template": "Complete the number pattern. {seq_with_blanks}",
+      "notes": "Pattern alternates between two differences (e.g. +10, +20, +10, +20…).",
+      "variables": {
+        "d1": { "type": "int", "example": 10, "description": "first difference" },
+        "d2": { "type": "int", "example": 20, "description": "second difference" }
+      },
+      "common_errors": ["applies only one difference", "applies sum of both differences", "adds wrong multiple"],
+      "source_questions": ["NH WA1 Q5"]
+    },
+
+    "number_pattern_missing_middle_term": {
+      "id": "number_pattern_missing_middle_term",
+      "topics": ["number_patterns"],
+      "label": "Find a missing middle term in an arithmetic sequence (short answer)",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "Find the missing number in the number pattern. {a}, ___, {a+2d}, {a+3d}, …",
+      "variables": {
+        "start": { "type": "int", "example": 1055 },
+        "common_diff": { "type": "int", "example": 25 }
+      },
+      "correct_answer_formula": "start + d",
+      "source_questions": ["NY WA1 Q5"]
+    },
+
+    "decreasing_pattern_find_missing": {
+      "id": "decreasing_pattern_find_missing",
+      "topics": ["number_patterns"],
+      "label": "Find missing term in a decreasing arithmetic sequence",
+      "section": "B", "question_type": "short_answer", "marks": 1,
+      "template": "Find the missing number. {seq_with_blank}",
+      "variables": {
+        "start": { "type": "int", "example": 8095 },
+        "common_diff": { "type": "int", "example": -25, "note": "negative = decreasing" }
+      },
+      "source_questions": ["Raffles Girls WA1 Q6", "Tao Nan WA1 Q3", "Rosyth WA1 Q6"]
+    },
+
+    "number_pattern_web": {
+      "id": "number_pattern_web",
+      "topics": ["number_patterns", "division"],
+      "label": "Number web: central number divided by surrounding divisors",
+      "section": "A", "question_type": "mcq", "marks": 2,
+      "template": "Look at the number pattern below. What is the missing number? [diagram: centre={n}, surrounding: n÷a, n÷b, n÷c, n÷?]",
+      "variables": {
+        "n": { "type": "int", "example": 72 },
+        "divisors": { "type": "list[int]", "example": [8, 6, 4, 3] }
+      },
+      "correct_answer_formula": "n ÷ last_divisor",
+      "notes": "Image-dependent: diamond/compass layout.",
+      "source_questions": ["NH WA2 Q5"]
+    },
+
+    "direct_addition_short": {
+      "id": "direct_addition_short",
+      "topics": ["addition_subtraction"],
+      "label": "Find the sum of two numbers (short answer)",
+      "section": "B", "question_type": "short_answer", "marks": 1,
+      "template": "Find the sum of {a} and {b}.",
+      "correct_answer_formula": "a + b",
+      "source_questions": ["ACS Jr WA1 Q7"]
+    },
+
+    "subtraction_difference_mcq": {
+      "id": "subtraction_difference_mcq",
+      "topics": ["addition_subtraction"],
+      "label": "Find the difference between two numbers (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 1,
+      "template": "The difference between {a} and {b} is ___.",
+      "correct_answer_formula": "a − b (where a > b)",
+      "common_errors": ["adds instead of subtracts", "regrouping error", "subtracts in wrong direction"],
+      "source_questions": ["HP WA1 Q2"]
+    },
+
+    "addition_4digit_mcq": {
+      "id": "addition_4digit_mcq",
+      "topics": ["addition_subtraction"],
+      "label": "Find the sum of two 4-digit numbers (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 2,
+      "template": "Find the sum of {a} and {b}.",
+      "correct_answer_formula": "a + b",
+      "common_errors": ["carry error", "subtraction instead of addition", "adds only matching place columns"],
+      "source_questions": ["NY WA1 Q2", "Rosyth WA2 Q2"]
+    },
+
+    "vertical_subtraction_4digit": {
+      "id": "vertical_subtraction_4digit",
+      "topics": ["addition_subtraction"],
+      "label": "Vertical subtraction of two 4-digit numbers (short answer)",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "{a} − {b} = ___  (shown in vertical format)",
+      "correct_answer_formula": "a − b",
+      "common_errors": ["regrouping error across multiple columns", "borrows from wrong column"],
+      "source_questions": ["Rosyth WA1 Q8"]
+    },
+
+    "missing_digit_vertical_subtraction": {
+      "id": "missing_digit_vertical_subtraction",
+      "topics": ["addition_subtraction"],
+      "label": "Find a hidden digit in a vertical subtraction sum",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "What is the missing number in the box?\n  {minuend_masked}\n− {subtrahend}\n  {difference}",
+      "correct_answer_formula": "digit at hidden_position of (difference + subtrahend)",
+      "source_questions": ["ACS Jr WA1 Q8"]
+    },
+
+    "missing_digit_in_subtraction_equation": {
+      "id": "missing_digit_in_subtraction_equation",
+      "topics": ["addition_subtraction"],
+      "label": "Find missing digit in equation of form A□BC − D = E",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "{masked_number} − {subtrahend} = {difference}",
+      "notes": "One digit of the top number is in a box. Recover by: masked_number = difference + subtrahend.",
+      "correct_answer_formula": "digit at masked_position of (difference + subtrahend)",
+      "source_questions": ["NH WA1 Q9"]
+    },
+
+    "two_number_sum_difference_mcq": {
+      "id": "two_number_sum_difference_mcq",
+      "topics": ["addition_subtraction"],
+      "label": "Given sum and one number, find the difference (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 2,
+      "template": "The sum of two numbers is {total}. One of the numbers is {a}. What is the difference between the 2 numbers?",
+      "correct_answer_formula": "total − 2×a",
+      "distractor_pattern": "wrong_operation_variants",
+      "source_questions": ["ACS Jr WA1 Q5"]
+    },
+
+    "two_number_difference_find_sum": {
+      "id": "two_number_difference_find_sum",
+      "topics": ["addition_subtraction"],
+      "label": "Given difference and smaller number, find the sum",
+      "section": "C", "question_type": "long_answer", "marks": 3,
+      "template": "The difference between two numbers is {diff}. The smaller number is {smaller}. Find the sum of the two numbers.",
+      "correct_answer_formula": "2 × smaller + diff",
+      "steps": ["larger = smaller + diff", "sum = smaller + larger"],
+      "source_questions": ["ACS Jr WA1 Q11"]
+    },
+
+    "part_whole_find_whole_word_problem": {
+      "id": "part_whole_find_whole_word_problem",
+      "topics": ["addition_subtraction"],
+      "label": "Given remainder after action, find original total",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "After {action} {amount}, {name} had {remainder} left. How many did {name} have at first?",
+      "correct_answer_formula": "amount + remainder",
+      "source_questions": ["Raffles Girls WA1 Q9"]
+    },
+
+    "fewer_than_then_total_word_problem": {
+      "id": "fewer_than_then_total_word_problem",
+      "topics": ["addition_subtraction"],
+      "label": "B has fewer than A; find total of A and B",
+      "section": "C", "question_type": "long_answer", "marks": 3,
+      "template": "{a_count} {people/things} [action A]. {fewer} fewer [same] [action B]. How many altogether?",
+      "correct_answer_formula": "A + (A − fewer)",
+      "steps": ["B = A − fewer", "total = A + B"],
+      "source_questions": ["Raffles Girls WA1 Q12", "HP WA1 Q15"]
+    },
+
+    "chain_add_subtract_word_problem": {
+      "id": "chain_add_subtract_word_problem",
+      "topics": ["addition_subtraction"],
+      "label": "3-entity chain: A more/fewer than B, B more/fewer than C; find C",
+      "section": "B/C", "question_type": "short_answer",  "marks": 2,
+      "template": "[A sold/has X]. [B sold Y more/fewer than A]. [C sold Z more/fewer than B]. How many did C [sell/have]?",
+      "steps": ["B = A ± d1", "C = B ± d2"],
+      "source_questions": ["Northland WA2 Q14"]
+    },
+
+    "two_part_comparison_and_total_word_problem": {
+      "id": "two_part_comparison_and_total_word_problem",
+      "topics": ["addition_subtraction"],
+      "label": "Two-part: (a) how many more, (b) total",
+      "section": "C", "question_type": "long_answer", "marks": 4,
+      "template": "There are {a} [A] and {b} [B]. (a) How many more [A] than [B]? (b) How many altogether?",
+      "source_questions": ["Rosyth WA1 Q12"]
+    },
+
+    "money_multi_item_mcq": {
+      "id": "money_multi_item_mcq",
+      "topics": ["money"],
+      "label": "Total cost of two groups of items with different unit prices (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 2,
+      "template": "What is the total cost of {n1} {item1} and {n2} {item2}?",
+      "correct_answer_formula": "(n1 × price1 + n2 × price2) in dollars",
+      "distractor_pattern": "money_quantity_confusion",
+      "source_questions": ["ACS Jr WA1 Q3"]
+    },
+
+    "money_change_from_purchase": {
+      "id": "money_change_from_purchase",
+      "topics": ["money"],
+      "label": "Calculate change after buying multiple items",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "{name} bought {item1} and {item2}. She gave the cashier ${paid}. How much change?",
+      "correct_answer_formula": "paid − (price1 + price2)",
+      "source_questions": ["ACS Jr WA1 Q9"]
+    },
+
+    "money_budget_open_ended": {
+      "id": "money_budget_open_ended",
+      "topics": ["money"],
+      "label": "Find valid item pairs within a budget (open-ended)",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "{name} had ${budget}. She bought two different {item_type}s. Which two could she buy? How much did she spend?",
+      "notes": "Open-ended: any valid pair accepted.",
+      "source_questions": ["ACS Jr WA1 Q10"]
+    },
+
+    "money_comparison_total": {
+      "id": "money_comparison_total",
+      "topics": ["money"],
+      "label": "Item B costs $X less than item A; find total of both",
+      "section": "C", "question_type": "long_answer", "marks": 3,
+      "template": "{name} bought {item1} for ${price1}. {item2} costs ${less} less. How much altogether?",
+      "correct_answer_formula": "price1 + (price1 − less)",
+      "source_questions": ["ACS Jr WA1 Q12"]
+    },
+
+    "money_sale_savings": {
+      "id": "money_sale_savings",
+      "topics": ["money"],
+      "label": "Calculate total savings when buying at sale price",
+      "section": "C", "question_type": "long_answer", "marks": 3,
+      "template": "A {item} usually costs ${unit_price}. {name} bought {n} for ${sale_price}. How much did she save?",
+      "correct_answer_formula": "(n × unit_price) − sale_price",
+      "source_questions": ["ACS Jr WA1 Q13"]
+    },
+
+    "money_before_after_mcq": {
+      "id": "money_before_after_mcq",
+      "topics": ["money"],
+      "label": "Given amount after receiving/spending, find original amount (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 1,
+      "template": "After {name} {received/spent} ${amount}, she had ${final}. How much did she have at first?",
+      "correct_answer_formula": "final ∓ amount (subtract if received, add if spent)",
+      "distractors": ["adds instead of subtracts", "arithmetic error", "uses final directly"],
+      "source_questions": ["NH WA1 Q3"]
+    },
+
+    "two_purchases_find_original_amount": {
+      "id": "two_purchases_find_original_amount",
+      "topics": ["money", "addition_subtraction"],
+      "label": "Two items bought, money left; find original amount",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "{name} bought {item1} (${p1}) and {item2} (${p2}). Had ${left} left. How much at first?",
+      "correct_answer_formula": "p1 + p2 + left",
+      "source_questions": ["NY WA1 Q6", "NH WA1 Q10"]
+    },
+
+    "multi_expense_change_calculation": {
+      "id": "multi_expense_change_calculation",
+      "topics": ["money"],
+      "label": "Multiple expenses, change from given amount",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "{name} spent ${a} on {item1} and ${b} on {item2}. Paid ${note}. How much change?",
+      "correct_answer_formula": "note − (a + b)",
+      "source_questions": ["NY WA1 Q7"]
+    },
+
+    "money_combination_selection_mcq": {
+      "id": "money_combination_selection_mcq",
+      "topics": ["money"],
+      "label": "Which combination of 3 items totals exactly $X? (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 2,
+      "template": "Kyan spent ${total} on 3 different items. What did Kyan buy? [options list]",
+      "notes": "Student must find the combination of 3 items that sums to the target.",
+      "source_questions": ["NY WA1 Q3"]
+    },
+
+    "count_mixed_notes_and_coins": {
+      "id": "count_mixed_notes_and_coins",
+      "topics": ["money"],
+      "label": "Count total from a mix of notes and coins (image-dependent)",
+      "section": "B", "question_type": "short_answer", "marks": 1,
+      "template": "Count and write the total amount of money. [image of notes and coins]",
+      "notes": "IMAGE ESSENTIAL. Tests ability to identify denominations and sum correctly.",
+      "source_questions": ["Tao Nan WA1 Q6", "HP WA1 Q11"]
+    },
+
+    "compare_prices_identify_most_expensive": {
+      "id": "compare_prices_identify_most_expensive",
+      "topics": ["money"],
+      "label": "Identify most expensive item from price tags (image-dependent)",
+      "section": "B", "question_type": "short_answer", "marks": 1,
+      "template": "Which item is the most expensive? [image of items with price tags]",
+      "source_questions": ["Tao Nan WA1 Q4"]
+    },
+
+    "difference_money_word_problem": {
+      "id": "difference_money_word_problem",
+      "topics": ["money"],
+      "label": "How much more did X spend than Y?",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "{name} spent ${a} on {item1} and ${b} on {item2}. How much more on {item1} than {item2}?",
+      "correct_answer_formula": "a − b",
+      "source_questions": ["Tao Nan WA1 Q11"]
+    },
+
+    "unit_rate_multiply_cost": {
+      "id": "unit_rate_multiply_cost",
+      "topics": ["money", "multiplication", "division"],
+      "label": "N items cost $X; find cost of M items",
+      "section": "A", "question_type": "mcq", "marks": 2,
+      "template": "A bag of {n} {items} cost ${cost}. How much did {name} pay for {m} {items}?",
+      "correct_answer_formula": "(m ÷ n) × cost",
+      "common_errors": ["multiplies m × cost ignoring group size", "adds n + m then multiplies"],
+      "source_questions": ["ACS Jr WA2 Q5"]
+    },
+
+    "total_then_divide_money": {
+      "id": "total_then_divide_money",
+      "topics": ["money", "multiplication", "division"],
+      "label": "Find unit price when N items cost same as known total",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "{name} had enough money to buy {n1} {item1} at ${p1} each. He can also buy {n2} {item2} for same amount. Find cost of each {item2}.",
+      "correct_answer_formula": "(n1 × p1) ÷ n2",
+      "source_questions": ["ACS Jr WA2 Q10"]
+    },
+
+    "buy_n_get_k_free_promotion": {
+      "id": "buy_n_get_k_free_promotion",
+      "topics": ["money", "multiplication", "division"],
+      "label": "Buy-N-get-K-free promotional pricing",
+      "section": "C", "question_type": "long_answer", "marks": 4,
+      "template": "For every {n} {items} bought, get {k} free at ${c} per {n}. (a) With ${budget}, how many total? (b) To get {target} items, how much?",
+      "notes": "Each 'deal unit' = n paid + k free = (n+k) items for price c.",
+      "correct_answer_formula_a": "(budget ÷ c) × (n+k)",
+      "correct_answer_formula_b": "(target ÷ (n+k)) × c",
+      "source_questions": ["Ai Tong WA2 Q15"]
+    },
+
+    "money_coin_combination_possible": {
+      "id": "money_coin_combination_possible",
+      "topics": ["money"],
+      "label": "Given specific coins, which amount is achievable? (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 1,
+      "template": "The purse contains {coins}. Which of the following amounts could she have donated?",
+      "notes": "IMAGE ESSENTIAL. Student must check which option can be formed from given coin set.",
+      "source_questions": ["Raffles Girls WA2 Q4"]
+    },
+
+    "multi_purchase_find_original_amount_word_problem": {
+      "id": "multi_purchase_find_original_amount_word_problem",
+      "topics": ["money", "addition_subtraction"],
+      "label": "Multi-purchase + money left = find original amount (word problem)",
+      "section": "C", "question_type": "long_answer", "marks": 3,
+      "template": "{name} bought {item1} for ${p1} and {item2} for ${p2}. Had ${left} left. How much at first?",
+      "correct_answer_formula": "p1 + p2 + left",
+      "source_questions": ["NH WA1 Q10"]
+    },
+
+    "multiplication_as_repeated_addition_mcq": {
+      "id": "multiplication_as_repeated_addition_mcq",
+      "topics": ["multiplication"],
+      "label": "Express multiplication as repeated addition (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 1,
+      "template": "{a} × {b} is the same as ___.",
+      "notes": "Convention: a × b = b added a times (or variant; check which school uses which).",
+      "distractors": ["b added b times", "repeated multiplication (a^b style)", "reversal: a added b times"],
+      "source_questions": ["Raffles Girls WA1 Q4", "Rosyth WA1 Q3", "NH WA2 Q1"]
+    },
+
+    "equal_groups_representation_mcq": {
+      "id": "equal_groups_representation_mcq",
+      "topics": ["multiplication"],
+      "label": "Choose the multiplication that matches a picture of equal groups (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 1,
+      "template": "Which of the following represents all the {items} in the picture? [image of {groups} groups of {per_group}]",
+      "notes": "IMAGE ESSENTIAL.",
+      "correct_answer_formula": "per_group × groups (or groups × per_group depending on convention)",
+      "distractors": ["addition (a+b)", "subtraction (a-b)", "division (a÷b)"],
+      "source_questions": ["HP WA1 Q3"]
+    },
+
+    "equal_groups_multiplication_word_problem_mcq": {
+      "id": "equal_groups_multiplication_word_problem_mcq",
+      "topics": ["multiplication"],
+      "label": "Equal groups word problem (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 2,
+      "template": "A {animal} has {n} {body_parts}. {k} {animals} have ___ {body_parts}.",
+      "correct_answer_formula": "n × k",
+      "distractors": ["n + k (adds)", "n × wrong_k", "n × (k-1)"],
+      "source_questions": ["Rosyth WA1 Q5"]
+    },
+
+    "multiplication_3digit_by_1digit": {
+      "id": "multiplication_3digit_by_1digit",
+      "topics": ["multiplication"],
+      "label": "3-digit × 1-digit multiplication (short answer)",
+      "section": "B", "question_type": "short_answer", "marks": 1,
+      "template": "Find the value of {a} × {b}.",
+      "correct_answer_formula": "a × b",
+      "common_errors": ["place value error in intermediate product", "arithmetic error in addition step"],
+      "source_questions": ["Ai Tong WA2 Q1", "NY WA2 Q1"]
+    },
+
+    "compare_products_difference_mcq": {
+      "id": "compare_products_difference_mcq",
+      "topics": ["multiplication"],
+      "label": "A×B is ___ more/less than A×C (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 1,
+      "template": "{a} × {b} is _____ more than {a} × {c}.",
+      "correct_answer_formula": "a × (b − c)",
+      "distractors": ["b − c (ignores common factor a)", "a (uses one factor)", "wrong arithmetic"],
+      "source_questions": ["ACS Jr WA2 Q1", "NH WA2 Q2"]
+    },
+
+    "times_as_many_then_total_word_problem": {
+      "id": "times_as_many_then_total_word_problem",
+      "topics": ["multiplication", "addition_subtraction"],
+      "label": "A has k times as many as B; find A+B",
+      "section": "B/C", "question_type": "short_answer", "marks": 2,
+      "template": "There are {b} {item_B}. The number of {item_A} is {k} times the number of {item_B}. How many {item} altogether?",
+      "correct_answer_formula": "b × k + b = b × (k + 1)",
+      "steps": ["A = k × b", "total = A + b"],
+      "common_errors": ["reports A only (forgets to add b)", "multiplies k × (k × b) (double applies factor)"],
+      "source_questions": ["Raffles Girls WA1 Q10", "ACS Jr WA2 Q4"]
+    },
+
+    "multiplicative_chain_word_problem": {
+      "id": "multiplicative_chain_word_problem",
+      "topics": ["multiplication"],
+      "label": "Chain: A = k1 × B, B = k2 × C; find A",
+      "section": "C", "question_type": "long_answer", "marks": 3,
+      "template": "{C_name} made {c} {items}. {B_name} made {k1} times as many as {C_name}. {A_name} made {k2} times as many as {B_name}. How many did {A_name} make?",
+      "correct_answer_formula": "c × k1 × k2",
+      "steps": ["B = k1 × c", "A = k2 × B"],
+      "source_questions": ["ACS Jr WA2 Q12"]
+    },
+
+    "units_method_comparison_word_problem": {
+      "id": "units_method_comparison_word_problem",
+      "topics": ["multiplication", "division", "addition_subtraction"],
+      "label": "A = k × B, A − B = difference; find A and B using units method",
+      "section": "C", "question_type": "long_answer", "marks": 3,
+      "template": "{A_name} scored {k} times as many points as {B_name}. {A_name} scored {diff} more points than {B_name}. How many did they score altogether?",
+      "correct_answer_formula": "total = (k+1) × (diff ÷ (k−1))",
+      "steps": ["1 unit = diff ÷ (k−1)", "B = 1 unit", "A = k units", "total = (k+1) units"],
+      "source_questions": ["NY WA2 Q3", "Maha Bodhi WA2 Q14"]
+    },
+
+    "divide_then_multiply_money_word_problem": {
+      "id": "divide_then_multiply_money_word_problem",
+      "topics": ["multiplication", "division", "money"],
+      "label": "Divide to find number of groups, then multiply for total value",
+      "section": "C", "question_type": "long_answer", "marks": 3,
+      "template": "{name} {had/baked} {total} {items}. {packed/sold} {n} per {container} for ${price}. How much collected?",
+      "correct_answer_formula": "(total ÷ n) × price",
+      "steps": ["groups = total ÷ n", "revenue = groups × price"],
+      "source_questions": ["Raffles Girls WA1 Q13"]
+    },
+
+    "division_missing_divisor_mcq": {
+      "id": "division_missing_divisor_mcq",
+      "topics": ["division"],
+      "label": "Find missing divisor in A ÷ ___ = B (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 1,
+      "template": "{a} ÷ ___ = {b}",
+      "correct_answer_formula": "a ÷ b",
+      "distractors": ["nearby integers with no clear relationship"],
+      "source_questions": ["Rosyth WA1 Q4"]
+    },
+
+    "equal_groups_division_word_problem": {
+      "id": "equal_groups_division_word_problem",
+      "topics": ["division"],
+      "label": "Sharing equally into groups (short answer)",
+      "section": "B", "question_type": "short_answer", "marks": 1,
+      "template": "{name} packed {total} {items} into bags. There were {n} {items} in each bag. How many bags?",
+      "correct_answer_formula": "total ÷ n",
+      "source_questions": ["Tao Nan WA1 Q9"]
+    },
+
+    "division_with_remainder_round_up_word_problem": {
+      "id": "division_with_remainder_round_up_word_problem",
+      "topics": ["division"],
+      "label": "Division with remainder requiring ceiling (round up) word problem",
+      "section": "B/C", "question_type": "short_answer", "marks": 2,
+      "template": "{name} has {total} {items}. She packs {n} per {container}. How many {containers} needed to pack ALL?",
+      "correct_answer_formula": "ceil(total ÷ n)",
+      "notes": "Key insight: remainder > 0 means one extra container is needed.",
+      "common_errors": ["gives floor division answer (ignores remainder)", "reports remainder instead of ceiling"],
+      "source_questions": ["Raffles Girls WA1 Q11", "NH WA2 Q4"]
+    },
+
+    "quotient_only_short_answer": {
+      "id": "quotient_only_short_answer",
+      "topics": ["division"],
+      "label": "Find the quotient only (short answer)",
+      "section": "B", "question_type": "short_answer", "marks": 1,
+      "template": "What is the quotient when {a} is divided by {b}?",
+      "correct_answer_formula": "a // b",
+      "source_questions": ["ACS Jr WA2 Q6", "NY WA2 Q4"]
+    },
+
+    "quotient_and_remainder_short_answer": {
+      "id": "quotient_and_remainder_short_answer",
+      "topics": ["division"],
+      "label": "Find both quotient and remainder (short answer)",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "Find the quotient and the remainder when {a} is divided by {b}.",
+      "correct_answer_formula": "quotient = a // b, remainder = a % b",
+      "source_questions": ["NH WA2 Q7", "Northland WA2 Q8"]
+    },
+
+    "reverse_division_find_dividend": {
+      "id": "reverse_division_find_dividend",
+      "topics": ["division"],
+      "label": "Given divisor, quotient and remainder, find the dividend",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "When a number is divided by {d}, the quotient is {q} and the remainder is {r}. What is the number?",
+      "correct_answer_formula": "d × q + r",
+      "source_questions": ["ACS Jr WA2 Q9", "Ai Tong WA2 Q10"]
+    },
+
+    "measurement_division_word_problem": {
+      "id": "measurement_division_word_problem",
+      "topics": ["division", "measurement_mass"],
+      "label": "Divide a measured quantity into equal pieces",
+      "section": "A", "question_type": "mcq", "marks": 1,
+      "template": "{name} has a {item} that is {total} cm long. Cut equally into {n} cm pieces. How many pieces?",
+      "correct_answer_formula": "total ÷ n",
+      "source_questions": ["NH WA2 Q3"]
+    },
+
+    "equivalent_fractions_missing_numerator_mcq": {
+      "id": "equivalent_fractions_missing_numerator_mcq",
+      "topics": ["fractions"],
+      "label": "Find missing numerator in equivalent fraction (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 1,
+      "template": "{a}/{b} = ?/{c}",
+      "correct_answer_formula": "a × (c ÷ b)",
+      "distractors": ["b − a (subtracts)", "a + (c − b) (adds difference)", "a (ignores denominator scaling)"],
+      "source_questions": ["Henry Park WA2 Q1"]
+    },
+
+    "fraction_of_figure_simplest_form": {
+      "id": "fraction_of_figure_simplest_form",
+      "topics": ["fractions"],
+      "label": "What fraction of a figure is shaded? Express in simplest form.",
+      "section": "B", "question_type": "short_answer", "marks": 1,
+      "template": "The figure is made up of {n} identical {shapes}. What fraction is shaded? Express in simplest form.",
+      "notes": "IMAGE ESSENTIAL.",
+      "correct_answer_formula": "shaded ÷ n, simplified by GCF",
+      "source_questions": ["Henry Park WA2 Q9", "Maha Bodhi WA2 Q3"]
+    },
+
+    "ordering_fractions_ascending": {
+      "id": "ordering_fractions_ascending",
+      "topics": ["fractions"],
+      "label": "Arrange fractions smallest to largest",
+      "section": "B", "question_type": "short_answer", "marks": 1,
+      "template": "Arrange the fractions in order. Begin with the smallest. {fractions}",
+      "notes": "Requires finding LCD or benchmark fractions.",
+      "source_questions": ["Henry Park WA2 Q10", "Raffles Girls WA2 Q6"]
+    },
+
+    "ordering_unit_fractions_descending": {
+      "id": "ordering_unit_fractions_descending",
+      "topics": ["fractions"],
+      "label": "Arrange unit fractions greatest to smallest",
+      "section": "B", "question_type": "short_answer", "marks": 1,
+      "template": "Arrange the following fractions in order. Begin with the greatest. {unit_fractions}",
+      "notes": "Key insight: for unit fractions, larger denominator = smaller fraction.",
+      "common_errors": ["reverses order (treats larger denominator as larger fraction)"],
+      "source_questions": ["HP WA1 Q9"]
+    },
+
+    "ordering_fractions_greatest_to_smallest_mcq": {
+      "id": "ordering_fractions_greatest_to_smallest_mcq",
+      "topics": ["fractions"],
+      "label": "Arrange fractions greatest to smallest (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 2,
+      "template": "Arrange these fractions from the greatest to the smallest. {fractions}",
+      "distractors": ["ascending order", "swaps two middle fractions", "incorrect benchmark comparison"],
+      "source_questions": ["Maha Bodhi WA2 Q5"]
+    },
+
+    "fraction_simplification": {
+      "id": "fraction_simplification",
+      "topics": ["fractions"],
+      "label": "Write a fraction in its simplest form (short answer)",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "Write {a}/{b} in its simplest form.",
+      "correct_answer_formula": "(a ÷ GCF) / (b ÷ GCF)",
+      "source_questions": ["Maha Bodhi WA2 Q9"]
+    },
+
+    "fraction_addition_unlike_denominators": {
+      "id": "fraction_addition_unlike_denominators",
+      "topics": ["fractions"],
+      "label": "Add two fractions with different denominators; simplify",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "Find the sum of {a}/{b} and {c}/{d}. Leave your answer in simplest form.",
+      "correct_answer_formula": "(a×d + c×b) / (b×d), simplified",
+      "notes": "Denominators are typically related (one is a multiple of the other).",
+      "source_questions": ["Raffles Girls WA2 Q9"]
+    },
+
+    "fraction_subtraction_find_remainder": {
+      "id": "fraction_subtraction_find_remainder",
+      "topics": ["fractions"],
+      "label": "Two fractions consumed; find fraction remaining",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "{A} ate {a}/{b} of a {item} and {B} ate {c}/{d}. What fraction was left?",
+      "correct_answer_formula": "1 − a/b − c/d",
+      "source_questions": ["Maha Bodhi WA2 Q11"]
+    },
+
+    "missing_fraction_in_equation": {
+      "id": "missing_fraction_in_equation",
+      "topics": ["fractions"],
+      "label": "Find missing fraction in equation [?] + a/b = c/d",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "What is the missing fraction in the box? [box] + {a}/{b} = {c}/{d}",
+      "correct_answer_formula": "c/d − a/b",
+      "source_questions": ["Maha Bodhi WA2 Q12"]
+    },
+
+    "fraction_find_unknown_from_subtraction": {
+      "id": "fraction_find_unknown_from_subtraction",
+      "topics": ["fractions"],
+      "label": "Spent fraction on A, unknown on B, fraction remaining; find B's fraction",
+      "section": "C", "question_type": "long_answer", "marks": 2,
+      "template": "{name} spent {a}/{b} on {item1} and some on {item2}. Had {c}/{d} left. What fraction on {item2}?",
+      "correct_answer_formula": "1 − a/b − c/d",
+      "source_questions": ["Henry Park WA2 Q12"]
+    },
+
+    "identify_shaded_fraction_from_diagram_mcq": {
+      "id": "identify_shaded_fraction_from_diagram_mcq",
+      "topics": ["fractions"],
+      "label": "Which diagram shows a given fraction shaded? (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 2,
+      "template": "Which of the following shows that {a}/{b} of the figure is shaded?",
+      "notes": "IMAGE ESSENTIAL. Distractors use figures where parts are unequal, or different fraction is shaded.",
+      "source_questions": ["Maha Bodhi WA2 Q3"]
+    },
+
+    "fraction_shade_more_to_reach_target": {
+      "id": "fraction_shade_more_to_reach_target",
+      "topics": ["fractions"],
+      "label": "Figure has some shaded; how many more to reach target fraction? (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 2,
+      "template": "A figure of {n} equal squares has {k} already shaded. To have {a}/{b} shaded, how many more?",
+      "notes": "IMAGE ESSENTIAL.",
+      "correct_answer_formula": "ceil(n × a/b) − k",
+      "source_questions": ["Maha Bodhi WA2 Q4"]
+    },
+
+    "fraction_eaten_by_two_find_remainder": {
+      "id": "fraction_eaten_by_two_find_remainder",
+      "topics": ["fractions"],
+      "label": "Two people eat fractions; find remaining (short answer)",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "{A} ate {a}/{b} of a pizza and {B} ate {c}/{d}. What fraction was left?",
+      "correct_answer_formula": "1 − a/b − c/d",
+      "source_questions": ["Maha Bodhi WA2 Q11"]
+    },
+
+    "identify_angle_type_mcq": {
+      "id": "identify_angle_type_mcq",
+      "topics": ["geometry_angles"],
+      "label": "Which of the following is an acute/obtuse/right angle? (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 2,
+      "template": "Which of the following is an {angle_type} angle? [four angle diagrams]",
+      "notes": "IMAGE ESSENTIAL.",
+      "distractors": ["right angle (90°)", "obtuse angle (>90°)", "angle with misleading mark"],
+      "source_questions": ["Northland WA2 Q4"]
+    },
+
+    "identify_obtuse_angle_in_figure_mcq": {
+      "id": "identify_obtuse_angle_in_figure_mcq",
+      "topics": ["geometry_angles"],
+      "label": "In a figure with labelled angles, which is obtuse? (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 1,
+      "template": "In the figure, which angle is an obtuse angle? (1) ∠a (2) ∠b (3) ∠c (4) ∠d",
+      "notes": "IMAGE ESSENTIAL — labelled polygon.",
+      "source_questions": ["Ai Tong WA2 Q3", "Raffles Girls WA2 Q1"]
+    },
+
+    "count_angle_type_in_figure_short": {
+      "id": "count_angle_type_in_figure_short",
+      "topics": ["geometry_angles"],
+      "label": "Count how many angles of a given type are in a figure (short answer)",
+      "section": "B", "question_type": "short_answer", "marks": 1,
+      "template": "In the figure shown below, how many of the marked angles are {angle_type} angles?",
+      "notes": "IMAGE ESSENTIAL.",
+      "source_questions": ["Henry Park WA2 Q7", "Maha Bodhi WA2 Q2"]
+    },
+
+    "mark_angles_in_polygon": {
+      "id": "mark_angles_in_polygon",
+      "topics": ["geometry_angles"],
+      "label": "Mark all angles in a polygon, then count right angles (two-part)",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "(a) Mark the remaining angles inside the shape. (b) How many right angles?",
+      "notes": "IMAGE ESSENTIAL — polygon with one angle already marked.",
+      "source_questions": ["Maha Bodhi WA2 Q7"]
+    },
+
+    "identify_parallel_lines_mcq": {
+      "id": "identify_parallel_lines_mcq",
+      "topics": ["geometry_lines"],
+      "label": "Identify pair of parallel lines from a diagram (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 1,
+      "template": "Identify the pair of parallel lines in the figure below.",
+      "notes": "IMAGE ESSENTIAL — grid with labelled lines.",
+      "source_questions": ["Henry Park WA2 Q3", "Maha Bodhi WA2 Q6"]
+    },
+
+    "identify_perpendicular_lines_mcq": {
+      "id": "identify_perpendicular_lines_mcq",
+      "topics": ["geometry_lines"],
+      "label": "Which line is perpendicular to a given line? (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 2,
+      "template": "Which line is perpendicular to line {line}?",
+      "notes": "IMAGE ESSENTIAL.",
+      "source_questions": ["Northland WA2 Q7"]
+    },
+
+    "identify_perpendicular_in_letters": {
+      "id": "identify_perpendicular_in_letters",
+      "topics": ["geometry_lines"],
+      "label": "Which letter shape has perpendicular lines? (short answer)",
+      "section": "B", "question_type": "short_answer", "marks": 1,
+      "template": "Which of the letters has a pair of perpendicular lines? [A, L, K, O, Z]",
+      "notes": "IMAGE ESSENTIAL.",
+      "source_questions": ["Ai Tong WA2 Q4"]
+    },
+
+    "name_parallel_lines_from_diagram": {
+      "id": "name_parallel_lines_from_diagram",
+      "topics": ["geometry_lines"],
+      "label": "Name a pair of parallel lines from a labelled diagram (short answer)",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "Study the diagram below. Name a pair of parallel lines.",
+      "notes": "IMAGE ESSENTIAL.",
+      "source_questions": ["Ai Tong WA2 Q5"]
+    },
+
+    "draw_perpendicular_on_grid": {
+      "id": "draw_perpendicular_on_grid",
+      "topics": ["geometry_lines"],
+      "label": "Draw a perpendicular line through a point on a grid",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "In the grid below, draw a line perpendicular to {line}, passing through point {P}.",
+      "notes": "IMAGE ESSENTIAL — construction task.",
+      "source_questions": ["Ai Tong WA2 Q12", "Henry Park WA2 Q8"]
+    },
+
+    "draw_parallel_on_grid": {
+      "id": "draw_parallel_on_grid",
+      "topics": ["geometry_lines"],
+      "label": "Draw a parallel line through a point on a grid",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "Draw a line parallel to line {line} that passes through point {P}.",
+      "notes": "IMAGE ESSENTIAL — construction task.",
+      "source_questions": ["Maha Bodhi WA2 Q8", "Northland WA2 Q11"]
+    },
+
+    "draw_perpendicular_and_parallel_on_grid": {
+      "id": "draw_perpendicular_and_parallel_on_grid",
+      "topics": ["geometry_lines"],
+      "label": "Draw both a perpendicular and parallel line using given dots on grid (two-part)",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "(a) Draw a line perpendicular to {EF} by joining two dots. (b) Draw a line parallel to {EF} by joining two dots. Use arrowheads to show parallel.",
+      "notes": "IMAGE ESSENTIAL.",
+      "source_questions": ["Raffles Girls WA2 Q5"]
+    },
+
+    "identify_perpendicular_parallel_true_statement_mcq": {
+      "id": "identify_perpendicular_parallel_true_statement_mcq",
+      "topics": ["geometry_lines"],
+      "label": "Given diagram, identify the true statement about line relationships (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 2,
+      "template": "The diagram shows lines on a square grid. Which of the following is true? (1)…(4)…",
+      "notes": "IMAGE ESSENTIAL. Tests ability to correctly identify ⊥ and // from a labelled grid.",
+      "source_questions": ["Maha Bodhi WA2 Q6"]
+    },
+
+    "bar_graph_read_single_value_mcq": {
+      "id": "bar_graph_read_single_value_mcq",
+      "topics": ["data_graphs"],
+      "label": "Read one bar value from a bar graph (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 1,
+      "template": "The bar graph shows {data}. How many {item_type} were {action}?",
+      "notes": "IMAGE ESSENTIAL.",
+      "distractors": ["misreads adjacent bar", "misreads between gridlines", "reads other category"],
+      "source_questions": ["ACS Jr WA2 Q2"]
+    },
+
+    "bar_graph_find_difference": {
+      "id": "bar_graph_find_difference",
+      "topics": ["data_graphs"],
+      "label": "How many more/fewer of A than B from bar graph?",
+      "section": "B", "question_type": "short_answer", "marks": 1,
+      "template": "How many more {A} than {B} did {subject} {action}?",
+      "notes": "IMAGE ESSENTIAL.",
+      "correct_answer_formula": "bar(A) − bar(B)",
+      "source_questions": ["ACS Jr WA2 Q7b", "Raffles Girls WA2 Q8b", "Northland WA2 Q9a"]
+    },
+
+    "bar_graph_count_above_threshold": {
+      "id": "bar_graph_count_above_threshold",
+      "topics": ["data_graphs"],
+      "label": "Count bars/values above a given threshold",
+      "section": "C", "question_type": "long_answer", "marks": 1,
+      "template": "How many {subjects} {action} more than {threshold} times?",
+      "notes": "IMAGE ESSENTIAL. Common error: includes threshold value (uses ≥ instead of >).",
+      "source_questions": ["ACS Jr WA2 Q11a", "NH WA2 Q6"]
+    },
+
+    "bar_graph_total_two_categories": {
+      "id": "bar_graph_total_two_categories",
+      "topics": ["data_graphs"],
+      "label": "Find total of two named categories from bar graph",
+      "section": "C", "question_type": "long_answer", "marks": 1,
+      "template": "How many {A} and {B} did {subject} sell/collect in total?",
+      "notes": "IMAGE ESSENTIAL.",
+      "correct_answer_formula": "bar(A) + bar(B)",
+      "source_questions": ["Henry Park WA2 Q11a", "Maha Bodhi WA2 Q1"]
+    },
+
+    "bar_graph_complete_given_relationship": {
+      "id": "bar_graph_complete_given_relationship",
+      "topics": ["data_graphs"],
+      "label": "Calculate and draw a missing bar from given relationship",
+      "section": "B/C", "question_type": "short_answer", "marks": 1,
+      "template": "{Day X} had {k} times as many {items} as {Day Y}. Draw the bar for {Day X}.",
+      "notes": "IMAGE ESSENTIAL — student must draw on the graph.",
+      "correct_answer_formula": "bar(X) = k × bar(Y)",
+      "source_questions": ["ACS Jr WA2 Q8", "Henry Park WA2 Q11b", "Raffles Girls WA2 Q11a"]
+    },
+
+    "data_read_then_calculate": {
+      "id": "data_read_then_calculate",
+      "topics": ["data_graphs", "multiplication", "money"],
+      "label": "Read graph value, then apply arithmetic (e.g. multiply by price)",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "{subject} sold each {item} for ${price}. How much collected from selling all {A} and {B}?",
+      "notes": "IMAGE ESSENTIAL.",
+      "correct_answer_formula": "(bar(A) + bar(B)) × price",
+      "source_questions": ["Northland WA2 Q10"]
+    },
+
+    "grouped_bar_graph_read_and_compare": {
+      "id": "grouped_bar_graph_read_and_compare",
+      "topics": ["data_graphs"],
+      "label": "Read and compare two groups in a double/grouped bar graph",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "(a) Which {category} has more {GroupA} than {GroupB}? (b) How many {GroupB} in {category}?",
+      "notes": "IMAGE ESSENTIAL — grouped bar chart.",
+      "source_questions": ["Ai Tong WA2 Q6"]
+    },
+
+    "bar_graph_true_false_statements": {
+      "id": "bar_graph_true_false_statements",
+      "topics": ["data_graphs"],
+      "label": "Evaluate true/false statements about a bar graph",
+      "section": "C", "question_type": "long_answer", "marks": 2,
+      "template": "Each statement below is either true or false. Write 'T' for true and 'F' for false. (i)… (ii)… (iii)… (iv)…",
+      "notes": "IMAGE ESSENTIAL. Tests reading accuracy and comparison skills simultaneously.",
+      "source_questions": ["Henry Park WA2 Q4", "NY WA2 Q9b"]
+    },
+
+    "bar_graph_equalise_two_groups": {
+      "id": "bar_graph_equalise_two_groups",
+      "topics": ["data_graphs", "addition_subtraction"],
+      "label": "Transfer items from one group to another to equalise; find amount transferred",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "How many {items} must be taken from {GroupA} and placed in {GroupB} so that both boxes will have the same number?",
+      "correct_answer_formula": "(bar(A) − bar(B)) ÷ 2",
+      "notes": "IMAGE ESSENTIAL.",
+      "source_questions": ["Maha Bodhi WA2 Q10"]
+    },
+
+    "bar_graph_identify_double": {
+      "id": "bar_graph_identify_double",
+      "topics": ["data_graphs", "multiplication"],
+      "label": "Identify which category is double another from bar graph",
+      "section": "C", "question_type": "long_answer", "marks": 1,
+      "template": "Who collected twice as many {items} as {subject}?",
+      "notes": "IMAGE ESSENTIAL.",
+      "source_questions": ["Ai Tong WA2 Q13a"]
+    },
+
+    "bar_graph_find_difference_to_match": {
+      "id": "bar_graph_find_difference_to_match",
+      "topics": ["data_graphs", "addition_subtraction"],
+      "label": "How many more must one collect to match another (from bar graph)?",
+      "section": "C", "question_type": "long_answer", "marks": 2,
+      "template": "How many more {items} must {A} collect so that {A} has the same number as {B}?",
+      "correct_answer_formula": "bar(B) − bar(A)",
+      "notes": "IMAGE ESSENTIAL.",
+      "source_questions": ["Ai Tong WA2 Q13b"]
+    },
+
+    "read_analogue_clock": {
+      "id": "read_analogue_clock",
+      "topics": ["time"],
+      "label": "Read time from analogue clock face (short answer)",
+      "section": "B", "question_type": "short_answer", "marks": 1,
+      "template": "The clock below shows the time when {name} {action}. What time was it?",
+      "notes": "IMAGE ESSENTIAL — analogue clock.",
+      "source_questions": ["Tao Nan WA1 Q7"]
+    },
+
+    "convert_hours_minutes_to_minutes": {
+      "id": "convert_hours_minutes_to_minutes",
+      "topics": ["time"],
+      "label": "Convert hours and minutes to total minutes (short answer)",
+      "section": "B", "question_type": "short_answer", "marks": 1,
+      "template": "How many minutes are there in {h}h {m} min?",
+      "correct_answer_formula": "h × 60 + m",
+      "source_questions": ["Tao Nan WA1 Q8"]
+    },
+
+    "hours_to_minutes_conversion_mcq": {
+      "id": "hours_to_minutes_conversion_mcq",
+      "topics": ["time"],
+      "label": "Convert hours and minutes to total minutes (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 1,
+      "template": "{h} h {m} min = ___ min",
+      "correct_answer_formula": "h × 60 + m",
+      "distractors": ["uses 30 min/hour", "concatenates digits", "uses 50 min/hour", "adds h and m directly"],
+      "source_questions": ["HP WA1 Q5"]
+    },
+
+    "elapsed_time_word_problem": {
+      "id": "elapsed_time_word_problem",
+      "topics": ["time"],
+      "label": "Calculate elapsed time between two given times",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "{name} {action} from {start_time} to {end_time}. How long was it in hours and minutes?",
+      "correct_answer_formula": "end_time − start_time",
+      "source_questions": ["Tao Nan WA1 Q12"]
+    },
+
+    "scale_reading_double_mass": {
+      "id": "scale_reading_double_mass",
+      "topics": ["measurement_mass"],
+      "label": "Read mass from scale, find total for multiple items",
+      "section": "B", "question_type": "short_answer", "marks": 1,
+      "template": "The diagram shows the mass of 1 jar. What is the mass of {n} such jars?",
+      "notes": "IMAGE ESSENTIAL — weighing scale.",
+      "correct_answer_formula": "scale_reading × n",
+      "source_questions": ["HP WA1 Q10"]
+    },
+
+    "volume_counting_equal_containers_mcq": {
+      "id": "volume_counting_equal_containers_mcq",
+      "topics": ["measurement_volume"],
+      "label": "Find total volume by counting equal containers (MCQ)",
+      "section": "A", "question_type": "mcq", "marks": 1,
+      "template": "{name} pours all water from a pail into bottles of {capacity}. What is the total volume?",
+      "notes": "IMAGE ESSENTIAL — bottles and pail shown.",
+      "source_questions": ["HP WA1 Q4"]
+    },
+
+    "combinations_counting_word_problem": {
+      "id": "combinations_counting_word_problem",
+      "topics": ["combinatorics"],
+      "label": "Count distinct combinations (choosing r from n) by listing",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "{name} has {n} different {items}: {list}. She chooses {r}. How many different ways?",
+      "correct_answer_formula": "C(n, r) = n! / (r! × (n−r)!)",
+      "notes": "P3 level: solved by systematic listing, not formula.",
+      "source_questions": ["NY WA1 Q8"]
+    },
+
+    "calendar_reasoning_odd_even": {
+      "id": "calendar_reasoning_odd_even",
+      "topics": ["odd_even", "number_patterns"],
+      "label": "Identify a date from clues (odd/even, day-of-week, digit sum)",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "The date of the party satisfies: (1) odd number, (2) on a weekend, (3) digit sum = {s}. [calendar shown]",
+      "notes": "IMAGE ESSENTIAL — calendar grid.",
+      "source_questions": ["NY WA2 Q7"]
+    },
+
+    "pictorial_algebra_system_of_equations": {
+      "id": "pictorial_algebra_system_of_equations",
+      "topics": ["addition_subtraction", "multiplication"],
+      "label": "Solve system of equations represented by picture symbols",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "[picture1] + [picture2] + [picture3] = {v1}; [picture1] + [picture1] = {v2}; [picture1] × [picture3] = {v3}; find value of [picture2].",
+      "notes": "IMAGE ESSENTIAL — variables represented as animal/shape pictures.",
+      "source_questions": ["Rosyth WA1 Q10"]
+    },
+
+    "age_problem_sum_of_ages": {
+      "id": "age_problem_sum_of_ages",
+      "topics": ["addition_subtraction"],
+      "label": "Find one age when sum of two ages and age difference are given",
+      "section": "B", "question_type": "short_answer", "marks": 2,
+      "template": "{A} is {d} years {older/younger} than {B}. How old will {A} be when the sum of their ages is {s}?",
+      "correct_answer_formula": "A_age = (s + d) ÷ 2",
+      "notes": "Solved via units method or simultaneous equations at P3 level using guess-and-check or bar model.",
+      "source_questions": ["Tao Nan WA1 Q15"]
+    },
+
+    "reverse_multi_step_word_problem": {
+      "id": "reverse_multi_step_word_problem",
+      "topics": ["addition_subtraction"],
+      "label": "Work backwards from end state through multiple changes to find start",
+      "section": "C", "question_type": "long_answer", "marks": 3,
+      "template": "Started with [?]. {action1} {amount1} [items]. Then {action2} {amount2} [items]. Had {final} at end. Find start.",
+      "correct_answer_formula": "start = final − net_change",
+      "steps": ["reverse action2", "reverse action1"],
+      "source_questions": ["Henry Park WA2 Q15"]
+    }
+  },
+
+  "distractor_patterns": {
+    "2x2_place_digit_grid": {
+      "id": "2x2_place_digit_grid",
+      "label": "2×2 Place-Digit Grid",
+      "used_in": ["digit_value_mcq"],
+      "description": "Options formed by crossing two place levels (current, one-up) with two perspectives (digit×place, place alone).",
+      "grid": {
+        "rows": ["current_place", "one_place_up"],
+        "cols": ["with_digit", "without_digit"],
+        "cells": {
+          "current_place + with_digit":    { "formula": "digit × pv",        "role": "correct"    },
+          "current_place + without_digit": { "formula": "pv",                "role": "distractor" },
+          "one_place_up  + with_digit":    { "formula": "digit × (pv × 10)", "role": "distractor" },
+          "one_place_up  + without_digit": { "formula": "pv × 10",           "role": "distractor" }
+        }
+      }
+    },
+    "shifted_and_stripped_grid": {
+      "id": "shifted_and_stripped_grid",
+      "label": "Shifted & Stripped Grid",
+      "used_in": ["expanded_form_mcq"],
+      "description": "Options slide the digit one place up or down, or strip the place value entirely.",
+      "options": [
+        { "formula": "digit × (pv × 10)", "role": "distractor", "type": "digit_shifted_up"   },
+        { "formula": "digit",             "role": "distractor", "type": "digit_only"          },
+        { "formula": "digit × pv",        "role": "correct"                                   },
+        { "formula": "digit × (pv / 10)", "role": "distractor", "type": "digit_shifted_down"  }
+      ]
+    },
+    "wrong_common_difference": {
+      "id": "wrong_common_difference",
+      "label": "Wrong Common Difference",
+      "used_in": ["number_pattern_missing_mcq"],
+      "description": "Distractors use a systematically smaller common difference (actual d minus 10, 20, 30).",
+      "options": [
+        { "formula": "start + 4×(d−30), start + 5×(d−30)", "role": "distractor" },
+        { "formula": "start + 4×(d−20), start + 5×(d−20)", "role": "distractor" },
+        { "formula": "start + 4×(d−10), start + 5×(d−10)", "role": "distractor" },
+        { "formula": "start + 4×d,      start + 5×d",       "role": "correct"    }
+      ]
+    },
+    "money_quantity_confusion": {
+      "id": "money_quantity_confusion",
+      "label": "Money vs. Quantity Confusion",
+      "used_in": ["money_multi_item_mcq"],
+      "description": "Distractors arise from confusing quantity (number of items) with price, or concatenating rather than multiplying.",
+      "options": [
+        { "formula": "(n1 + n2) × arbitrary", "role": "distractor", "type": "adds_quantities_wrong_unit" },
+        { "formula": "n1 as dollars + p2", "role": "distractor", "type": "quantity_as_dollars" },
+        { "formula": "$(n1+n2).(p1+p2)", "role": "distractor", "type": "concatenates_quantities" },
+        { "formula": "n1×p1 + n2×p2", "role": "correct" }
+      ]
+    },
+    "wrong_operation_variants": {
+      "id": "wrong_operation_variants",
+      "label": "Wrong Operation Variants",
+      "used_in": ["two_number_sum_difference_mcq", "subtraction_difference_mcq"],
+      "description": "Distractors use wrong operations (add instead of subtract, stop at intermediate result, compound errors).",
+      "options": [
+        { "formula": "total − a (intermediate result)", "role": "distractor", "type": "incomplete_multistep" },
+        { "formula": "total + a", "role": "distractor", "type": "wrong_inverse_operation" },
+        { "formula": "total + 2×a", "role": "distractor", "type": "compound_operation_errors" },
+        { "formula": "total − 2×a", "role": "correct" }
+      ]
+    },
+    "division_operation_confusion": {
+      "id": "division_operation_confusion",
+      "label": "Division Operation Confusion",
+      "used_in": ["equal_groups_multiplication_word_problem_mcq", "times_as_many_find_other_divide"],
+      "description": "Distractors use the wrong operation: multiply instead of divide, add instead of multiply, etc.",
+      "options": [
+        { "formula": "a × b (multiplies instead of divides)", "role": "distractor" },
+        { "formula": "a + b (adds instead of divides)", "role": "distractor" },
+        { "formula": "a − b (subtracts instead of divides)", "role": "distractor" },
+        { "formula": "a ÷ b", "role": "correct" }
+      ]
+    }
+  },
+
+  "distractor_types": {
+    "digit_shifted_up": {
+      "id": "digit_shifted_up", "label": "Digit shifted one place up",
+      "formula": "digit × (place_value × 10)",
+      "example": { "digit": 7, "place_value": 10, "output": 700 },
+      "misconception": "place_confusion_off_by_one_up",
+      "used_in": ["digit_value_mcq", "expanded_form_mcq"]
+    },
+    "place_up": {
+      "id": "place_up", "label": "Next place value (no digit applied)",
+      "formula": "place_value × 10",
+      "example": { "place_value": 10, "output": 100 },
+      "misconception": "place_value_conflation_shifted",
+      "used_in": ["digit_value_mcq"]
+    },
+    "place_self": {
+      "id": "place_self", "label": "Current place value (no digit applied)",
+      "formula": "place_value",
+      "example": { "place_value": 10, "output": 10 },
+      "misconception": "place_value_conflation",
+      "used_in": ["digit_value_mcq"]
+    },
+    "digit_only": {
+      "id": "digit_only", "label": "Bare digit with no place value",
+      "formula": "digit",
+      "example": { "digit": 2, "output": 2 },
+      "misconception": "no_place_value_applied",
+      "used_in": ["expanded_form_mcq"]
+    },
+    "digit_shifted_down": {
+      "id": "digit_shifted_down", "label": "Digit shifted one place down",
+      "formula": "digit × (place_value / 10)",
+      "example": { "digit": 2, "place_value": 100, "output": 20 },
+      "misconception": "place_confusion_off_by_one_down",
+      "used_in": ["expanded_form_mcq"]
+    },
+    "adds_quantities_wrong_unit": {
+      "id": "adds_quantities_wrong_unit", "label": "Adds item quantities, applies arbitrary unit",
+      "formula": "(n1 + n2) × some_base_unit",
+      "misconception": "quantity_unit_confusion",
+      "used_in": ["money_multi_item_mcq"]
+    },
+    "quantity_as_dollars": {
+      "id": "quantity_as_dollars", "label": "Reads item count as dollar amount",
+      "formula": "n1 (as dollars) + price2_in_dollars",
+      "misconception": "quantity_as_currency",
+      "used_in": ["money_multi_item_mcq"]
+    },
+    "concatenates_quantities_and_denominations": {
+      "id": "concatenates_quantities_and_denominations", "label": "Concatenates sum of quantities and sum of prices",
+      "formula": "$(n1+n2).(p1_cents+p2_cents)",
+      "misconception": "numerical_concatenation",
+      "used_in": ["money_multi_item_mcq"]
+    },
+    "wrong_diff_d_minus_30": {
+      "id": "wrong_diff_d_minus_30", "label": "Uses d−30 as common difference",
+      "formula": "[start + 4×(d−30), start + 5×(d−30)]",
+      "misconception": "misidentified_common_difference",
+      "used_in": ["number_pattern_missing_mcq"]
+    },
+    "wrong_diff_d_minus_20": {
+      "id": "wrong_diff_d_minus_20", "label": "Uses d−20 as common difference",
+      "formula": "[start + 4×(d−20), start + 5×(d−20)]",
+      "misconception": "misidentified_common_difference",
+      "used_in": ["number_pattern_missing_mcq"]
+    },
+    "wrong_diff_d_minus_10": {
+      "id": "wrong_diff_d_minus_10", "label": "Uses d−10 as common difference",
+      "formula": "[start + 4×(d−10), start + 5×(d−10)]",
+      "misconception": "misidentified_common_difference",
+      "used_in": ["number_pattern_missing_mcq"]
+    },
+    "incomplete_multistep_other_number": {
+      "id": "incomplete_multistep_other_number", "label": "Answers intermediate result instead of final answer",
+      "formula": "total − a",
+      "misconception": "incomplete_multistep",
+      "used_in": ["two_number_sum_difference_mcq"]
+    },
+    "wrong_operation_sum_plus_a": {
+      "id": "wrong_operation_sum_plus_a", "label": "Adds known number to total instead of subtracting",
+      "formula": "total + a",
+      "misconception": "wrong_inverse_operation",
+      "used_in": ["two_number_sum_difference_mcq"]
+    },
+    "compound_wrong_operations": {
+      "id": "compound_wrong_operations", "label": "Chains two wrong operations",
+      "formula": "total + 2×a",
+      "misconception": "compound_operation_errors",
+      "used_in": ["two_number_sum_difference_mcq"]
+    },
+    "reversal_ascending_descending": {
+      "id": "reversal_ascending_descending", "label": "Gives ascending order when descending is asked (or vice versa)",
+      "formula": "sorted(numbers, reverse=False) when should be True",
+      "misconception": "ordering_direction_confusion",
+      "used_in": ["ordering_numbers_short", "ordering_3_numbers_descending_mcq"]
+    },
+    "floor_division_no_roundup": {
+      "id": "floor_division_no_roundup", "label": "Gives floor quotient without rounding up for remainder",
+      "formula": "total // n (floor)",
+      "example": { "total": 65, "n": 9, "wrong": 7, "correct": 8 },
+      "misconception": "division_no_rounding_up",
+      "used_in": ["division_with_remainder_round_up_word_problem"]
+    },
+    "multiplies_instead_of_divides": {
+      "id": "multiplies_instead_of_divides", "label": "Multiplies when should divide (or vice versa)",
+      "formula": "a × b instead of a ÷ b",
+      "misconception": "wrong_inverse_operation_mult_div",
+      "used_in": ["equal_groups_division_word_problem", "times_as_many_find_other_divide"]
+    },
+    "unit_fraction_order_reversal": {
+      "id": "unit_fraction_order_reversal", "label": "Orders unit fractions as if larger denominator = larger fraction",
+      "formula": "1/10 > 1/5 > 1/3 (wrong)",
+      "misconception": "unit_fraction_inverse_relationship_ignored",
+      "used_in": ["ordering_unit_fractions_descending"]
+    },
+    "bar_graph_off_by_one_gridline": {
+      "id": "bar_graph_off_by_one_gridline", "label": "Misreads bar length by one gridline interval",
+      "formula": "bar_value ± grid_interval",
+      "misconception": "graph_reading_imprecision",
+      "used_in": ["bar_graph_read_single_value_mcq", "bar_graph_find_difference"]
+    }
+  },
+
+  "misconceptions": {
+    "place_confusion_off_by_one_up": {
+      "id": "place_confusion_off_by_one_up",
+      "label": "Place mis-identification (one level too high)",
+      "description": "Student identifies the digit correctly but assigns it to the next higher place.",
+      "linked_distractors": ["digit_shifted_up"],
+      "remediation_hints": [
+        "Write the number in a place-value chart before answering.",
+        "Cover all digits except the target; identify its column header."
+      ]
+    },
+    "place_value_conflation": {
+      "id": "place_value_conflation",
+      "label": "Confusing place value with digit value",
+      "description": "Student identifies the correct place but reports the place value (e.g. 10) rather than digit × place (e.g. 70).",
+      "linked_distractors": ["place_self"],
+      "remediation_hints": [
+        "Reinforce: value of digit = digit × place value.",
+        "Use base-10 blocks: 7 rods of 10 = 70, not just 1 rod = 10."
+      ]
+    },
+    "place_value_conflation_shifted": {
+      "id": "place_value_conflation_shifted",
+      "label": "Wrong place AND reports bare place value",
+      "description": "Picks the wrong (higher) place and also forgets to multiply by the digit.",
+      "linked_distractors": ["place_up"],
+      "remediation_hints": [
+        "Use a chart; have student circle both the digit and its column.",
+        "Explicit two-step: (1) which column? (2) digit × column value."
+      ]
+    },
+    "no_place_value_applied": {
+      "id": "no_place_value_applied",
+      "label": "Reports bare digit without applying place value",
+      "description": "Student reports the digit itself (e.g. 2) rather than its value in context (e.g. 200).",
+      "linked_distractors": ["digit_only"],
+      "remediation_hints": [
+        "Compare: the digit 2 in 5207 vs. the number 2 on its own — why different?",
+        "Multiply the digit by its column header to get the value."
+      ]
+    },
+    "place_confusion_off_by_one_down": {
+      "id": "place_confusion_off_by_one_down",
+      "label": "Place mis-identification (one level too low)",
+      "description": "Student assigns the digit to the next lower place.",
+      "linked_distractors": ["digit_shifted_down"],
+      "remediation_hints": [
+        "Practise reading digits from right: ones, tens, hundreds, thousands.",
+        "Count place columns from right to left on a chart."
+      ]
+    },
+    "quantity_unit_confusion": {
+      "id": "quantity_unit_confusion",
+      "label": "Confuses item quantity with monetary value",
+      "description": "Adds item counts and treats the result as a price.",
+      "linked_distractors": ["adds_quantities_wrong_unit"],
+      "remediation_hints": [
+        "Label every number: '8 stamps', not just '8'.",
+        "First find each subtotal: group × price, then add subtotals."
+      ]
+    },
+    "quantity_as_currency": {
+      "id": "quantity_as_currency",
+      "label": "Reads item count as a dollar amount",
+      "description": "Mistakes number of items (e.g. 8) for a dollar amount ($8).",
+      "linked_distractors": ["quantity_as_dollars"],
+      "remediation_hints": [
+        "Write units on every value: '8 stamps × 50¢ = 400¢'.",
+        "The number 8 is a count, not money."
+      ]
+    },
+    "numerical_concatenation": {
+      "id": "numerical_concatenation",
+      "label": "Concatenates separate totals into a single price",
+      "description": "Adds quantities (8+7=15) and denominations (20+50=70) separately and reads as $15.70.",
+      "linked_distractors": ["concatenates_quantities_and_denominations"],
+      "remediation_hints": [
+        "Explicit table: quantity × unit price = subtotal; sum subtotals.",
+        "Show the two separate products before adding."
+      ]
+    },
+    "misidentified_common_difference": {
+      "id": "misidentified_common_difference",
+      "label": "Incorrectly identifies the common difference",
+      "description": "Uses a step size that doesn't fit all consecutive pairs.",
+      "linked_distractors": ["wrong_diff_d_minus_30", "wrong_diff_d_minus_20", "wrong_diff_d_minus_10"],
+      "remediation_hints": [
+        "Check the difference for two or more consecutive pairs, not just one.",
+        "Write the difference above each arrow: 3448 →(40)→ 3488 →(40)→…"
+      ]
+    },
+    "incomplete_multistep": {
+      "id": "incomplete_multistep",
+      "label": "Stops at an intermediate step",
+      "description": "Correctly finds an intermediate result but reports it as the final answer.",
+      "linked_distractors": ["incomplete_multistep_other_number"],
+      "remediation_hints": [
+        "Underline exactly what the question asks for before calculating.",
+        "Practise identifying 'what is the final question?' in multi-step problems."
+      ]
+    },
+    "wrong_inverse_operation": {
+      "id": "wrong_inverse_operation",
+      "label": "Uses wrong inverse operation to recover an unknown",
+      "description": "Adds the known number to the total instead of subtracting.",
+      "linked_distractors": ["wrong_operation_sum_plus_a"],
+      "remediation_hints": [
+        "Bar model: whole bar = sum, one part = a, other part = total − a.",
+        "If a + b = total, then b = total − a (not total + a)."
+      ]
+    },
+    "compound_operation_errors": {
+      "id": "compound_operation_errors",
+      "label": "Chains multiple wrong operations",
+      "description": "Applies the wrong operation at two consecutive steps, compounding the error.",
+      "linked_distractors": ["compound_wrong_operations"],
+      "remediation_hints": [
+        "Break into labelled steps; check each step before proceeding.",
+        "Ask: 'Does this intermediate result make sense?'"
+      ]
+    },
+    "ordering_direction_confusion": {
+      "id": "ordering_direction_confusion",
+      "label": "Reverses ordering direction (ascending vs descending)",
+      "description": "Arranges numbers in ascending order when descending is asked, or vice versa.",
+      "linked_distractors": ["reversal_ascending_descending"],
+      "remediation_hints": [
+        "Highlight the direction word ('begin with smallest' vs 'begin with greatest').",
+        "Draw a number line and circle the correct start/end."
+      ]
+    },
+    "division_no_rounding_up": {
+      "id": "division_no_rounding_up",
+      "label": "Gives floor quotient without rounding up when remainder exists",
+      "description": "For real-world problems requiring 'enough containers', student gives exact quotient ignoring the remainder.",
+      "linked_distractors": ["floor_division_no_roundup"],
+      "remediation_hints": [
+        "Ask: 'Are all items packed?' If remainder > 0, one more container is needed.",
+        "Practise 'ceiling division': 65 ÷ 9 = 7 r 2 → need 8 boxes."
+      ]
+    },
+    "wrong_inverse_operation_mult_div": {
+      "id": "wrong_inverse_operation_mult_div",
+      "label": "Multiplies when should divide (or vice versa)",
+      "description": "Confuses which operation is needed when given a total and rate.",
+      "linked_distractors": ["multiplies_instead_of_divides"],
+      "remediation_hints": [
+        "Draw a bar model: total bar ÷ number of groups = size of each group.",
+        "Check: if answer is larger than input, did you multiply? Should you have divided?"
+      ]
+    },
+    "unit_fraction_inverse_relationship_ignored": {
+      "id": "unit_fraction_inverse_relationship_ignored",
+      "label": "Treats larger denominator as larger unit fraction",
+      "description": "Student orders 1/10 > 1/3 because 10 > 3, ignoring that unit fractions decrease as denominator increases.",
+      "linked_distractors": ["unit_fraction_order_reversal"],
+      "remediation_hints": [
+        "Use physical fraction strips: 1/10 strip is visibly shorter than 1/3 strip.",
+        "Explain: dividing a pizza into 10 slices gives smaller slices than into 3."
+      ]
+    },
+    "graph_reading_imprecision": {
+      "id": "graph_reading_imprecision",
+      "label": "Misreads bar chart value by one or more gridline intervals",
+      "description": "Student reads the wrong gridline when the bar ends between gridlines.",
+      "linked_distractors": ["bar_graph_off_by_one_gridline"],
+      "remediation_hints": [
+        "Always trace a horizontal line from the bar tip to the y-axis.",
+        "Identify the scale interval first before reading any bars."
+      ]
+    }
+  }
+}

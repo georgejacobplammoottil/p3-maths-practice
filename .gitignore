@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+.env
+
+# Database (don't commit data, Render will persist it on disk)
+data/sessions.db
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
