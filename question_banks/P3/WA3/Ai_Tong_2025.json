@@ -1,0 +1,115 @@
+{
+  "source": "Ai Tong School 2025",
+  "grade": "P3",
+  "assessment": "WA3",
+  "questions": [
+    {
+      "structure_id": "fraction_addition_unlike_denominators",
+      "topic": "fractions",
+      "section": "A",
+      "marks": 1,
+      "text": "Find the value of 2/9 + 2/3.",
+      "options": null,
+      "correct_option": null,
+      "answer": "8/9",
+      "working": "2/3 = 6/9. 2/9 + 6/9 = 8/9",
+      "source": "Ai Tong 2025 WA3 Q1"
+    },
+    {
+      "structure_id": "fraction_subtraction_unlike_denominators",
+      "topic": "fractions",
+      "section": "A",
+      "marks": 1,
+      "text": "Find the value of 1/2 - 3/8.",
+      "options": null,
+      "correct_option": null,
+      "answer": "1/8",
+      "working": "1/2 = 4/8. 4/8 - 3/8 = 1/8",
+      "source": "Ai Tong 2025 WA3 Q2"
+    },
+    {
+      "structure_id": "equivalent_fraction_find_denominator",
+      "topic": "fractions",
+      "section": "B",
+      "marks": 2,
+      "text": "Find the missing number.\n5/6 = 15/___",
+      "options": null,
+      "correct_option": null,
+      "answer": "18",
+      "working": "5 × 3 = 15, so 6 × 3 = 18",
+      "source": "Ai Tong 2025 WA3 Q7b"
+    },
+    {
+      "structure_id": "ordering_fractions_short",
+      "topic": "fractions",
+      "section": "B",
+      "marks": 2,
+      "text": "Arrange the following fractions from the smallest to the greatest.\n7/12,  2/7,  2/5",
+      "options": null,
+      "correct_option": null,
+      "answer": "2/7, 2/5, 7/12",
+      "working": "Convert to common denominator (420): 7/12=245/420, 2/7=120/420, 2/5=168/420. Smallest to greatest: 120/420, 168/420, 245/420 → 2/7, 2/5, 7/12",
+      "source": "Ai Tong 2025 WA3 Q8"
+    },
+    {
+      "structure_id": "measurement_mass_g_conversion",
+      "topic": "measurement",
+      "section": "B",
+      "marks": 2,
+      "text": "6 kg 50 g = ___ g",
+      "options": null,
+      "correct_option": null,
+      "answer": "6050",
+      "working": "6 kg = 6000 g. 6000 + 50 = 6050 g",
+      "source": "Ai Tong 2025 WA3 Q5a"
+    },
+    {
+      "structure_id": "length_cm_to_m_cm",
+      "topic": "measurement",
+      "section": "B",
+      "marks": 2,
+      "text": "4028 cm = ___ m ___ cm",
+      "options": null,
+      "correct_option": null,
+      "answer": "40 m 28 cm",
+      "working": "4028 ÷ 100 = 40 remainder 28. So 40 m 28 cm",
+      "source": "Ai Tong 2025 WA3 Q5b"
+    },
+    {
+      "structure_id": "measurement_km_m_subtraction",
+      "topic": "measurement",
+      "section": "B",
+      "marks": 2,
+      "text": "Ken joined a 5 km walk-and-run race. He ran 3450 m and walked for the rest of the distance. How far did he walk? Give your answer in km and m.",
+      "options": null,
+      "correct_option": null,
+      "answer": "1 km 550 m",
+      "working": "5 km = 5000 m. 5000 - 3450 = 1550 m = 1 km 550 m",
+      "source": "Ai Tong 2025 WA3 Q12"
+    },
+    {
+      "structure_id": "times_as_many_division",
+      "topic": "mixed_wa3",
+      "section": "C",
+      "marks": 1,
+      "text": "Kevin had 546 stickers. He had 3 times as many stickers as Celia. How many stickers did Celia have?",
+      "options": null,
+      "correct_option": null,
+      "answer": "182",
+      "working": "546 ÷ 3 = 182",
+      "source": "Ai Tong 2025 WA3 Q13a"
+    },
+    {
+      "structure_id": "measurement_volume_subtraction",
+      "topic": "measurement",
+      "section": "C",
+      "marks": 3,
+      "text": "A jug has 3 ℓ of milk. Amy poured the milk into 5 cups. Each cup contains 220 mℓ of milk. How much milk is left in the jug? Give your answer in ℓ and mℓ.",
+      "options": null,
+      "correct_option": null,
+      "answer": "1 ℓ 900 mℓ",
+      "working": "5 cups × 220 mℓ = 1100 mℓ. 3 ℓ = 3000 mℓ. 3000 - 1100 = 1900 mℓ = 1 ℓ 900 mℓ",
+      "source": "Ai Tong 2025 WA3 Q15"
+    }
+  ]
+}

@@ -7,14 +7,22 @@
       "label": "Place Value",
       "icon": "🔢",
       "taxonomy_topic": "place_value",
-      "structure_ids": ["digit_value_mcq", "expanded_form_mcq"]
+      "structure_ids": [
+        "digit_value_mcq",
+        "expanded_form_mcq",
+        "numeral_writing_short",
+        "digit_value_short",
+        "digit_in_place_short",
+        "expanded_form_missing_part_short",
+        "number_sense_relative_short"
+      ]
     },
     {
       "key": "number_patterns",
       "label": "Number Patterns",
       "icon": "🔄",
       "taxonomy_topic": "number_patterns",
-      "structure_ids": ["number_pattern_missing_mcq"]
+      "structure_ids": ["number_pattern_missing_mcq", "number_pattern_missing_short"]
     },
     {
       "key": "addition_subtraction",
@@ -24,7 +32,10 @@
       "structure_ids": [
         "two_number_sum_difference_mcq",
         "direct_addition_short",
-        "diff_find_sum"
+        "direct_subtraction_short",
+        "diff_find_sum",
+        "two_step_subtract_total_word_problem",
+        "three_step_chain_word_problem"
       ]
     },
     {
@@ -32,7 +43,14 @@
       "label": "Money",
       "icon": "💵",
       "taxonomy_topic": "money",
-      "structure_ids": ["money_multi_item_mcq", "money_change_from_purchase"]
+      "structure_ids": [
+        "money_multi_item_mcq",
+        "money_change_from_purchase",
+        "money_cents_to_dollars",
+        "money_make_target_short",
+        "money_two_item_total_short",
+        "money_difference_short"
+      ]
     },
     {
       "key": "ordering",
@@ -49,12 +67,25 @@
       "structure_ids": [
         "digit_value_mcq",
         "expanded_form_mcq",
+        "numeral_writing_short",
+        "digit_value_short",
+        "digit_in_place_short",
+        "expanded_form_missing_part_short",
+        "number_sense_relative_short",
         "number_pattern_missing_mcq",
+        "number_pattern_missing_short",
         "two_number_sum_difference_mcq",
         "direct_addition_short",
+        "direct_subtraction_short",
         "diff_find_sum",
+        "two_step_subtract_total_word_problem",
+        "three_step_chain_word_problem",
         "money_multi_item_mcq",
         "money_change_from_purchase",
+        "money_cents_to_dollars",
+        "money_make_target_short",
+        "money_two_item_total_short",
+        "money_difference_short",
         "ordering_numbers_short"
       ]
     }

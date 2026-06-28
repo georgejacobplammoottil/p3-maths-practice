@@ -1,0 +1,139 @@
+{
+  "source": "Ai Tong School 2025",
+  "grade": "P3",
+  "assessment": "WA1",
+  "questions": [
+    {
+      "structure_id": "numeral_writing_short",
+      "topic": "place_value",
+      "section": "A",
+      "marks": 1,
+      "text": "Write five thousand, eight hundred and nine in numerals.",
+      "options": null,
+      "correct_option": null,
+      "answer": "5809",
+      "working": "Five thousand = 5000, eight hundred = 800, nine = 9. 5000 + 800 + 9 = 5809",
+      "source": "Ai Tong 2025 WA1 Q1"
+    },
+    {
+      "structure_id": "digit_value_short",
+      "topic": "place_value",
+      "section": "A",
+      "marks": 1,
+      "text": "What is the value of the digit 6 in 6315?",
+      "options": null,
+      "correct_option": null,
+      "answer": "6000",
+      "working": "Digit 6 is in the thousands place → 6 × 1000 = 6000",
+      "source": "Ai Tong 2025 WA1 Q2"
+    },
+    {
+      "structure_id": "money_cents_to_dollars",
+      "topic": "money",
+      "section": "A",
+      "marks": 1,
+      "text": "Write 750¢ in dollars.",
+      "options": null,
+      "correct_option": null,
+      "answer": "$7.50",
+      "working": "750¢ ÷ 100 = $7.50",
+      "source": "Ai Tong 2025 WA1 Q3"
+    },
+    {
+      "structure_id": "expanded_form_missing_part_short",
+      "topic": "place_value",
+      "section": "A",
+      "marks": 2,
+      "text": "What is the missing number in the box?\n6795 = 6000 + ___ + 90 + 5",
+      "options": null,
+      "correct_option": null,
+      "answer": "700",
+      "working": "6795 = 6000 + 700 + 90 + 5. The hundreds digit is 7, so the missing part is 700.",
+      "source": "Ai Tong 2025 WA1 Q5"
+    },
+    {
+      "structure_id": "number_sense_relative_short",
+      "topic": "place_value",
+      "section": "A",
+      "marks": 2,
+      "text": "10 less than 372 is ___.",
+      "options": null,
+      "correct_option": null,
+      "answer": "362",
+      "working": "372 - 10 = 362",
+      "source": "Ai Tong 2025 WA1 Q6b"
+    },
+    {
+      "structure_id": "money_make_target_short",
+      "topic": "money",
+      "section": "A",
+      "marks": 2,
+      "text": "Write the missing amount that makes $100.\n$53.40 + ___ = $100",
+      "options": null,
+      "correct_option": null,
+      "answer": "$46.60",
+      "working": "$100 - $53.40 = $46.60",
+      "source": "Ai Tong 2025 WA1 Q7"
+    },
+    {
+      "structure_id": "number_pattern_missing_short",
+      "topic": "number_patterns",
+      "section": "A",
+      "marks": 2,
+      "text": "Study the number pattern. What is the missing number?\n1754, 1854, 1954, ___, 2154",
+      "options": null,
+      "correct_option": null,
+      "answer": "2054",
+      "working": "The pattern increases by 100 each time. 1954 + 100 = 2054",
+      "source": "Ai Tong 2025 WA1 Q9"
+    },
+    {
+      "structure_id": "ordering_numbers_short",
+      "topic": "ordering",
+      "section": "A",
+      "marks": 2,
+      "text": "Arrange the numbers in decreasing order.\n3937,  3793,  7393",
+      "options": null,
+      "correct_option": null,
+      "answer": "7393, 3937, 3793",
+      "working": "7393 is largest (thousands digit 7). Compare 3937 and 3793: hundreds digit 9 > 7, so 3937 > 3793.",
+      "source": "Ai Tong 2025 WA1 Q11"
+    },
+    {
+      "structure_id": "diff_find_sum",
+      "topic": "addition_subtraction",
+      "section": "A",
+      "marks": 2,
+      "text": "The sum of 2 numbers is 320. One of the numbers is 56. What is the other number?",
+      "options": null,
+      "correct_option": null,
+      "answer": "264",
+      "working": "320 - 56 = 264",
+      "source": "Ai Tong 2025 WA1 Q12"
+    },
+    {
+      "structure_id": "money_two_item_total_short",
+      "topic": "money",
+      "section": "B",
+      "marks": 2,
+      "text": "Chloe bought a dress for $38.40 and a T-shirt for $24.50. How much did she spend in total?",
+      "options": null,
+      "correct_option": null,
+      "answer": "$62.90",
+      "working": "$38.40 + $24.50 = $62.90",
+      "source": "Ai Tong 2025 WA1 Q15a"
+    },
+    {
+      "structure_id": "money_difference_short",
+      "topic": "money",
+      "section": "B",
+      "marks": 2,
+      "text": "A dress costs $38.40 and a T-shirt costs $24.50. How much more does the dress cost than the T-shirt?",
+      "options": null,
+      "correct_option": null,
+      "answer": "$13.90",
+      "working": "$38.40 - $24.50 = $13.90",
+      "source": "Ai Tong 2025 WA1 Q15b"
+    }
+  ]
+}

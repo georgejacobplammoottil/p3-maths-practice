@@ -1,0 +1,91 @@
+{
+  "source": "ACS Junior Primary 2025",
+  "grade": "P3",
+  "assessment": "WA3",
+  "questions": [
+    {
+      "structure_id": "fraction_compare_half_mcq",
+      "topic": "fractions",
+      "section": "A",
+      "marks": 2,
+      "text": "Which of the following fractions is greater than 1/2?",
+      "options": ["2/5", "3/7", "4/8", "5/9"],
+      "correct_option": 3,
+      "answer": "5/9",
+      "working": "5/9: compare 5×2 vs 9×1 → 10 > 9, so 5/9 > 1/2. Check others: 2/5: 10 vs 10 → equal to 4/10 = 2/5 < 1/2. 3/7: 6 < 7. 4/8 = 1/2 exactly.",
+      "source": "ACS Junior 2025 WA3 Q4"
+    },
+    {
+      "structure_id": "missing_fraction_to_one_mcq",
+      "topic": "fractions",
+      "section": "A",
+      "marks": 2,
+      "text": "What is the missing fraction in the box?\n6/10 + ___ = 1",
+      "options": ["2/5", "3/5", "4/5", "6/10"],
+      "correct_option": 0,
+      "answer": "2/5",
+      "working": "1 - 6/10 = 4/10 = 2/5",
+      "source": "ACS Junior 2025 WA3 Q5"
+    },
+    {
+      "structure_id": "fraction_comparison_true_mcq",
+      "topic": "fractions",
+      "section": "A",
+      "marks": 2,
+      "text": "Which of the following is true?",
+      "options": ["2/9 > 5/9", "5/6 < 2/3", "1/8 > 1/11", "3/4 = 6/12"],
+      "correct_option": 2,
+      "answer": "1/8 > 1/11",
+      "working": "Same numerator: smaller denominator = larger fraction. 8 < 11, so 1/8 > 1/11. Check others: 2/9 < 5/9 (same denominator). 5/6 > 2/3 = 4/6. 3/4 ≠ 6/12 = 1/2.",
+      "source": "ACS Junior 2025 WA3 Q6"
+    },
+    {
+      "structure_id": "ordering_fractions_short",
+      "topic": "fractions",
+      "section": "B",
+      "marks": 2,
+      "text": "Arrange the following fractions in order. Begin with the greatest.\n3/8,  1/4,  5/10",
+      "options": null,
+      "correct_option": null,
+      "answer": "5/10, 3/8, 1/4",
+      "working": "Convert to common denominator (40): 5/10=20/40, 3/8=15/40, 1/4=10/40. Order greatest first: 20/40, 15/40, 10/40 → 5/10, 3/8, 1/4",
+      "source": "ACS Junior 2025 WA3 Q9"
+    },
+    {
+      "structure_id": "units_method_comparison_word_problem",
+      "topic": "mixed_wa3",
+      "section": "B",
+      "marks": 2,
+      "text": "5 chairs cost as much as 3 tables. A table costs $90. What is the cost of 1 chair?",
+      "options": null,
+      "correct_option": null,
+      "answer": "$54",
+      "working": "3 tables = 3 × $90 = $270. 5 chairs = $270. 1 chair = $270 ÷ 5 = $54",
+      "source": "ACS Junior 2025 WA3 Q12"
+    },
+    {
+      "structure_id": "multiplicative_chain_word_problem",
+      "topic": "mixed_wa3",
+      "section": "C",
+      "marks": 3,
+      "text": "Ming has some eggs. Crystal has twice as many eggs as Ming. Rahim has 3 times as many eggs as Crystal. Rahim has 320 more eggs than Crystal. How many eggs do they have altogether?",
+      "options": null,
+      "correct_option": null,
+      "answer": "720",
+      "working": "Let Ming = 1u. Crystal = 2u. Rahim = 6u. Rahim - Crystal = 4u = 320. 1u = 80. Total = 1u + 2u + 6u = 9u = 720",
+      "source": "ACS Junior 2025 WA3 Q14"
+    },
+    {
+      "structure_id": "two_step_subtract_then_multiply_word_problem",
+      "topic": "mixed_wa3",
+      "section": "C",
+      "marks": 3,
+      "text": "Sonia used 120 g of sugar to bake an almond cake. She used 25 g of almond powder less than the amount of sugar used. She used 4 times as much flour as the amount of almond powder used. What was the mass of flour Sonia used?",
+      "options": null,
+      "correct_option": null,
+      "answer": "380",
+      "working": "Almond powder = 120 - 25 = 95 g. Flour = 95 × 4 = 380 g",
+      "source": "ACS Junior 2025 WA3 Q15"
+    }
+  ]
+}

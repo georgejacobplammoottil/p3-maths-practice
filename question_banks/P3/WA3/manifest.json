@@ -1,0 +1,68 @@
+{
+  "grade": "P3",
+  "assessment": "WA3",
+  "topics": [
+    {
+      "key": "fractions",
+      "label": "Fractions",
+      "icon": "½",
+      "taxonomy_topic": "fractions",
+      "structure_ids": [
+        "fraction_addition_unlike_denominators",
+        "fraction_simplification",
+        "fraction_subtraction_unlike_denominators",
+        "fraction_compare_half_mcq",
+        "fraction_comparison_true_mcq",
+        "ordering_fractions_short",
+        "equivalent_fraction_find_denominator",
+        "missing_fraction_to_one_mcq"
+      ]
+    },
+    {
+      "key": "measurement",
+      "label": "Measurement",
+      "icon": "⚖️",
+      "taxonomy_topic": "measurement",
+      "structure_ids": [
+        "measurement_mass_g_conversion",
+        "length_cm_to_m_cm",
+        "measurement_km_m_subtraction",
+        "measurement_volume_subtraction",
+        "times_as_many_division"
+      ]
+    },
+    {
+      "key": "geometry",
+      "label": "Geometry",
+      "icon": "📐",
+      "taxonomy_topic": "geometry",
+      "structure_ids": [
+        "parallel_perpendicular_identify"
+      ]
+    },
+    {
+      "key": "mixed_wa3",
+      "label": "Mixed (WA3)",
+      "icon": "🔀",
+      "taxonomy_topic": "mixed",
+      "structure_ids": [
+        "fraction_addition_unlike_denominators",
+        "fraction_simplification",
+        "fraction_subtraction_unlike_denominators",
+        "fraction_compare_half_mcq",
+        "fraction_comparison_true_mcq",
+        "ordering_fractions_short",
+        "equivalent_fraction_find_denominator",
+        "missing_fraction_to_one_mcq",
+        "measurement_mass_g_conversion",
+        "length_cm_to_m_cm",
+        "measurement_km_m_subtraction",
+        "measurement_volume_subtraction",
+        "times_as_many_division",
+        "units_method_comparison_word_problem",
+        "multiplicative_chain_word_problem",
+        "two_step_subtract_then_multiply_word_problem"
+      ]
+    }
+  ]
+}

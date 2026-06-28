@@ -1,0 +1,127 @@
+{
+  "source": "Henry Park Primary School 2025",
+  "grade": "P3",
+  "assessment": "WA1",
+  "questions": [
+    {
+      "structure_id": "digit_value_mcq",
+      "topic": "place_value",
+      "section": "A",
+      "marks": 2,
+      "text": "In 701, the value of the digit 0 is ___.",
+      "options": ["1", "10", "100", "0"],
+      "correct_option": 3,
+      "answer": "0",
+      "working": "Digit 0 is in the tens place, but its value is 0 × 10 = 0.",
+      "source": "Henry Park 2025 WA1 Q1"
+    },
+    {
+      "structure_id": "direct_subtraction_short",
+      "topic": "addition_subtraction",
+      "section": "A",
+      "marks": 1,
+      "text": "The difference between 903 and 314 is ___.",
+      "options": null,
+      "correct_option": null,
+      "answer": "589",
+      "working": "903 - 314 = 589",
+      "source": "Henry Park 2025 WA1 Q2"
+    },
+    {
+      "structure_id": "direct_addition_short",
+      "topic": "addition_subtraction",
+      "section": "A",
+      "marks": 1,
+      "text": "Find the sum of 2086 and 4288.",
+      "options": null,
+      "correct_option": null,
+      "answer": "6374",
+      "working": "2086 + 4288 = 6374",
+      "source": "Henry Park 2025 WA1 Q6b"
+    },
+    {
+      "structure_id": "expanded_form_missing_part_short",
+      "topic": "place_value",
+      "section": "A",
+      "marks": 2,
+      "text": "What is the missing number in the box?\n3189 = 3000 + ___ + 80 + 9",
+      "options": null,
+      "correct_option": null,
+      "answer": "100",
+      "working": "3189 = 3000 + 100 + 80 + 9. The hundreds digit is 1, so the missing part is 100.",
+      "source": "Henry Park 2025 WA1 Q7a"
+    },
+    {
+      "structure_id": "digit_in_place_short",
+      "topic": "place_value",
+      "section": "A",
+      "marks": 2,
+      "text": "In 9723, which digit is in the thousands place?",
+      "options": null,
+      "correct_option": null,
+      "answer": "9",
+      "working": "9 7 2 3 → thousands, hundreds, tens, ones. The thousands digit is 9.",
+      "source": "Henry Park 2025 WA1 Q7b"
+    },
+    {
+      "structure_id": "number_sense_relative_short",
+      "topic": "place_value",
+      "section": "A",
+      "marks": 2,
+      "text": "What is 10 more than 3490?",
+      "options": null,
+      "correct_option": null,
+      "answer": "3500",
+      "working": "3490 + 10 = 3500",
+      "source": "Henry Park 2025 WA1 Q8a"
+    },
+    {
+      "structure_id": "ordering_numbers_short",
+      "topic": "ordering",
+      "section": "A",
+      "marks": 2,
+      "text": "Arrange the following numbers in order. Begin with the smallest.\n7028,  2800,  7820,  8270",
+      "options": null,
+      "correct_option": null,
+      "answer": "2800, 7028, 7820, 8270",
+      "working": "Thousands digit: 2<7<7<8, so 2800 is smallest, 8270 is largest. Among 7028 and 7820: tens digit 2 vs 2 — compare hundreds: 0 < 8, so 7028 < 7820.",
+      "source": "Henry Park 2025 WA1 Q8b"
+    },
+    {
+      "structure_id": "ordering_fractions_short",
+      "topic": "fractions",
+      "section": "A",
+      "marks": 2,
+      "text": "Arrange the following fractions in order. Begin with the greatest.\n1/10,  1/5,  1/7,  1/3",
+      "options": null,
+      "correct_option": null,
+      "answer": "1/3, 1/5, 1/7, 1/10",
+      "working": "Same numerator: smaller denominator = larger fraction. Order of denominators smallest to largest: 3, 5, 7, 10. So greatest to smallest: 1/3, 1/5, 1/7, 1/10.",
+      "source": "Henry Park 2025 WA1 Q9"
+    },
+    {
+      "structure_id": "two_step_subtract_total_word_problem",
+      "topic": "word_problems",
+      "section": "B",
+      "marks": 2,
+      "text": "Mrs Baker baked 280 cupcakes on Friday. On Saturday, she baked 50 fewer cupcakes than on Friday. What was the total number of cupcakes she baked on both days?",
+      "options": null,
+      "correct_option": null,
+      "answer": "510",
+      "working": "Saturday: 280 - 50 = 230. Total: 280 + 230 = 510",
+      "source": "Henry Park 2025 WA1 Q15"
+    },
+    {
+      "structure_id": "three_step_chain_word_problem",
+      "topic": "word_problems",
+      "section": "B",
+      "marks": 3,
+      "text": "Kevin scored 2378 points in a game. Andy scored 1251 more points than Kevin. Andy scored 755 fewer points than Bernard. What was Bernard's score?",
+      "options": null,
+      "correct_option": null,
+      "answer": "4384",
+      "working": "Andy = 2378 + 1251 = 3629. Bernard = 3629 + 755 = 4384",
+      "source": "Henry Park 2025 WA1 Q16"
+    }
+  ]
+}
