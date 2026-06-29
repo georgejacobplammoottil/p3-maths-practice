@@ -1,0 +1,159 @@
+{
+  "_comment": "P3 Singapore Maths — misconception taxonomy. Edit this file to refine mappings as evidence accumulates.",
+
+  "abstract_misconception_types": {
+    "place_value_digit_vs_value": {
+      "label": "Digit vs Value Confusion",
+      "description": "Confuses the digit in a position with the value of that position. E.g., the digit 0 in 701 has value 0, not 10.",
+      "cpa_notes": "Concrete: use place-value discs or MAB blocks to show that a 0 disc contributes nothing. Pictorial: number expanders.",
+      "intervention_types_ranked": ["worked_example_contrast", "concrete_representation", "retrieval_varied"]
+    },
+    "place_value_relative_neighbour": {
+      "label": "10 More / 10 Less Errors",
+      "description": "Errors when adding or subtracting 10 (or 100). Often changes the wrong digit or changes the ones digit instead of tens.",
+      "cpa_notes": "Pictorial: hundreds chart — moving one row up/down shows only the tens digit changes. Edge cases: crossing hundreds boundary.",
+      "intervention_types_ranked": ["pictorial_bar_model", "edge_case_exposure", "retrieval_varied"]
+    },
+    "place_value_expanded_form": {
+      "label": "Expanded Form Errors",
+      "description": "Cannot decompose or recompose numbers between standard and expanded form. Often omits or doubles a place.",
+      "cpa_notes": "Concrete: MAB blocks grouped by place. Pictorial: number expander strip.",
+      "intervention_types_ranked": ["worked_example_correct", "retrieval_varied"]
+    },
+    "place_value_numeral_word": {
+      "label": "Numeral ↔ Word Form",
+      "description": "Errors converting between numerals and number words, especially for numbers with internal zeros.",
+      "cpa_notes": "Worked examples with 4-digit numbers containing zeros; contrast correct vs common error.",
+      "intervention_types_ranked": ["worked_example_contrast", "retrieval_varied"]
+    },
+    "ordering_digit_by_digit": {
+      "label": "Ordering / Comparison Strategy",
+      "description": "Does not use systematic left-to-right digit comparison. May sort by last digit or by number of digits without aligning place values.",
+      "cpa_notes": "Pictorial: number line placement; align digits in columns to make comparison visual.",
+      "intervention_types_ranked": ["worked_example_correct", "edge_case_exposure", "retrieval_varied"]
+    },
+    "number_pattern_rule": {
+      "label": "Pattern Rule Identification",
+      "description": "Cannot identify the additive or multiplicative rule in a number sequence, or misapplies it (e.g., adds instead of multiplies).",
+      "cpa_notes": "Pictorial: difference arrows between terms. Distinguish +/- patterns from ×/÷ patterns explicitly.",
+      "intervention_types_ranked": ["worked_example_correct", "edge_case_exposure", "retrieval_varied"]
+    },
+    "operation_selection": {
+      "label": "Wrong Operation Selected",
+      "description": "Selects the wrong arithmetic operation in a word problem. Common: uses subtraction when addition is needed, or vice versa.",
+      "cpa_notes": "Bar model is the primary Singapore tool for operation selection. Build the model before writing the equation.",
+      "intervention_types_ranked": ["pictorial_bar_model", "worked_example_correct", "retrieval_varied"]
+    },
+    "multi_step_sequencing": {
+      "label": "Multi-Step Problem Sequencing",
+      "description": "Individual operations are correct but performed in wrong order, or an intermediate step is skipped.",
+      "cpa_notes": "Teach explicit step labelling: Step 1 / Step 2. Bar model helps identify sequence before computing.",
+      "intervention_types_ranked": ["worked_example_correct", "pictorial_bar_model", "edge_case_exposure"]
+    },
+    "fraction_denominator_size": {
+      "label": "Denominator-as-Count Confusion",
+      "description": "Treats denominator as a count rather than a unit size, concluding larger denominator = larger fraction.",
+      "cpa_notes": "Concrete: fraction strips or circles. Key image: 1/8 of a pizza is smaller than 1/3 of the same pizza — more pieces means each piece is smaller.",
+      "intervention_types_ranked": ["concrete_representation", "pictorial_bar_model", "worked_example_contrast"]
+    },
+    "fraction_addition_whole_number": {
+      "label": "Fraction Addition Like Whole Numbers",
+      "description": "Adds (or subtracts) both numerators and denominators separately: 1/2 + 1/3 = 2/5.",
+      "cpa_notes": "Fraction strips: you cannot add pieces of different sizes without making them the same size first. Equivalent fractions prerequisite.",
+      "intervention_types_ranked": ["concrete_representation", "worked_example_contrast", "retrieval_varied"]
+    },
+    "measurement_unit_conversion": {
+      "label": "Unit Conversion Errors",
+      "description": "Errors converting between metric units: cm↔m, g↔kg, mL↔L, m↔km. Often multiplies when should divide or uses wrong conversion factor.",
+      "cpa_notes": "Concrete: show 100 cm ruler = 1 m ruler. Table of conversion facts before practice.",
+      "intervention_types_ranked": ["worked_example_correct", "edge_case_exposure", "retrieval_varied"]
+    },
+    "money_cents_dollars": {
+      "label": "Cents ↔ Dollars Conversion",
+      "description": "Errors converting between cents and dollars. May treat $1.05 as 15 cents, or 250 cents as $2.5 instead of $2.50.",
+      "cpa_notes": "Concrete: physical coins/notes. Pictorial: 100-cent number bond to $1.",
+      "intervention_types_ranked": ["concrete_representation", "worked_example_correct", "retrieval_varied"]
+    }
+  },
+
+  "intervention_types": {
+    "concrete_representation": {
+      "label": "Concrete Representation",
+      "description": "Use physical or visual manipulatives (place-value discs, fraction strips, coins, rulers) to make the abstract concept tangible.",
+      "cpa_phase": "Concrete"
+    },
+    "pictorial_bar_model": {
+      "label": "Pictorial / Bar Model",
+      "description": "Use the Singapore bar model or other diagrams (number line, fraction strip, hundreds chart) to represent the problem visually before computing.",
+      "cpa_phase": "Pictorial"
+    },
+    "worked_example_correct": {
+      "label": "Worked Example (Correct Method)",
+      "description": "Step-by-step demonstration of the correct procedure, with explicit annotation of each decision.",
+      "cpa_phase": "Abstract"
+    },
+    "worked_example_contrast": {
+      "label": "Worked Example (Error Contrast)",
+      "description": "Present the student's error alongside the correct method, explicitly naming what went wrong and why.",
+      "cpa_phase": "Abstract"
+    },
+    "edge_case_exposure": {
+      "label": "Edge Case Exposure",
+      "description": "Deliberate practice on boundary cases that reveal and dislodge the misconception (e.g., crossing hundreds boundary for ±10, zero digits, unit fractions with large denominators).",
+      "cpa_phase": "Abstract"
+    },
+    "retrieval_varied": {
+      "label": "Varied Retrieval Practice",
+      "description": "Retrieval practice with varied surface features (different numbers, different wording) to build flexible, transferable knowledge.",
+      "cpa_phase": "Abstract"
+    }
+  },
+
+  "structure_id_map": {
+    "digit_value_mcq":                    { "specific_misconception": "confuses_digit_with_positional_value",   "abstract_type": "place_value_digit_vs_value" },
+    "digit_value_short":                  { "specific_misconception": "confuses_digit_with_positional_value",   "abstract_type": "place_value_digit_vs_value" },
+    "digit_in_place_short":               { "specific_misconception": "cannot_identify_digit_at_position",      "abstract_type": "place_value_digit_vs_value" },
+    "expanded_form_mcq":                  { "specific_misconception": "incomplete_place_decomposition",         "abstract_type": "place_value_expanded_form" },
+    "expanded_form_missing_part_short":   { "specific_misconception": "incomplete_place_decomposition",         "abstract_type": "place_value_expanded_form" },
+    "numeral_writing_short":              { "specific_misconception": "word_to_numeral_zero_placeholder",       "abstract_type": "place_value_numeral_word" },
+    "number_sense_relative_short":        { "specific_misconception": "wrong_digit_changes_for_plus_minus_10",  "abstract_type": "place_value_relative_neighbour" },
+    "number_pattern_missing_mcq":         { "specific_misconception": "wrong_rule_applied_to_sequence",         "abstract_type": "number_pattern_rule" },
+    "number_pattern_missing_short":       { "specific_misconception": "wrong_rule_applied_to_sequence",         "abstract_type": "number_pattern_rule" },
+    "ordering_numbers_short":             { "specific_misconception": "non_systematic_digit_comparison",        "abstract_type": "ordering_digit_by_digit" },
+    "ordering_fractions_short":           { "specific_misconception": "larger_denominator_means_larger_fraction","abstract_type": "fraction_denominator_size" },
+    "diff_find_sum":                      { "specific_misconception": "difference_used_where_sum_needed",       "abstract_type": "operation_selection" },
+    "direct_addition_short":              { "specific_misconception": "computation_error_addition",             "abstract_type": null },
+    "direct_subtraction_short":           { "specific_misconception": "computation_error_subtraction",          "abstract_type": null },
+    "two_step_subtract_total_word_problem":{ "specific_misconception": "skips_intermediate_step",              "abstract_type": "multi_step_sequencing" },
+    "three_step_chain_word_problem":      { "specific_misconception": "wrong_step_order_in_chain",             "abstract_type": "multi_step_sequencing" },
+    "two_number_sum_difference_mcq":      { "specific_misconception": "swaps_sum_and_difference",              "abstract_type": "operation_selection" },
+    "money_multi_item_mcq":               { "specific_misconception": "omits_item_in_total",                   "abstract_type": "operation_selection" },
+    "money_change_from_purchase":         { "specific_misconception": "wrong_direction_of_change_calculation", "abstract_type": "operation_selection" },
+    "money_cents_to_dollars":             { "specific_misconception": "divides_by_10_not_100",                 "abstract_type": "money_cents_dollars" },
+    "money_make_target_short":            { "specific_misconception": "off_by_one_coin_denomination",          "abstract_type": "money_cents_dollars" },
+    "money_two_item_total_short":         { "specific_misconception": "fails_to_convert_before_adding",        "abstract_type": "money_cents_dollars" },
+    "money_difference_short":             { "specific_misconception": "fails_to_convert_before_subtracting",   "abstract_type": "money_cents_dollars" },
+    "fraction_compare_half_mcq":          { "specific_misconception": "larger_denominator_means_larger_fraction","abstract_type": "fraction_denominator_size" },
+    "missing_fraction_to_one_mcq":        { "specific_misconception": "adds_numerator_and_denominator",        "abstract_type": "fraction_addition_whole_number" },
+    "fraction_comparison_true_mcq":       { "specific_misconception": "larger_denominator_means_larger_fraction","abstract_type": "fraction_denominator_size" },
+    "fraction_addition_unlike_denominators":{ "specific_misconception": "adds_numerators_and_denominators",    "abstract_type": "fraction_addition_whole_number" },
+    "fraction_subtraction_unlike_denominators":{ "specific_misconception": "subtracts_numerators_and_denominators","abstract_type": "fraction_addition_whole_number" },
+    "equivalent_fraction_find_denominator":{ "specific_misconception": "adds_instead_of_multiplies_for_equivalent","abstract_type": "fraction_denominator_size" },
+    "measurement_mass_g_conversion":      { "specific_misconception": "wrong_conversion_factor_g_kg",          "abstract_type": "measurement_unit_conversion" },
+    "length_cm_to_m_cm":                  { "specific_misconception": "wrong_conversion_factor_cm_m",          "abstract_type": "measurement_unit_conversion" },
+    "measurement_km_m_subtraction":       { "specific_misconception": "fails_to_convert_before_operating",     "abstract_type": "measurement_unit_conversion" },
+    "measurement_volume_subtraction":     { "specific_misconception": "fails_to_convert_before_operating",     "abstract_type": "measurement_unit_conversion" },
+    "times_as_many_division":             { "specific_misconception": "multiplies_where_division_needed",       "abstract_type": "operation_selection" },
+    "units_method_comparison_word_problem":{ "specific_misconception": "wrong_unit_selected_for_comparison",   "abstract_type": "operation_selection" },
+    "multiplicative_chain_word_problem":  { "specific_misconception": "wrong_step_order_in_chain",             "abstract_type": "multi_step_sequencing" },
+    "two_step_subtract_then_multiply_word_problem":{ "specific_misconception": "wrong_step_order_in_chain",   "abstract_type": "multi_step_sequencing" },
+    "times_as_many_division":             { "specific_misconception": "multiplies_where_division_needed",       "abstract_type": "operation_selection" }
+  },
+
+  "_notes": {
+    "null_abstract_type": "structure_ids with abstract_type=null are pure computation errors — a wrong answer is more likely a careless slip than a misconception. Do not trigger interventions for these.",
+    "threshold": "Only create an intervention if the student's accuracy on this structure_id in the triggering session is below 0.6 (i.e., got more wrong than right).",
+    "update_cadence": "After every 20 completed interventions, re-rank intervention_types_ranked within each abstract_type based on observed mean post-score. Manually review any intervention with mean post_score < 0.6.",
+    "splitting_signal": "If lift (post_score - pre_score) within an abstract_type is bimodal — good for some students, near-zero for others — consider splitting the abstract_type."
+  }
+}

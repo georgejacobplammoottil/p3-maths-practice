@@ -77,6 +77,21 @@ if INTERVENTION_PATH.exists():
         except Exception as _e:
             print(f"WARNING: could not load intervention {_f}: {_e}")
 
+# ── Load P3 misconception taxonomy ───────────────────────────────────────────
+_taxonomy_path = BASE / "question_banks" / "P3" / "taxonomy.json"
+STRUCTURE_ID_MAP: dict[str, dict] = {}   # structure_id → {specific_misconception, abstract_type}
+ABSTRACT_TYPES:   dict[str, dict] = {}   # abstract_type → metadata
+if _taxonomy_path.exists():
+    try:
+        _tx = json.loads(_taxonomy_path.read_text())
+        STRUCTURE_ID_MAP = _tx.get("structure_id_map", {})
+        ABSTRACT_TYPES   = _tx.get("abstract_misconception_types", {})
+    except Exception as _e:
+        print(f"WARNING: could not load taxonomy: {_e}")
+
+# Threshold below which a wrong-answer streak is treated as a genuine misconception
+INTERVENTION_THRESHOLD = 0.6
+
 # Build lookup: grade → assessment → [topic_dict, ...]
 TOPIC_INDEX: dict[str, dict[str, list[dict]]] = {}
 for _m in MANIFESTS:
@@ -152,10 +167,25 @@ def init_db() -> None:
                 original_topic_label TEXT,
                 created_at           TEXT DEFAULT (datetime('now')),
                 completed_at         TEXT,
+                pre_score            REAL,
+                post_score           REAL,
+                retention_score      REAL,
+                retention_session_id INTEGER,
                 FOREIGN KEY (student_id) REFERENCES students(id),
                 UNIQUE (student_id, structure_id, triggered_by_session)
             );
         """)
+        # ── Migrate existing DBs: add columns if they don't exist yet ────────
+        for _col, _typedef in [
+            ("pre_score",            "REAL"),
+            ("post_score",           "REAL"),
+            ("retention_score",      "REAL"),
+            ("retention_session_id", "INTEGER"),
+        ]:
+            try:
+                conn.execute(f"ALTER TABLE interventions ADD COLUMN {_col} {_typedef}")
+            except Exception:
+                pass  # column already exists
 
 init_db()
 
@@ -469,29 +499,77 @@ def end_session(session_id: int, body: EndIn):
         try:
             with get_db() as db:
                 if sess["mode"] == "intervention":
+                    # Compute post_score: accuracy across all questions in the retake
+                    post_row = db.execute(
+                        """SELECT COUNT(*) AS total, COALESCE(SUM(is_correct),0) AS correct
+                           FROM responses WHERE session_id=?""",
+                        (session_id,),
+                    ).fetchone()
+                    post_score = (post_row["correct"] / post_row["total"]) if post_row["total"] else None
                     db.execute(
-                        """UPDATE interventions SET completed_at=datetime('now')
+                        """UPDATE interventions
+                           SET completed_at=datetime('now'), post_score=?
                            WHERE student_id=? AND structure_id=? AND completed_at IS NULL""",
-                        (sess["student_id"], sess["topic_key"]),
+                        (post_score, sess["student_id"], sess["topic_key"]),
                     )
-                elif INTERVENTIONS:
-                    wrong = db.execute(
-                        "SELECT DISTINCT structure_id FROM responses WHERE session_id=? AND is_correct=0",
+
+                else:
+                    # ── Trigger new interventions for wrong answers ─────────
+                    if INTERVENTIONS:
+                        # Compute per-structure_id accuracy within this session
+                        resp_rows = db.execute(
+                            """SELECT structure_id,
+                                      COUNT(*) AS total,
+                                      COALESCE(SUM(is_correct),0) AS correct
+                               FROM responses WHERE session_id=?
+                               GROUP BY structure_id""",
+                            (session_id,),
+                        ).fetchall()
+                        for r in resp_rows:
+                            sid       = r["structure_id"]
+                            pre_score = r["correct"] / r["total"] if r["total"] else 1.0
+                            # Only trigger if accuracy below threshold AND we have intervention content
+                            # AND abstract_type is not null (skip pure computation errors)
+                            tx_entry  = STRUCTURE_ID_MAP.get(sid, {})
+                            if (sid in INTERVENTIONS
+                                    and pre_score < INTERVENTION_THRESHOLD
+                                    and tx_entry.get("abstract_type") is not None):
+                                inv = INTERVENTIONS[sid]
+                                db.execute(
+                                    """INSERT OR IGNORE INTO interventions
+                                       (student_id, structure_id, callout_title,
+                                        triggered_by_session, pre_score,
+                                        original_grade, original_assessment,
+                                        original_topic_key, original_topic_label)
+                                       VALUES (?,?,?,?,?,?,?,?,?)""",
+                                    (sess["student_id"], sid, inv.get("callout_title", ""),
+                                     session_id, pre_score,
+                                     sess["grade"], sess["assessment"],
+                                     sess["topic_key"], sess["topic_label"]),
+                                )
+
+                    # ── Record retention scores for previously completed interventions ─
+                    # For each structure_id answered in this regular session, if the student
+                    # has a completed intervention on it with no retention score yet, record it.
+                    retention_rows = db.execute(
+                        """SELECT structure_id,
+                                  COUNT(*) AS total,
+                                  COALESCE(SUM(is_correct),0) AS correct
+                           FROM responses WHERE session_id=?
+                           GROUP BY structure_id""",
                         (session_id,),
                     ).fetchall()
-                    for w in wrong:
-                        sid = w["structure_id"]
-                        if sid in INTERVENTIONS:
-                            inv = INTERVENTIONS[sid]
-                            db.execute(
-                                """INSERT OR IGNORE INTO interventions
-                                   (student_id, structure_id, callout_title, triggered_by_session,
-                                    original_grade, original_assessment, original_topic_key, original_topic_label)
-                                   VALUES (?,?,?,?,?,?,?,?)""",
-                                (sess["student_id"], sid, inv.get("callout_title", ""),
-                                 session_id, sess["grade"], sess["assessment"],
-                                 sess["topic_key"], sess["topic_label"]),
-                            )
+                    for r in retention_rows:
+                        ret_score = r["correct"] / r["total"] if r["total"] else None
+                        db.execute(
+                            """UPDATE interventions
+                               SET retention_score=?, retention_session_id=?
+                               WHERE student_id=? AND structure_id=?
+                                 AND completed_at IS NOT NULL
+                                 AND retention_score IS NULL""",
+                            (ret_score, session_id, sess["student_id"], r["structure_id"]),
+                        )
+
         except Exception as e:
             print(f"WARNING: could not update interventions for session {session_id}: {e}")
 
@@ -619,10 +697,14 @@ def get_interventions(student_id: int):
     for r in rows:
         d = dict(r)
         inv_data = INTERVENTIONS.get(d["structure_id"], {})
-        d["callout"]      = inv_data.get("callout", "")
-        d["explanation"]  = inv_data.get("explanation", "")
-        d["callout_title"] = inv_data.get("callout_title", d["structure_id"])
-        d["question_count"] = len(inv_data.get("questions", []))
+        tx_entry = STRUCTURE_ID_MAP.get(d["structure_id"], {})
+        d["callout"]            = inv_data.get("callout", "")
+        d["explanation"]        = inv_data.get("explanation", "")
+        d["callout_title"]      = inv_data.get("callout_title", d["structure_id"])
+        d["question_count"]     = len(inv_data.get("questions", []))
+        d["abstract_type"]      = tx_entry.get("abstract_type")
+        d["specific_misconception"] = tx_entry.get("specific_misconception")
+        d["abstract_type_label"] = ABSTRACT_TYPES.get(tx_entry.get("abstract_type",""), {}).get("label")
         result.append(d)
     return result
 
