@@ -202,12 +202,18 @@ def check_answer(q: dict, user_answer: str) -> bool:
         except (ValueError, TypeError):
             return False
 
-    # Short answer
-    ua = str(user_answer).strip().lower()
-    ca = str(q["answer"]).strip().lower()
+    # Short answer — normalise internal whitespace so "a,b,c" matches "a, b, c"
+    def normalise(s: str) -> str:
+        return re.sub(r"\s+", " ", str(s).strip().lower())
+
+    ua = normalise(user_answer)
+    ca = normalise(q["answer"])
     if not ua:
         return False
     if ua == ca:
+        return True
+    # Also compare with all spaces removed (handles "4 321" vs "4321" style)
+    if ua.replace(" ", "") == ca.replace(" ", ""):
         return True
 
     # Numeric / money ($X.XX)
