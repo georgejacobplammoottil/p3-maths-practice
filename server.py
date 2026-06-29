@@ -66,6 +66,17 @@ def load_manifests() -> list[dict]:
 
 MANIFESTS = load_manifests()
 
+# ── Load interventions ────────────────────────────────────────────────────────
+INTERVENTION_PATH = BASE / "question_banks" / "P3" / "interventions"
+INTERVENTIONS: dict[str, dict] = {}
+if INTERVENTION_PATH.exists():
+    for _f in INTERVENTION_PATH.glob("*.json"):
+        try:
+            _data = json.loads(_f.read_text())
+            INTERVENTIONS[_data["structure_id"]] = _data
+        except Exception as _e:
+            print(f"WARNING: could not load intervention {_f}: {_e}")
+
 # Build lookup: grade → assessment → [topic_dict, ...]
 TOPIC_INDEX: dict[str, dict[str, list[dict]]] = {}
 for _m in MANIFESTS:
@@ -127,6 +138,22 @@ def init_db() -> None:
                 marks_available  INTEGER NOT NULL DEFAULT 1,
                 FOREIGN KEY (session_id) REFERENCES sessions(id),
                 UNIQUE (session_id, question_index)
+            );
+
+            CREATE TABLE IF NOT EXISTS interventions (
+                id                   INTEGER PRIMARY KEY AUTOINCREMENT,
+                student_id           INTEGER NOT NULL,
+                structure_id         TEXT NOT NULL,
+                callout_title        TEXT,
+                triggered_by_session INTEGER,
+                original_grade       TEXT,
+                original_assessment  TEXT,
+                original_topic_key   TEXT,
+                original_topic_label TEXT,
+                created_at           TEXT DEFAULT (datetime('now')),
+                completed_at         TEXT,
+                FOREIGN KEY (student_id) REFERENCES students(id),
+                UNIQUE (student_id, structure_id, triggered_by_session)
             );
         """)
 
@@ -326,6 +353,23 @@ def create_session(body: SessionIn):
     if not topic:
         raise HTTPException(404, f"Topic '{body.topic_key}' not found in {body.grade} {body.assessment}")
 
+    if body.mode == "intervention":
+        inv = INTERVENTIONS.get(body.topic_key)
+        if not inv:
+            raise HTTPException(404, f"No intervention content for '{body.topic_key}'")
+        questions = list(inv["questions"])
+        topic_label = inv.get("callout_title", body.topic_key)
+        with get_db() as db:
+            cur = db.execute(
+                """INSERT INTO sessions
+                   (student_id, grade, assessment, topic_key, topic_label, mode, questions_json)
+                   VALUES (?,?,?,?,?,?,?)""",
+                (body.student_id, body.grade, body.assessment,
+                 body.topic_key, topic_label, body.mode, json.dumps(questions)),
+            )
+            session_id = cur.lastrowid
+        return {"session_id": session_id, "questions": strip_answers(questions), "total": len(questions)}
+
     if body.mode == "bank":
         bank_qs = load_bank_questions(body.grade, body.assessment, topic["structure_ids"])
         if not bank_qs:
@@ -414,6 +458,40 @@ def end_session(session_id: int, body: EndIn):
             "UPDATE sessions SET ended_at=datetime('now'), score=?, max_score=? WHERE id=?",
             (row["earned"], row["total"], session_id),
         )
+
+        sess = db.execute(
+            "SELECT student_id, grade, assessment, topic_key, topic_label, mode FROM sessions WHERE id=?",
+            (session_id,),
+        ).fetchone()
+
+        if sess:
+            if sess["mode"] == "intervention":
+                # Mark the intervention complete
+                db.execute(
+                    """UPDATE interventions SET completed_at=datetime('now')
+                       WHERE student_id=? AND structure_id=? AND completed_at IS NULL""",
+                    (sess["student_id"], sess["topic_key"]),
+                )
+            elif INTERVENTIONS:
+                # Auto-trigger interventions for any wrong structure_ids that have content
+                wrong = db.execute(
+                    "SELECT DISTINCT structure_id FROM responses WHERE session_id=? AND is_correct=0",
+                    (session_id,),
+                ).fetchall()
+                for w in wrong:
+                    sid = w["structure_id"]
+                    if sid in INTERVENTIONS:
+                        inv = INTERVENTIONS[sid]
+                        db.execute(
+                            """INSERT OR IGNORE INTO interventions
+                               (student_id, structure_id, callout_title, triggered_by_session,
+                                original_grade, original_assessment, original_topic_key, original_topic_label)
+                               VALUES (?,?,?,?,?,?,?,?)""",
+                            (sess["student_id"], sid, inv.get("callout_title", ""),
+                             session_id, sess["grade"], sess["assessment"],
+                             sess["topic_key"], sess["topic_label"]),
+                        )
+
     return {"ok": True, "score": row["earned"], "max_score": row["total"]}
 
 # ── API: Student history & stats ──────────────────────────────────────────────
@@ -492,6 +570,67 @@ def get_responses(student_id: int, session_id: Optional[int] = None):
         d["taxonomy"] = get_taxonomy_structure(d["structure_id"])
         result.append(d)
     return result
+
+# ── API: Interventions ───────────────────────────────────────────────────────
+
+@app.get("/api/students/{student_id}/interventions")
+def get_interventions(student_id: int):
+    """Return pending + recent completed interventions for a student.
+    Auto-backfills from historical wrong answers on first call."""
+    with get_db() as db:
+        if INTERVENTIONS:
+            # Backfill: create intervention records for any past wrong answers not yet tracked
+            sid_list = list(INTERVENTIONS.keys())
+            placeholders = ",".join("?" * len(sid_list))
+            past_wrong = db.execute(
+                f"""SELECT DISTINCT r.structure_id,
+                           s.grade, s.assessment, s.topic_key, s.topic_label, s.id AS session_id
+                    FROM responses r
+                    JOIN sessions s ON s.id = r.session_id
+                    WHERE s.student_id=? AND r.is_correct=0 AND s.mode != 'intervention'
+                      AND r.structure_id IN ({placeholders})""",
+                [student_id] + sid_list,
+            ).fetchall()
+            for pw in past_wrong:
+                sid = pw["structure_id"]
+                inv = INTERVENTIONS[sid]
+                db.execute(
+                    """INSERT OR IGNORE INTO interventions
+                       (student_id, structure_id, callout_title, triggered_by_session,
+                        original_grade, original_assessment, original_topic_key, original_topic_label)
+                       VALUES (?,?,?,?,?,?,?,?)""",
+                    (student_id, sid, inv.get("callout_title", ""),
+                     pw["session_id"], pw["grade"], pw["assessment"],
+                     pw["topic_key"], pw["topic_label"]),
+                )
+
+        rows = db.execute(
+            """SELECT * FROM interventions
+               WHERE student_id=?
+               ORDER BY completed_at IS NULL DESC, created_at DESC
+               LIMIT 30""",
+            (student_id,),
+        ).fetchall()
+
+    result = []
+    for r in rows:
+        d = dict(r)
+        inv_data = INTERVENTIONS.get(d["structure_id"], {})
+        d["callout"]      = inv_data.get("callout", "")
+        d["explanation"]  = inv_data.get("explanation", "")
+        d["callout_title"] = inv_data.get("callout_title", d["structure_id"])
+        d["question_count"] = len(inv_data.get("questions", []))
+        result.append(d)
+    return result
+
+@app.patch("/api/interventions/{intervention_id}/complete")
+def complete_intervention(intervention_id: int):
+    with get_db() as db:
+        db.execute(
+            "UPDATE interventions SET completed_at=datetime('now') WHERE id=?",
+            (intervention_id,),
+        )
+    return {"ok": True}
 
 # ── Serve static files (must be last — catches all remaining routes) ───────────
 if STATIC_PATH.exists():

@@ -1,0 +1,12 @@
+# Maths Practice — Session Results
+# Student: Naira
+# Date: 28/06/2026, 15:16:24
+# Grade / Assessment: P3 WA1
+# Topic: Ordering Numbers
+# Mode: Exam Bank
+# Score: 5 / 5 marks
+# Time: 08:14
+"#","Structure ID","Topic","Question","User Answer","Correct Answer","Correct","Marks Earned","Marks Available"
+"1","ordering_numbers_short","ordering","Arrange the following numbers in order. Begin with the smallest. 7028,  2800,  7820,  8270","2800,7028,7820,8270","2800, 7028, 7820, 8270","Y","2","2"
+"2","ordering_numbers_short","ordering_numbers","Arrange the following numbers in decreasing order. 4 321,  1 234,  4 123,  3 412","4321,4123,3412,1234","4 321,  4 123,  3 412,  1 234","Y","1","1"
+"3","ordering_numbers_short","ordering","Arrange the numbers in decreasing order. 3937,  3793,  7393","7393,3937,3793","7393, 3937, 3793","Y","2","2"

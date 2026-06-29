@@ -136,6 +136,32 @@
     .acc-bar{display:inline-block;height:8px;border-radius:4px;background:var(--blue);vertical-align:middle;margin-left:.4rem}
     .acc-ok{background:var(--green)} .acc-warn{background:var(--amber)} .acc-bad{background:var(--red)}
     .empty-note{color:var(--grey);font-size:.9rem;padding:1rem 0}
+
+    /* ── Interventions ── */
+    .int-card{border-left:4px solid var(--amber);background:#fffbeb;border-radius:12px;padding:1.1rem 1.2rem;margin-bottom:.85rem}
+    .int-card.done{border-color:var(--green);background:#f0fdf4;opacity:.75}
+    .int-card-title{font-weight:800;font-size:.95rem;color:#92400e;margin-bottom:.35rem;display:flex;align-items:center;gap:.4rem}
+    .int-card.done .int-card-title{color:var(--green)}
+    .int-callout{font-size:.85rem;font-weight:700;color:#7f1d1d;background:#fee2e2;border-radius:7px;padding:.6rem .85rem;margin-bottom:.55rem;border-left:3px solid var(--red)}
+    .int-explain{font-size:.85rem;color:#44403c;line-height:1.55;margin-bottom:.75rem}
+    .int-btn{padding:.45rem 1.1rem;border-radius:8px;border:none;cursor:pointer;font-size:.85rem;font-weight:700;font-family:inherit;background:var(--amber);color:#fff;transition:background .12s}
+    .int-btn:hover{background:#92400e}
+    .int-done-badge{font-size:.78rem;font-weight:700;color:var(--green);padding:.2rem .6rem;background:var(--green-lt);border-radius:20px}
+
+    /* ── Intervention intro screen ── */
+    #screen-intervention{align-items:center;justify-content:center;padding:2rem 1rem}
+    #screen-intervention .card{max-width:600px;width:100%}
+    .inv-header{font-size:1.5rem;font-weight:900;margin-bottom:.25rem}
+    .inv-sub{color:var(--grey);font-size:.88rem;margin-bottom:1.5rem}
+    .inv-callout-box{background:#fee2e2;border-left:4px solid var(--red);border-radius:8px;padding:.85rem 1rem;margin-bottom:1rem;font-size:.9rem;font-weight:700;color:#7f1d1d}
+    .inv-explain-box{background:#f0f9ff;border-left:4px solid #0ea5e9;border-radius:8px;padding:.85rem 1rem;margin-bottom:1.5rem;font-size:.9rem;line-height:1.6;color:#0c4a6e}
+    .inv-actions{display:flex;gap:.75rem;margin-top:.5rem}
+
+    /* ── Post-intervention retake banner ── */
+    .retake-banner{margin-top:1.25rem;padding:1rem 1.2rem;background:var(--green-lt);border-radius:12px;border:1.5px solid var(--green);text-align:center}
+    .retake-banner p{font-size:.88rem;color:#14532d;margin-bottom:.65rem;font-weight:600}
+    .btn-retake-inv{display:inline-block;padding:.6rem 1.4rem;background:var(--green);color:#fff;border:none;border-radius:9px;font-size:.95rem;font-weight:800;cursor:pointer;font-family:inherit;transition:background .12s}
+    .btn-retake-inv:hover{background:#15803d}
   </style>
 </head>
 <body>
@@ -194,6 +220,20 @@
   </div>
 </div>
 
+<!-- ═══ SCREEN 3b: Intervention Intro ═══ -->
+<div id="screen-intervention" class="screen">
+  <div class="card">
+    <div class="inv-header">🎯 Targeted Practice</div>
+    <div class="inv-sub" id="inv-topic-label"></div>
+    <div class="inv-callout-box" id="inv-callout"></div>
+    <div class="inv-explain-box" id="inv-explain"></div>
+    <div class="inv-actions">
+      <button class="btn btn-sec" style="width:auto;padding:.5rem 1.2rem" onclick="showDash()">← Back</button>
+      <button class="btn btn-pri" id="btn-start-inv">Start 5 Practice Questions →</button>
+    </div>
+  </div>
+</div>
+
 <!-- ═══ SCREEN 4: Results ═══ -->
 <div id="screen-results" class="screen">
   <div class="res-card card">
@@ -211,7 +251,11 @@
       <button class="btn btn-sec" onclick="goSelect()">← New topic</button>
       <button class="btn btn-sec" onclick="downloadCSV()">⬇ CSV</button>
       <button class="btn btn-sec" onclick="showDash()">📈 Progress</button>
-      <button class="btn btn-pri" onclick="retryTopic()">Try again ↺</button>
+      <button class="btn btn-pri" id="btn-retry" onclick="retryTopic()">Try again ↺</button>
+    </div>
+    <div class="retake-banner" id="retake-banner" style="display:none">
+      <p id="retake-banner-msg">Practice complete! Ready to try the real thing again?</p>
+      <button class="btn-retake-inv" id="btn-retake-topic">Retake →</button>
     </div>
   </div>
 </div>
@@ -222,6 +266,11 @@
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem">
       <h2 style="font-size:1.2rem;font-weight:900"><span id="dash-name"></span>'s Progress</h2>
       <button class="btn btn-sec" style="width:auto;padding:.45rem 1rem" onclick="goSelect()">← Back</button>
+    </div>
+
+    <div class="dash-section" id="dash-int-section" style="display:none">
+      <h3>⚠️ Needs Attention</h3>
+      <div id="dash-interventions"></div>
     </div>
 
     <div class="dash-section">
@@ -257,6 +306,8 @@ let S = {
   startMs:    null,
   submitted:  false,
   selOpt:     null,
+  isIntervention: false,
+  interventionData: null,   // { id, structure_id, callout_title, original_grade, original_assessment, original_topic_key, original_topic_label }
 };
 
 // Grade/assessment/mode state
@@ -643,6 +694,32 @@ async function finishSession() {
     tbody.appendChild(tr);
   });
 
+  // Hide retake banner by default; show only after interventions
+  document.getElementById('retake-banner').style.display = 'none';
+  document.getElementById('btn-retry').style.display = '';
+
+  if (S.isIntervention && S.interventionData) {
+    const inv = S.interventionData;
+    // Mark intervention complete server-side
+    try { await api('PATCH', `/api/interventions/${inv.id}/complete`, {}); } catch(e) {}
+    // Show retake banner instead of "try again"
+    document.getElementById('btn-retry').style.display = 'none';
+    document.getElementById('retake-banner').style.display = '';
+    document.getElementById('retake-banner-msg').textContent =
+      `Great work! You've finished the targeted practice. Ready to retake ${inv.original_topic_label}?`;
+    const retakeBtn = document.getElementById('btn-retake-topic');
+    retakeBtn.textContent = `Retake: ${inv.original_topic_label} →`;
+    retakeBtn.onclick = () => {
+      S.isIntervention   = false;
+      S.interventionData = null;
+      selGrade  = inv.original_grade;
+      selAssess = inv.original_assessment;
+      startSession({ key: inv.original_topic_key, label: inv.original_topic_label, icon: '📄', bank_count: 1 });
+    };
+    S.isIntervention   = false;
+    S.interventionData = null;
+  }
+
   show('screen-results');
 }
 
@@ -696,6 +773,42 @@ function downloadCSV() {
 async function showDash() {
   document.getElementById('dash-name').textContent = S.student.name;
   show('screen-dash');
+
+  // Interventions
+  const intSection = document.getElementById('dash-int-section');
+  const intEl      = document.getElementById('dash-interventions');
+  try {
+    const interventions = await api('GET', `/api/students/${S.student.id}/interventions`);
+    const pending   = interventions.filter(i => !i.completed_at);
+    const completed = interventions.filter(i =>  i.completed_at);
+    if (interventions.length === 0) {
+      intSection.style.display = 'none';
+    } else {
+      intSection.style.display = '';
+      let html = '';
+      pending.forEach(inv => {
+        html += `<div class="int-card">
+          <div class="int-card-title">⚠️ ${inv.callout_title}</div>
+          <div class="int-callout">${inv.callout}</div>
+          <div class="int-explain">${inv.explanation}</div>
+          <button class="int-btn" onclick="showInterventionIntro(${JSON.stringify(inv).replace(/"/g,'&quot;')})">Start ${inv.question_count} Practice Questions →</button>
+        </div>`;
+      });
+      if (completed.length > 0) {
+        html += `<details style="margin-top:.5rem"><summary style="font-size:.82rem;color:var(--grey);cursor:pointer;font-weight:600">✅ ${completed.length} completed</summary><div style="margin-top:.5rem">`;
+        completed.forEach(inv => {
+          html += `<div class="int-card done">
+            <div class="int-card-title">✅ ${inv.callout_title} <span class="int-done-badge">Done</span></div>
+            <div class="int-explain" style="margin-bottom:0">${inv.callout}</div>
+          </div>`;
+        });
+        html += '</div></details>';
+      }
+      intEl.innerHTML = html;
+    }
+  } catch(e) {
+    intSection.style.display = 'none';
+  }
 
   // History
   const histEl = document.getElementById('dash-history');
@@ -775,6 +888,57 @@ async function showDash() {
   } catch(e) {
     statsEl.innerHTML = `<p class="empty-note">Could not load stats.</p>`;
   }
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  Interventions
+// ─────────────────────────────────────────────────────────────────
+function showInterventionIntro(inv) {
+  S.interventionData = inv;
+  document.getElementById('inv-topic-label').textContent = `${inv.original_grade} ${inv.original_assessment} — ${inv.callout_title}`;
+  document.getElementById('inv-callout').textContent  = inv.callout;
+  document.getElementById('inv-explain').textContent  = inv.explanation;
+  document.getElementById('btn-start-inv').onclick = () => startInterventionSession(inv);
+  show('screen-intervention');
+}
+
+async function startInterventionSession(inv) {
+  S.isIntervention   = true;
+  S.interventionData = inv;
+  S.responses = [];
+  S.idx       = 0;
+  S.secsLeft  = DURATION;
+  S.startMs   = Date.now();
+  S.submitted = false;
+  S.selOpt    = null;
+  clearInterval(S.interval);
+
+  selGrade  = inv.original_grade;
+  selAssess = inv.original_assessment;
+  S.topic   = { key: inv.structure_id, label: inv.callout_title, icon: '🎯' };
+
+  try {
+    const data = await api('POST', '/api/sessions', {
+      student_id: S.student.id,
+      grade:      inv.original_grade,
+      assessment: inv.original_assessment,
+      topic_key:  inv.structure_id,
+      mode:       'intervention',
+    });
+    S.sessionId = data.session_id;
+    S.questions = data.questions;
+  } catch(e) {
+    alert('Could not start practice: ' + e.message);
+    return;
+  }
+
+  document.getElementById('p-topic').textContent = `🎯 Targeted Practice — ${inv.callout_title}`;
+  const badge = document.getElementById('mode-badge');
+  badge.textContent = '🎯 Intervention';
+  badge.style.cssText = 'font-size:.72rem;font-weight:800;padding:.18rem .55rem;border-radius:20px;text-transform:uppercase;letter-spacing:.06em;background:#fef3c7;color:#b45309';
+  show('screen-practice');
+  startTimer();
+  renderQ();
 }
 
 // ─────────────────────────────────────────────────────────────────

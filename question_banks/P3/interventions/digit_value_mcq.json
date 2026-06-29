@@ -1,0 +1,63 @@
+{
+  "structure_id": "digit_value_mcq",
+  "callout_title": "Value of a Digit (especially 0)",
+  "callout": "You answered '10' for the value of the digit 0 in 701. The correct answer is 0.",
+  "explanation": "The value of a digit is digit × place value. The digit 0 in 701 is in the tens place, so its value is 0 × 10 = 0. Zero multiplied by anything is always zero — no matter which column it is in, a zero digit contributes nothing to the number's total value. You found the right column (tens = 10), but the digit itself is 0, so the value is 0.",
+  "questions": [
+    {
+      "structure_id": "digit_value_mcq",
+      "topic": "place_value",
+      "section": "A",
+      "marks": 2,
+      "text": "In 507, what is the value of the digit 0?",
+      "options": ["0", "7", "10", "70"],
+      "correct_option": 0,
+      "answer": "0",
+      "working": "0 is in the tens place. Value = 0 × 10 = 0. Zero in any position is always worth 0."
+    },
+    {
+      "structure_id": "digit_value_mcq",
+      "topic": "place_value",
+      "section": "A",
+      "marks": 2,
+      "text": "In 302, what is the value of the digit 0?",
+      "options": ["0", "2", "10", "100"],
+      "correct_option": 0,
+      "answer": "0",
+      "working": "0 is in the tens place. Value = 0 × 10 = 0."
+    },
+    {
+      "structure_id": "digit_value_mcq",
+      "topic": "place_value",
+      "section": "A",
+      "marks": 2,
+      "text": "In 4035, what is the value of the digit 0?",
+      "options": ["0", "35", "100", "300"],
+      "correct_option": 0,
+      "answer": "0",
+      "working": "0 is in the hundreds place. Value = 0 × 100 = 0. Even in hundreds, a zero digit adds nothing."
+    },
+    {
+      "structure_id": "digit_value_mcq",
+      "topic": "place_value",
+      "section": "A",
+      "marks": 2,
+      "text": "In 346, what is the value of the digit 4?",
+      "options": ["4", "40", "400", "4000"],
+      "correct_option": 1,
+      "answer": "40",
+      "working": "4 is in the tens place. Value = 4 × 10 = 40. Compare: if it were 0 in the tens place, 0 × 10 = 0."
+    },
+    {
+      "structure_id": "digit_value_mcq",
+      "topic": "place_value",
+      "section": "A",
+      "marks": 2,
+      "text": "In 3070, what is the value of the digit 0 in the hundreds place?",
+      "options": ["0", "7", "70", "100"],
+      "correct_option": 0,
+      "answer": "0",
+      "working": "The 0 in the hundreds place: value = 0 × 100 = 0. The digit 7 is in the tens place (value = 70) — but the digit 0 is always 0 regardless of position."
+    }
+  ]
+}

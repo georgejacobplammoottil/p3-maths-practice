@@ -1,0 +1,63 @@
+{
+  "structure_id": "number_sense_relative_short",
+  "callout_title": "10 More / 10 Less",
+  "callout": "You answered 368 for '10 less than 372' and 6500 for '10 more than 3490'. The correct answers are 362 and 3500.",
+  "explanation": "When you add or subtract 10, only the tens digit changes — the ones digit always stays the same. Think of it like moving one row up or down on a hundreds chart. The trick is: sometimes the tens digit reaches 9 or 0 and you need to carry or borrow from the hundreds, but the ones digit never moves.",
+  "questions": [
+    {
+      "structure_id": "number_sense_relative_short",
+      "topic": "place_value",
+      "section": "A",
+      "marks": 2,
+      "text": "10 less than 457 is ___.\n\n💡 Hint: only the tens digit changes.",
+      "options": null,
+      "correct_option": null,
+      "answer": "447",
+      "working": "Only the tens digit changes: 5 tens → 4 tens. The ones digit (7) stays the same. Answer: 447."
+    },
+    {
+      "structure_id": "number_sense_relative_short",
+      "topic": "place_value",
+      "section": "A",
+      "marks": 2,
+      "text": "10 more than 2340 is ___.\n\n💡 Hint: only the tens digit changes.",
+      "options": null,
+      "correct_option": null,
+      "answer": "2350",
+      "working": "Only the tens digit changes: 4 tens → 5 tens. The ones digit (0) stays the same. Answer: 2350."
+    },
+    {
+      "structure_id": "number_sense_relative_short",
+      "topic": "place_value",
+      "section": "A",
+      "marks": 2,
+      "text": "10 less than 3490 is ___.",
+      "options": null,
+      "correct_option": null,
+      "answer": "3480",
+      "working": "Only the tens digit changes: 9 tens → 8 tens. The ones digit (0) stays the same. Answer: 3480."
+    },
+    {
+      "structure_id": "number_sense_relative_short",
+      "topic": "place_value",
+      "section": "A",
+      "marks": 2,
+      "text": "10 more than 392 is ___.\n\n💡 Edge case: 9 tens + 1 ten = 10 tens = 1 hundred, so the hundreds digit goes up.",
+      "options": null,
+      "correct_option": null,
+      "answer": "402",
+      "working": "9 tens + 1 ten = 10 tens = carry 1 hundred. 3 hundreds + 1 hundred = 4 hundreds. Tens becomes 0. Ones stays 2. Answer: 402."
+    },
+    {
+      "structure_id": "number_sense_relative_short",
+      "topic": "place_value",
+      "section": "A",
+      "marks": 2,
+      "text": "10 less than 504 is ___.\n\n💡 Edge case: the tens digit is 0, so you need to borrow from the hundreds.",
+      "options": null,
+      "correct_option": null,
+      "answer": "494",
+      "working": "Tens digit is 0 — borrow 1 hundred: 5 hundreds → 4 hundreds, and 0 tens → 10 tens. 10 tens − 1 ten = 9 tens. Ones stays 4. Answer: 494."
+    }
+  ]
+}
