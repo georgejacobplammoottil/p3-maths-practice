@@ -136,6 +136,18 @@
     .acc-bar{display:inline-block;height:8px;border-radius:4px;background:var(--blue);vertical-align:middle;margin-left:.4rem}
     .acc-ok{background:var(--green)} .acc-warn{background:var(--amber)} .acc-bad{background:var(--red)}
     .empty-note{color:var(--grey);font-size:.9rem;padding:1rem 0}
+    /* ── Session detail expand ── */
+    .expand-btn{background:none;border:1px solid var(--border);border-radius:4px;cursor:pointer;font-size:.75rem;padding:.15rem .45rem;color:var(--grey);line-height:1.4;white-space:nowrap}
+    .expand-btn:hover{background:var(--bg);color:var(--text)}
+    .detail-row{display:none}
+    .detail-row.open{display:table-row}
+    .detail-inner{padding:.75rem 1rem 1rem;background:#f8f9fa;border-bottom:1px solid var(--border)}
+    .wrong-q{margin-bottom:.65rem;padding:.5rem .7rem;border-left:3px solid var(--red);background:#fff5f5;border-radius:0 6px 6px 0;font-size:.84rem}
+    .wrong-q:last-child{margin-bottom:0}
+    .wrong-q-text{font-weight:600;margin-bottom:.35rem;line-height:1.4;white-space:pre-wrap}
+    .wrong-q-answers{display:flex;gap:2rem;flex-wrap:wrap}
+    .wrong-lbl{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:.1rem}
+    .wrong-yours{color:var(--red)} .wrong-correct{color:var(--green)}
 
     /* ── Interventions ── */
     .int-card{border-left:4px solid var(--amber);background:#fffbeb;border-radius:12px;padding:1.1rem 1.2rem;margin-bottom:.85rem}
@@ -826,18 +838,27 @@ async function showDash() {
         const date = new Date(h.started_at + 'Z').toLocaleDateString('en-SG');
         const modePill = h.mode === 'bank'
           ? `<span style="font-size:.7rem;font-weight:700;padding:.1rem .4rem;border-radius:4px;background:#dcfce7;color:#16a34a">Bank</span>`
+          : h.mode === 'intervention'
+          ? `<span style="font-size:.7rem;font-weight:700;padding:.1rem .4rem;border-radius:4px;background:#fef3c7;color:#d97706">Practice</span>`
           : `<span style="font-size:.7rem;font-weight:700;padding:.1rem .4rem;border-radius:4px;background:#dbeafe;color:#2563eb">Gen</span>`;
+        const pctColor = pct >= 80 ? 'var(--green)' : pct >= 50 ? 'var(--amber)' : 'var(--red)';
         return `<tr>
           <td>${date}</td>
           <td>${h.grade} ${h.assessment}</td>
           <td>${h.topic_label}</td>
           <td>${modePill}</td>
           <td>${h.score ?? 0}/${h.max_score ?? '?'}</td>
-          <td>${pct}%</td>
+          <td style="font-weight:700;color:${pctColor}">${pct}%</td>
+          <td><button class="expand-btn" id="expand-btn-${h.id}" onclick="toggleSessionDetail(${h.id},this)">▼ Review</button></td>
+        </tr>
+        <tr class="detail-row" id="detail-${h.id}">
+          <td colspan="7" style="padding:0">
+            <div class="detail-inner" id="detail-inner-${h.id}"></div>
+          </td>
         </tr>`;
       }).join('');
       histEl.innerHTML = `<table class="dash-table">
-        <thead><tr><th>Date</th><th>Assessment</th><th>Topic</th><th>Mode</th><th>Score</th><th>Accuracy</th></tr></thead>
+        <thead><tr><th>Date</th><th>Assessment</th><th>Topic</th><th>Mode</th><th>Score</th><th>Accuracy</th><th></th></tr></thead>
         <tbody>${rows}</tbody>
       </table>`;
     }
@@ -891,6 +912,51 @@ async function showDash() {
     }
   } catch(e) {
     statsEl.innerHTML = `<p class="empty-note">Could not load stats.</p>`;
+  }
+}
+
+async function toggleSessionDetail(sessionId, btn) {
+  const detailRow  = document.getElementById(`detail-${sessionId}`);
+  const detailInner = document.getElementById(`detail-inner-${sessionId}`);
+  const isOpen = detailRow.classList.contains('open');
+
+  if (isOpen) {
+    detailRow.classList.remove('open');
+    btn.textContent = '▼ Review';
+    return;
+  }
+
+  detailRow.classList.add('open');
+  btn.textContent = '▲ Hide';
+
+  if (detailInner.dataset.loaded) return; // already fetched
+
+  detailInner.innerHTML = '<span style="color:var(--grey);font-size:.82rem">Loading…</span>';
+
+  try {
+    const responses = await api('GET', `/api/students/${S.student.id}/responses?session_id=${sessionId}`);
+    const wrong = responses.filter(r => !r.is_correct);
+
+    if (wrong.length === 0) {
+      detailInner.innerHTML = '<p style="font-size:.85rem;color:var(--green);margin:0">✅ No wrong answers in this session — great work!</p>';
+    } else {
+      const cards = wrong.map(r => {
+        const qText = (r.question_text || '').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        const yours  = r.user_answer   || '<em style="color:var(--grey)">no answer given</em>';
+        const correct = r.correct_answer || '';
+        return `<div class="wrong-q">
+          <div class="wrong-q-text">${qText}</div>
+          <div class="wrong-q-answers">
+            <span><span class="wrong-lbl wrong-yours">Your answer</span>${yours}</span>
+            <span><span class="wrong-lbl wrong-correct">Correct answer</span>${correct}</span>
+          </div>
+        </div>`;
+      }).join('');
+      detailInner.innerHTML = `<p style="font-size:.78rem;font-weight:700;color:var(--grey);margin:0 0 .6rem">Questions answered incorrectly — ${wrong.length} of ${responses.length}</p>${cards}`;
+    }
+    detailInner.dataset.loaded = '1';
+  } catch(e) {
+    detailInner.innerHTML = '<span style="color:var(--red);font-size:.82rem">Could not load responses.</span>';
   }
 }
 
