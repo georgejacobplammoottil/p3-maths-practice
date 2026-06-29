@@ -447,6 +447,7 @@ class EndIn(BaseModel):
 
 @app.patch("/api/sessions/{session_id}/end")
 def end_session(session_id: int, body: EndIn):
+    # ── Transaction 1: commit the session end — must always succeed ──────────
     with get_db() as db:
         row = db.execute(
             """SELECT COALESCE(SUM(marks_earned),0) AS earned,
@@ -458,39 +459,41 @@ def end_session(session_id: int, body: EndIn):
             "UPDATE sessions SET ended_at=datetime('now'), score=?, max_score=? WHERE id=?",
             (row["earned"], row["total"], session_id),
         )
-
         sess = db.execute(
             "SELECT student_id, grade, assessment, topic_key, topic_label, mode FROM sessions WHERE id=?",
             (session_id,),
         ).fetchone()
 
-        if sess:
-            if sess["mode"] == "intervention":
-                # Mark the intervention complete
-                db.execute(
-                    """UPDATE interventions SET completed_at=datetime('now')
-                       WHERE student_id=? AND structure_id=? AND completed_at IS NULL""",
-                    (sess["student_id"], sess["topic_key"]),
-                )
-            elif INTERVENTIONS:
-                # Auto-trigger interventions for any wrong structure_ids that have content
-                wrong = db.execute(
-                    "SELECT DISTINCT structure_id FROM responses WHERE session_id=? AND is_correct=0",
-                    (session_id,),
-                ).fetchall()
-                for w in wrong:
-                    sid = w["structure_id"]
-                    if sid in INTERVENTIONS:
-                        inv = INTERVENTIONS[sid]
-                        db.execute(
-                            """INSERT OR IGNORE INTO interventions
-                               (student_id, structure_id, callout_title, triggered_by_session,
-                                original_grade, original_assessment, original_topic_key, original_topic_label)
-                               VALUES (?,?,?,?,?,?,?,?)""",
-                            (sess["student_id"], sid, inv.get("callout_title", ""),
-                             session_id, sess["grade"], sess["assessment"],
-                             sess["topic_key"], sess["topic_label"]),
-                        )
+    # ── Transaction 2: intervention side-effects — safe to fail independently ─
+    if sess:
+        try:
+            with get_db() as db:
+                if sess["mode"] == "intervention":
+                    db.execute(
+                        """UPDATE interventions SET completed_at=datetime('now')
+                           WHERE student_id=? AND structure_id=? AND completed_at IS NULL""",
+                        (sess["student_id"], sess["topic_key"]),
+                    )
+                elif INTERVENTIONS:
+                    wrong = db.execute(
+                        "SELECT DISTINCT structure_id FROM responses WHERE session_id=? AND is_correct=0",
+                        (session_id,),
+                    ).fetchall()
+                    for w in wrong:
+                        sid = w["structure_id"]
+                        if sid in INTERVENTIONS:
+                            inv = INTERVENTIONS[sid]
+                            db.execute(
+                                """INSERT OR IGNORE INTO interventions
+                                   (student_id, structure_id, callout_title, triggered_by_session,
+                                    original_grade, original_assessment, original_topic_key, original_topic_label)
+                                   VALUES (?,?,?,?,?,?,?,?)""",
+                                (sess["student_id"], sid, inv.get("callout_title", ""),
+                                 session_id, sess["grade"], sess["assessment"],
+                                 sess["topic_key"], sess["topic_label"]),
+                            )
+        except Exception as e:
+            print(f"WARNING: could not update interventions for session {session_id}: {e}")
 
     return {"ok": True, "score": row["earned"], "max_score": row["total"]}
 

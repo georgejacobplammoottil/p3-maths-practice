@@ -349,7 +349,7 @@ async function initStudentScreen() {
         const chip = document.createElement('button');
         chip.className = 'chip';
         chip.textContent = st.name;
-        chip.onclick = () => setStudent(st);
+        chip.onclick = () => setStudent({ ...st, is_new: false });
         chips.appendChild(chip);
       });
     }
@@ -363,7 +363,7 @@ async function loginStudent() {
   if (!name) { document.getElementById('name-input').focus(); return; }
   try {
     const st = await api('POST', '/api/students', { name });
-    setStudent({ id: st.id, name: st.name });
+    setStudent({ id: st.id, name: st.name, is_new: st.is_new });
   } catch(e) {
     alert('Could not log in: ' + e.message);
   }
@@ -372,8 +372,12 @@ async function loginStudent() {
 async function setStudent(student) {
   S.student = student;
   document.getElementById('name-input').value = '';
-  await initSelectScreen();
-  show('screen-select');
+  if (student.is_new) {
+    await initSelectScreen();
+    show('screen-select');
+  } else {
+    await showDash();
+  }
 }
 
 document.getElementById('name-input').addEventListener('keydown', e => {
